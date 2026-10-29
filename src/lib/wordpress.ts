@@ -54,6 +54,13 @@ export function checkout(items: WordPressCartItem[]): boolean {
     return false
   }
 
-  window.location.href = `${WP_SITE}/?bolt_cart=${pairs}`
+  /*
+   * The payload contains colons and commas. Sending them raw makes some
+   * WordPress/nginx setups answer with a 301 (path sanitising) before the
+   * redirect to /checkout/, which costs a full extra request. Encoding the
+   * value keeps it inside the query string and lets the store answer with
+   * a single 302.
+   */
+  window.location.href = `${WP_SITE}/?bolt_cart=${encodeURIComponent(pairs)}`
   return true
 }

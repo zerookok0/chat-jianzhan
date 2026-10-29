@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useEscape, useScrollLock } from '../../lib/hooks'
 import { useCart } from '../../lib/cart'
@@ -17,9 +17,21 @@ import { ArrowUpRight, Close, Minus, Plus } from '../ui/Icons'
 export function CartDrawer() {
   const { lines, isOpen, closeCart, count, subtotal, currency, setQty, removeItem } = useCart()
   const panelRef = useRef<HTMLDivElement>(null)
+  /*
+   * True from the click until the store takes over. It is set before the
+   * navigation starts, so the overlay paints on the very next frame and the
+   * drawer never looks frozen during the handoff.
+   */
+  const [isRedirecting, setIsRedirecting] = useState(false)
+
+  /* Closing mid-handoff would unmount the overlay, so it is ignored. */
+  const handleClose = useCallback(() => {
+    if (isRedirecting) return
+    closeCart()
+  }, [isRedirecting, closeCart])
 
   useScrollLock(isOpen)
-  useEscape(isOpen, closeCart)
+  useEscape(isOpen, handleClose)
 
   // Move focus into the panel when it opens so keyboard users land here.
   useEffect(() => {
@@ -31,19 +43,35 @@ export function CartDrawer() {
   if (!isOpen) return null
 
   const handleCheckout = () => {
-    const ok = checkout(
-      lines.map((line) => ({
-        id: line.wooId,
-        qty: line.qty,
-        variationId: line.variationId,
-      })),
-    )
-    if (ok) closeCart()
+    if (isRedirecting) return
+
+    /* Paint the overlay first — it must be on screen before we navigate. */
+    setIsRedirecting(true)
+
+    /*
+     * Two frames guarantee the overlay has actually been painted before the
+     * document starts unloading. Without this pause a fast store response can
+     * replace the page while the overlay is still only in React state.
+     */
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const ok = checkout(
+          lines.map((line) => ({
+            id: line.wooId,
+            qty: line.qty,
+            variationId: line.variationId,
+          })),
+        )
+
+        /* Demo mode / not configured: the handoff never happened, so undo it. */
+        if (!ok) setIsRedirecting(false)
+      })
+    })
   }
 
   return createPortal(
     <div className="cart-drawer" role="presentation">
-      <div className="cart-drawer__scrim" onClick={closeCart} aria-hidden="true" />
+      <div className="cart-drawer__scrim" onClick={handleClose} aria-hidden="true" />
 
       <div
         className="cart-drawer__panel"
@@ -63,7 +91,7 @@ export function CartDrawer() {
           <button
             type="button"
             className="icon-btn"
-            onClick={closeCart}
+            onClick={handleClose}
             aria-label="Close cart"
           >
             <Close width={18} height={18} />
@@ -161,9 +189,19 @@ export function CartDrawer() {
                 <strong>{formatPrice(subtotal, currency)}</strong>
               </div>
 
-              <button type="button" className="btn btn--solid btn--block" onClick={handleCheckout}>
-                <span>Checkout on our store</span>
-                <ArrowUpRight width={14} height={14} />
+              <button
+                type="button"
+                className={`btn btn--solid btn--block ${isRedirecting ? 'btn--loading' : ''}`}
+                onClick={handleCheckout}
+                disabled={isRedirecting}
+                aria-busy={isRedirecting}
+              >
+                <span>{isRedirecting ? 'Connecting…' : 'Checkout on our store'}</span>
+                {isRedirecting ? (
+                  <span className="btn__spinner" aria-hidden="true" />
+                ) : (
+                  <ArrowUpRight width={14} height={14} />
+                )}
               </button>
 
               <p className="cart-drawer__note">
@@ -174,6 +212,21 @@ export function CartDrawer() {
           </>
         )}
       </div>
+
+      {/*
+        Painted the moment Checkout is pressed, above the drawer (z-index 140).
+        The handoff is a single top-level navigation, so this overlay is what
+        the visitor sees while the store responds — never a frozen cart.
+      */}
+      {isRedirecting && (
+        <div className="checkout-overlay" role="status" aria-live="assertive">
+          <div className="checkout-overlay__inner">
+            <span className="checkout-overlay__spinner" aria-hidden="true" />
+            <p className="checkout-overlay__title">正在连接安全支付…</p>
+            <p className="checkout-overlay__note">Securing your handoff to the store</p>
+          </div>
+        </div>
+      )}
     </div>,
     document.body,
   )
