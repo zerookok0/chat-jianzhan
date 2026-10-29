@@ -47,9 +47,9 @@ export function Craft() {
         <div className="shell page-hero__inner">
           <p className="eyebrow reveal">Our Craft</p>
           <h1 id="craft-hero-title" className="display display--lg page-hero__title reveal" data-delay="1">
-            Nothing here
+            Slow by
             <br />
-            is hurried
+            necessity
           </h1>
           <p className="lede reveal" data-delay="2">
             Jian ware depends on a handful of variables that cannot be fully separated: the clay, the
@@ -143,12 +143,13 @@ export function Craft() {
         <div className="shell closing-band__inner">
           <p className="eyebrow">A note on claims</p>
           <h2 id="honest-title" className="display display--md reveal">
-            What we do not say
+            What we can state plainly
           </h2>
           <p className="body reveal" data-delay="1">
-            We do not describe our work as museum-equivalent, certified, or produced by a named
-            historical lineage. What we can state plainly is the material, the method, the firing and
-            the year — and let the object speak for the rest.
+            We do not describe our work as museum-equivalent or certified. The lineage we claim is a
+            method, not a title: the Song-era Jian kilns of Fujian, their iron-rich clay, their dragon
+            kilns and their wood fire. Beyond that, we offer only the material, the firing and the
+            year — and let the bowl say the rest.
           </p>
           <AppLink href="/about" className="btn reveal" data-delay="2">
             About the studio

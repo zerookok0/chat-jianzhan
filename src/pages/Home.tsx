@@ -94,15 +94,18 @@ export function Home({ onQuickView }: HomeProps) {
           <div className="hero__text">
             <p className="eyebrow hero__kicker reveal">Jian Ware · Song Dynasty Lineage</p>
             <h1 id="hero-title" className="display display--xl hero__title reveal" data-delay="1">
-              An Ancient Craft
+              The Cosmos Held
               <br />
-              for Eternal Beauty
+              in a Cup
             </h1>
-            <p className="hero__sub reveal" data-delay="2">
-              A timeless art shaped by fire, earth and nature. Jianzhan — a masterpiece of time,
-              fire and nature.
+            <p className="hero__line serif-italic reveal" data-delay="2">
+              Where fire is the only author.
             </p>
-            <div className="hero__cta reveal" data-delay="3">
+            <p className="hero__sub reveal" data-delay="3">
+              Iron-rich earth, pine wood fire, and stilled time. A Song Dynasty lineage capturing
+              fleeting constellations in dark glaze.
+            </p>
+            <div className="hero__cta reveal" data-delay="4">
               <AppLink href="/collection" className="btn">
                 Explore Collection
                 <ArrowRight width={18} height={18} className="btn__arrow" />
@@ -129,9 +132,9 @@ export function Home({ onQuickView }: HomeProps) {
                 Shaped by Time
               </h2>
               <p className="lede reveal" data-delay="2">
-                Jianzhan is more than a tea bowl. It is a living legacy — thrown by hand, fired in
-                wood kilns, and perfected through centuries of tradition. Every surface records a
-                specific firing that can never be repeated.
+                Jianzhan is more than a tea bowl; it is an encounter between earth and cosmic chance.
+                Thrown by hand and fired in ancient dragon kilns, one clay enters the kiln, yet ten
+                thousand colours emerge. What the flame decides, the artisan accepts.
               </p>
               <div className="reveal" data-delay="3">
                 <AppLink href="/craft" className="btn">
@@ -172,8 +175,8 @@ export function Home({ onQuickView }: HomeProps) {
               </h2>
             </div>
             <p className="body section-head__note reveal" data-delay="2">
-              Each piece is unique. With every firing, the glazes take on forms that can never be
-              repeated.
+              Each vessel is a singular occurrence — glazes born from momentary alignments of heat,
+              draft, and mineral ash that human hands cannot replicate.
             </p>
             <AppLink href="/collection" className="btn section-head__link reveal" data-delay="2">
               All pieces
@@ -208,9 +211,9 @@ export function Home({ onQuickView }: HomeProps) {
               Passed down through generations
             </h2>
             <p className="body reveal" data-delay="2">
-              Our artisans still follow the ancient methods, using natural minerals and wood-fired
-              kilns. Nothing is accelerated: forming, drying, glazing and days of firing all take the
-              time they take.
+              Our artisans preserve Song-era methods, firing unrefined minerals in wood-fuelled
+              kilns. Nothing is hurried: forming, drying, glazing, and days inside the fire are
+              entirely surrendered to the patient rhythm of the kiln.
             </p>
             <AppLink href="/craft" className="btn reveal" data-delay="3">
               Learn More
@@ -308,15 +311,15 @@ export function Home({ onQuickView }: HomeProps) {
             held still
           </h2>
           <p className="lede closing__lede reveal" data-delay="2">
-            Every bowl leaves the kiln as it is — not as it was planned. That uncertainty is the
-            craft.
+            The kiln does not bend to human will. We merely shape the clay; nature finishes the
+            glaze.
           </p>
           <div className="closing__cta reveal" data-delay="3">
             <AppLink href="/collection" className="btn btn--solid">
-              View the collection
+              View the Collection
             </AppLink>
             <AppLink href="/about" className="btn">
-              Our story
+              Our Story
               <ArrowDown width={16} height={16} className="btn__arrow" />
             </AppLink>
           </div>

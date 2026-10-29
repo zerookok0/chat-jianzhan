@@ -64,9 +64,9 @@ export const products: Product[] = [
     id: 'jz-03',
     slug: 'iridescent-blue-bowl',
     name: 'Iridescent Blue',
-    subtitle: 'A shift of colour held inside the glaze',
+    subtitle: 'A phantom blue awakened by light',
     description:
-      'Held to the light, the surface moves between blue, violet and a faint copper warmth. This iridescence is a thin-film effect in the glaze layer itself; it is not a pigment, and it changes as the viewing angle changes.',
+      'A phantom blue awakened by light — shifting like starlight held inside dark stone. The colour has no pigment to thank; it is a thin film of glaze interfering with the light itself, so it answers to the angle of your gaze and the hour of the day.',
     price: 640,
     currency: 'USD',
     images: ['bowl-iris', 'bowl-iris-2', 'glaze-tools', 'smoke-soft'],
@@ -269,7 +269,7 @@ export const glazes: Glaze[] = [
     cn: '曜变',
     tagline: 'Colour without pigment',
     description:
-      'A very thin surface layer breaks light into blue, violet and faint copper. The effect moves with the viewer — a quality that has made these bowls difficult to photograph and prized by collectors.',
+      'A microscopic surface layer that splits raw light into violet, copper, and celestial blue. An elusive shimmer that moves with the gaze, long prized as the pinnacle of tea wares.',
     image: 'bowl-iris',
   },
   {

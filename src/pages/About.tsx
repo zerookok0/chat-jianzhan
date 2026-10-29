@@ -106,7 +106,7 @@ export function About() {
               },
               {
                 t: 'Describe, do not inflate',
-                d: 'No invented certifications, no borrowed historical claims, no manufactured scarcity.',
+                d: 'No invented certifications, no manufactured scarcity. We name the kiln, the material and the year, and let the bowl carry the claim.',
               },
               {
                 t: 'Made to be used',

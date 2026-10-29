@@ -8,7 +8,7 @@
 export const site = {
   brand: 'JIANZHAN',
   brandCn: '建盏',
-  tagline: 'The Earth in Your Hands, Time in the Glaze',
+  tagline: 'The Earth in Your Hands, the Cosmos in the Glaze.',
   legalName: 'JIANZHAN Studio',
   email: 'studio@example.com',
   phone: '+1 (000) 000-0000',
@@ -42,5 +42,3 @@ export const navigation = [
   { label: 'Journal', href: '/journal' },
   { label: 'About', href: '/about' },
 ] as const
-
-export const announcement = 'Demo catalogue — prices and availability are illustrative. Checkout is completed on our WordPress store.'

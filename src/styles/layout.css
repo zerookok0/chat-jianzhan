@@ -1,29 +1,6 @@
 /* ============================================================
-   JIANZHAN — Layout: announcement, header, menu, hero, footer
+   JIANZHAN — Layout: header, menu, hero, footer
    ============================================================ */
-
-/* ---------------- Announcement ---------------- */
-.announce {
-  position: relative;
-  z-index: 60;
-  background: var(--charcoal);
-  border-bottom: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 9px var(--page-x);
-  line-height: 1.5;
-}
-
-@media (max-width: 520px) {
-  .announce {
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    padding-block: 8px;
-  }
-}
 
 /* ---------------- Header ---------------- */
 .site-header {

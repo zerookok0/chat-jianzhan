@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { navigation, site, announcement } from '../../data/site'
+import { navigation, site } from '../../data/site'
 import { useRoute, useScrollLock } from '../../lib/hooks'
 import { useCart } from '../../lib/cart'
 import { AppLink } from '../ui/Media'
@@ -45,10 +45,6 @@ export function Header() {
       <a href="#main" className="skip-link">
         Skip to content
       </a>
-
-      <div className="announce" role="status">
-        <span>{announcement}</span>
-      </div>
 
       <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="site-header__inner">
