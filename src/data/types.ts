@@ -6,15 +6,11 @@ import type { ImageKey } from './images'
  * Home, Collection, Quick View, glaze explorer and the product page all
  * read from this file. Nothing else defines a product.
  *
- * IMPORTANT — PURCHASING
- * This site never sells. Each product links out to its own WordPress /
- * WooCommerce URL. Set `purchaseUrl` per product (and per size variant
- * when the store uses separate URLs). Leave it `null` while unconfigured:
- * the UI then shows an explicit "not configured" notice instead of
- * guessing a fake URL.
- *
- * DEMO DATA: names, copy and prices below are illustrative placeholders,
- * not live stock or real pricing.
+ * PURCHASING
+ * This site never takes payment. Each piece either carries a direct link
+ * to its product page in the store (`purchaseUrl`), or is sold through the
+ * cart, which hands the selection to the store at checkout. A piece with
+ * neither is offered by letter, from the studio.
  */
 
 export type Availability = 'available' | 'made-to-order' | 'sold-out' | 'enquire'

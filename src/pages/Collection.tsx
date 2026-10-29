@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { products, glazes, categories, formatPrice } from '../data/products'
 import { useDocumentMeta, useReveal, useRoute } from '../lib/hooks'
 import { ProductCard } from '../components/ui/ProductCard'
-import { MediaImage } from '../components/ui/Media'
+import { MediaImage, AppLink } from '../components/ui/Media'
 import { visual } from '../styles/visual'
-import { Close } from '../components/ui/Icons'
+import { Close, ArrowRight } from '../components/ui/Icons'
+import { site } from '../data/site'
 import type { Product, CategoryId, GlazeId } from '../data/types'
 
 type SortKey = 'curated' | 'price-asc' | 'price-desc' | 'newest'
@@ -18,7 +19,7 @@ const PAGE = 9
 export function Collection({ onQuickView }: CollectionProps) {
   useDocumentMeta(
     'Collection — Jian Ware Tea Bowls & Vessels | JIANZHAN',
-    'Browse the JIANZHAN collection of Jian ware tea bowls and vessels: oil spot, hare’s fur, iridescent and jade glazes. Filter by glaze and category, preview quickly, and continue to purchase on our WordPress store.',
+    'Browse the JIANZHAN collection of Jian ware tea bowls and vessels: oil spot, hare’s fur, iridescent and jade glazes. Filter by glaze and category, preview quickly, and enquire about bespoke acquisitions.',
   )
   useReveal()
 
@@ -94,7 +95,6 @@ export function Collection({ onQuickView }: CollectionProps) {
               <dd>{formatPrice(Math.min(...products.map((p) => p.price)))}</dd>
             </div>
           </dl>
-          <p className="collection-hero__demo">Demo catalogue · prices illustrative, not live stock</p>
         </div>
       </header>
 
@@ -252,11 +252,15 @@ export function Collection({ onQuickView }: CollectionProps) {
         <aside className="collection-note">
           <MediaImage image="kiln-studio" alt="Pottery tools on a workshop table" ratio={16 / 9} sizes="92vw" />
           <div className="collection-note__body">
-            <p className="eyebrow">How buying works</p>
+            <p className="eyebrow">From the Studio</p>
             <p className="body">
-              This site is a catalogue, not a shop. Choosing a piece takes you to its page on our
-              WordPress store, where checkout, shipping and payment are handled.
+              Each piece in our collection is wood-fired in Jianyang. For bespoke acquisitions or
+              private curation, contact our studio concierge.
             </p>
+            <AppLink href={`mailto:${site.email}`} className="btn collection-note__link">
+              Write to the studio
+              <ArrowRight width={16} height={16} className="btn__arrow" />
+            </AppLink>
           </div>
         </aside>
       </div>

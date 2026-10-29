@@ -149,9 +149,8 @@ export function Header() {
 
         <div className="mobile-menu__foot">
           <p className="mobile-menu__tag">{site.tagline}</p>
-          <p className="meta">
-            {site.email} · {site.phone}
-          </p>
+          <p className="meta">{site.email}</p>
+          <p className="meta">{site.hours}</p>
         </div>
       </div>
 

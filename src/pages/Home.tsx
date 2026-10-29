@@ -330,7 +330,7 @@ export function Home({ onQuickView }: HomeProps) {
         </div>
       </section>
 
-      {/* Keeps the price reference visible for the demo dataset */}
+      {/* Price reference for screen readers and search snippets */}
       <p className="sr-only">
         Catalogue contains {products.length} pieces. Featured pieces from{' '}
         {formatPrice(Math.min(...featured.map((p) => p.price)))}.

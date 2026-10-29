@@ -85,7 +85,10 @@ export function QuickView({ product, onClose }: QuickViewProps) {
             </AppLink>
           </div>
 
-          <p className="qv__data-note">Demo catalogue · {site.brand} — prices illustrative only.</p>        </div>
+          <p className="qv__data-note">
+            Fired in Jianyang · studio-signed presentation box and firing certificate included.
+          </p>
+        </div>
       </div>
     </Modal>
   )

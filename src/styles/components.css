@@ -284,6 +284,12 @@
   max-width: 46ch;
 }
 
+/* Secondary line under the note — e.g. the link to the piece in the store */
+.buy__note--secondary {
+  margin-top: -6px;
+  opacity: 0.7;
+}
+
 .buy__direct {
   color: var(--bronze);
   border-bottom: 1px solid var(--bronze-soft);
@@ -615,6 +621,21 @@
   line-height: 1.7;
   color: var(--muted);
   opacity: 0.8;
+}
+
+/* Shown only when the store handoff could not be started */
+.cart-drawer__error {
+  padding: 12px 14px;
+  border: 1px solid var(--bronze-soft);
+  background: rgba(169, 135, 91, 0.08);
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--ivory);
+}
+
+.cart-drawer__error-link {
+  color: var(--bronze);
+  border-bottom: 1px solid var(--bronze-soft);
 }
 
 @media (min-width: 860px) {

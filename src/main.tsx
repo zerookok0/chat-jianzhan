@@ -6,6 +6,7 @@ import './styles/global.css'
 import './styles/layout.css'
 import './styles/components.css'
 import './styles/pages.css'
+import './styles/policy.css'
 import './styles/refine.css'
 
 createRoot(document.getElementById('root')!).render(

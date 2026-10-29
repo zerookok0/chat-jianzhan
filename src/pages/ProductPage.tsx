@@ -110,7 +110,7 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
 
           <div className="product-info__price-row">
             <p className="product-info__price">{formatPrice(product.price, product.currency)}</p>
-            <p className="meta">Demo price — not live</p>
+            <p className="meta">Duties included · 30-day returns</p>
           </div>
 
           <p className="body product-info__desc">{product.description}</p>
@@ -171,9 +171,10 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
               <summary>Care</summary>
               <div className="accordion__body">
                 <p>
-                  Hand wash with warm water and a soft cloth. Avoid abrasive pads and sudden
-                  temperature change. Dry fully, upside down, before storing. Fine crackles and a
-                  deepening of colour with use are normal.
+                  Hand wash only, with warm water and a soft cloth; never use abrasive scouring pads
+                  or harsh detergents. Avoid thermal shock — do not pour boiling water into a cold
+                  vessel. Not suitable for microwave, oven or dishwasher. The iron-rich glaze darkens
+                  and gains a soft lustre with use; this patina is the mark of a lived-in piece.
                 </p>
               </div>
             </details>
@@ -182,17 +183,17 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
               <summary>Shipping</summary>
               <div className="accordion__body">
                 <p>
-                  Packed in a linen-wrapped box with a firing note. Shipping options, lead times and
-                  duties are shown on the product page in our store at checkout — this site does not
-                  calculate or process orders.
+                  Insured worldwide express shipping in custom wooden crating and impact-resistant
+                  packaging, with live tracking issued on dispatch. Every piece travels with its
+                  firing note. Returns are accepted within 30 days of delivery, free of charge.
                 </p>
               </div>
             </details>
           </div>
 
           <p className="product-info__disclaimer">
-            All purchasing is completed on our WordPress store. This page is a presentation
-            catalogue; prices and availability are illustrative demo data.
+            Includes a studio-signed paulownia wooden presentation box and recorded firing
+            certificate.
           </p>
         </div>
       </div>

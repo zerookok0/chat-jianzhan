@@ -1,10 +1,15 @@
 import type { Product, GlazeId, CategoryId } from './types'
 
 /**
- * DEMO CATALOGUE
- * Prices, availability and copy are illustrative only — nothing here is
- * live data. Replace the objects below with your real pieces and paste the
- * matching WooCommerce URL into `purchaseUrl`.
+ * THE CATALOGUE
+ * ------------------------------------------------------------------
+ * Every piece the studio currently offers, in one place. Home, the
+ * collection, quick view, the glaze explorer and the product page all
+ * read from this file.
+ *
+ * To list a new work, copy an existing object and edit it. Leave
+ * `purchaseUrl` at null while a piece is still held by the studio — the
+ * product page then offers it by letter instead of inventing a link.
  */
 
 export const products: Product[] = [

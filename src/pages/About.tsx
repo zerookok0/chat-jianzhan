@@ -7,7 +7,7 @@ import { site } from '../data/site'
 export function About() {
   useDocumentMeta(
     'About — The Studio | JIANZHAN',
-    'JIANZHAN is a studio project presenting Jian ware tea bowls as collectible objects. A short statement of intent, materials and approach.',
+    'JIANZHAN is a studio presenting Jian ware tea bowls as collectible objects. A short statement of intent, materials and approach.',
   )
   useReveal()
 
@@ -24,8 +24,8 @@ export function About() {
             <span className="about-page__cn cn-mark">{site.brandCn}</span>
           </h1>
           <p className="lede reveal" data-delay="2">
-            A studio project concerned with one narrow question: what can a single bowl tell you
-            about the fire that made it?
+            A studio concerned with one narrow question: what can a single bowl tell you about the
+            fire that made it?
           </p>
         </div>
       </header>
@@ -51,8 +51,8 @@ export function About() {
               lie about the material.
             </p>
             <p className="body reveal" data-delay="3">
-              This website is a gallery, not a shop. Transactions are handled by our WordPress store;
-              we keep them separate so that neither experience has to compromise the other.
+              We keep the catalogue and the transaction separate on purpose. Looking at a bowl and
+              buying one are different acts, and neither should be hurried by the other.
             </p>
           </div>
         </div>

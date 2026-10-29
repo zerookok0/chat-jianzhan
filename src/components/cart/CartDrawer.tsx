@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { useEscape, useScrollLock } from '../../lib/hooks'
 import { useCart } from '../../lib/cart'
 import { formatPrice } from '../../data/products'
+import { site } from '../../data/site'
 import { checkout } from '../../lib/wordpress'
 import { AppLink } from '../ui/Media'
 import { ArrowUpRight, Close, Minus, Plus } from '../ui/Icons'
@@ -23,6 +24,7 @@ export function CartDrawer() {
    * drawer never looks frozen during the handoff.
    */
   const [isRedirecting, setIsRedirecting] = useState(false)
+  const [handoffFailed, setHandoffFailed] = useState(false)
 
   /* Closing mid-handoff would unmount the overlay, so it is ignored. */
   const handleClose = useCallback(() => {
@@ -45,6 +47,7 @@ export function CartDrawer() {
   const handleCheckout = () => {
     if (isRedirecting) return
 
+    setHandoffFailed(false)
     /* Paint the overlay first — it must be on screen before we navigate. */
     setIsRedirecting(true)
 
@@ -63,8 +66,11 @@ export function CartDrawer() {
           })),
         )
 
-        /* Demo mode / not configured: the handoff never happened, so undo it. */
-        if (!ok) setIsRedirecting(false)
+        /* The store could not be reached: the handoff never happened, so undo it. */
+        if (!ok) {
+          setIsRedirecting(false)
+          setHandoffFailed(true)
+        }
       })
     })
   }
@@ -205,16 +211,25 @@ export function CartDrawer() {
               </button>
 
               <p className="cart-drawer__note">
-                Shipping and taxes are calculated at checkout. Prices here are illustrative demo
-                data — your store is the source of truth.
+                Taxes and insured crated shipping calculated at checkout.
               </p>
+
+              {handoffFailed && (
+                <p className="cart-drawer__error" role="status">
+                  We could not reach the store just now. Please try again, or write to{' '}
+                  <AppLink href={`mailto:${site.email}`} className="cart-drawer__error-link">
+                    {site.email}
+                  </AppLink>{' '}
+                  and we will complete the order with you directly.
+                </p>
+              )}
             </footer>
           </>
         )}
       </div>
 
       {/*
-        Painted the moment Checkout is pressed, above the drawer (z-index 140).
+        Painted the moment Checkout is pressed, above the drawer (z-index 160).
         The handoff is a single top-level navigation, so this overlay is what
         the visitor sees while the store responds — never a frozen cart.
       */}
@@ -222,8 +237,8 @@ export function CartDrawer() {
         <div className="checkout-overlay" role="status" aria-live="assertive">
           <div className="checkout-overlay__inner">
             <span className="checkout-overlay__spinner" aria-hidden="true" />
-            <p className="checkout-overlay__title">正在连接安全支付…</p>
-            <p className="checkout-overlay__note">Securing your handoff to the store</p>
+            <p className="checkout-overlay__title">Taking you to secure checkout…</p>
+            <p className="checkout-overlay__note">Your selection is being transferred</p>
           </div>
         </div>
       )}

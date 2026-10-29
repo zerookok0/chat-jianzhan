@@ -5,20 +5,25 @@
  * Product data is NOT here — see src/data/products.ts
  */
 
+/**
+ * The store that owns checkout and payment. Read from the build environment
+ * so the "buy directly" links can never drift from the real checkout host.
+ */
+const STORE_URL = ((import.meta.env.VITE_WP_SITE_URL as string | undefined) ?? '').replace(/\/+$/, '')
+
 export const site = {
   brand: 'JIANZHAN',
   brandCn: '建盏',
   tagline: 'The Earth in Your Hands, the Cosmos in the Glaze.',
   legalName: 'JIANZHAN Studio',
-  email: 'studio@example.com',
-  phone: '+1 (000) 000-0000',
-  studio: 'Placeholder address — Studio 00, Kiln Road, Jianyang, Fujian, China',
-  hours: 'Mon – Fri, 9:00 – 18:00 (GMT+8)',
-  /** Replace with your live domain */
-  url: 'https://www.example.com',
-  /** WordPress / WooCommerce store. All buying happens there. */
-  shopBaseUrl: 'https://shop.example.com',
-  /** If set, product purchaseUrl falls back to `${shopBaseUrl}/product/${slug}` */
+  email: 'studio@jianzhan.studio',
+  studio: 'Jianyang, Nanping, Fujian, China',
+  hours: 'Mon – Fri, 09:00 – 18:00 (GMT+8)',
+  /** Public domain of this site, used for canonical links and metadata. */
+  url: 'https://jianzhan.studio',
+  /** The shop. All buying, payment and fulfilment happen there. */
+  shopBaseUrl: STORE_URL,
+  /** Product links fall back to `${shopBaseUrl}/product/${slug}` when no direct URL is set */
   autoDerivePurchaseUrl: true,
   currency: 'USD',
   social: [
@@ -28,10 +33,10 @@ export const site = {
     { label: 'YouTube', href: '#' },
   ],
   policies: [
-    { label: 'Shipping & Returns', href: '#' },
-    { label: 'Care & Use', href: '#' },
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
+    { label: 'Shipping & Returns', href: '/shipping' },
+    { label: 'Care & Use', href: '/care' },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
   ],
 } as const
 

@@ -6,8 +6,8 @@
  * owns everything from there on.
  *
  * URL shape:
- *   https://store.example/?bolt_cart=2472:1,2465:2:331
- *                                    ^id   ^qty ^variationId (optional)
+ *   https://store.host/?bolt_cart=2472:1,2465:2:331
+ *                              ^id   ^qty ^variationId (optional)
  *
  * The WordPress side reads `bolt_cart` and fills the WooCommerce cart
  * before redirecting to /checkout/.
@@ -43,16 +43,13 @@ export function cartQuery(items: WordPressCartItem[]): string {
 
 /**
  * Sends the visitor to the store checkout.
- * Returns false (and says why) when the handoff cannot happen, so callers
- * can keep the drawer open instead of silently doing nothing.
+ * Returns false when the handoff cannot happen, so callers can keep the
+ * drawer open instead of silently doing nothing.
  */
 export function checkout(items: WordPressCartItem[]): boolean {
   const pairs = cartQuery(items)
 
-  if (!WP_SITE || !pairs) {
-    window.alert('演示模式：配置 VITE_WP_SITE_URL 和商品 wooId 后即可真实支付')
-    return false
-  }
+  if (!WP_SITE || !pairs) return false
 
   /*
    * The payload contains colons and commas. Sending them raw makes some

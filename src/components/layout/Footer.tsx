@@ -3,10 +3,13 @@ import { AppLink } from '../ui/Media'
 import { visual } from '../../styles/visual'
 
 /**
- * Footer — brand mark, navigation, contact placeholders, policies, social.
- * Replace every href in src/data/site.ts when the real store is ready.
+ * Footer — brand mark, navigation, studio details, policies, social.
+ * All links and contact details come from src/data/site.ts.
  */
 export function Footer() {
+  /* Channels that have not been set up yet are simply not shown. */
+  const social = site.social.filter((s) => s.href && s.href !== '#')
+
   return (
     <footer className="site-footer grain" style={{ position: 'relative' }}>
       <div className="site-footer__bg" style={{ backgroundImage: `url(${visual.footer})` }} aria-hidden="true" />
@@ -44,11 +47,6 @@ export function Footer() {
                   {site.email}
                 </AppLink>
               </li>
-              <li>
-                <AppLink href={`tel:${site.phone.replace(/\s|\(|\)/g, '')}`} className="footer-link">
-                  {site.phone}
-                </AppLink>
-              </li>
               <li className="footer-address">{site.studio}</li>
               <li className="footer-address">{site.hours}</li>
             </ul>
@@ -75,9 +73,9 @@ export function Footer() {
           </p>
 
           <ul className="site-footer__social" aria-label="Social links">
-            {site.social.map((s) => (
+            {social.map((s) => (
               <li key={s.label}>
-                <AppLink href={s.href} className="footer-link footer-link--social" external={s.href.startsWith('http')}>
+                <AppLink href={s.href} className="footer-link footer-link--social" external>
                   {s.label}
                 </AppLink>
               </li>
@@ -86,8 +84,7 @@ export function Footer() {
         </div>
 
         <p className="site-footer__note">
-          Demo catalogue for presentation purposes. Prices, availability and copy are illustrative;
-          all purchases are completed on our WordPress store.
+          Handcrafted Song-style tea ceramics. Fired in small studio batches in Jianyang, Fujian.
         </p>
       </div>
     </footer>

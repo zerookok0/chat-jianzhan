@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import type { Product } from '../../data/types'
 import { resolvePurchaseUrl } from '../../lib/purchase'
 import { useCart } from '../../lib/cart'
+import { site } from '../../data/site'
 import { ArrowUpRight, Check, Info } from './Icons'
 
 interface BuyButtonProps {
@@ -16,15 +17,17 @@ interface BuyButtonProps {
   onNavigate?: () => void
 }
 
-type Notice = 'none' | 'choose-size' | 'no-store-id' | 'no-variation' | 'added'
+type Notice = 'none' | 'choose-size' | 'added'
 
 /**
- * Buying always ends on the WordPress / WooCommerce store.
- * This site has no payment, checkout or stock logic.
+ * BUYING
+ * ------------------------------------------------------------------
+ * Adding to the cart is a request to reserve a piece, not a payment.
+ * The selection is handed to our store, which owns the transaction.
  *
- * "Add to cart" only works when the piece and (if it has sizes) the chosen
- * size carry a WooCommerce ID. Otherwise we say exactly what is missing
- * instead of silently doing nothing or inventing a link.
+ * Pieces offered through the studio — one-of-a-kind works, commissions,
+ * and archive pieces — are arranged by letter rather than through the
+ * cart, so the visitor is never left with a button that does nothing.
  */
 export function BuyButton({
   product,
@@ -54,10 +57,17 @@ export function BuyButton({
   const enquiry = availability === 'enquire'
   const hasVariants = variants.length > 0
 
+  /* Sold by the studio rather than through the store's own checkout. */
+  const directOnly = !product.wooId
+  const studioOnly = directOnly || Boolean(selectedVariant && !selectedVariant.wooVariationId)
+
   const storeUrl = resolvePurchaseUrl(product, selected)
 
+  const subject = `Enquiry — ${product.name}${selectedVariant ? ` (${selectedVariant.label})` : ''}`
+  const enquiryHref = `mailto:${site.email}?subject=${encodeURIComponent(subject)}`
+
   const handleAdd = () => {
-    if (archived) return
+    if (archived || studioOnly) return
 
     if (hasVariants && !selected) {
       setNotice('choose-size')
@@ -74,7 +84,7 @@ export function BuyButton({
     }
 
     /* 'unavailable' is already handled by the archived/enquiry branch above. */
-    if (result !== 'unavailable') setNotice(result)
+    if (result !== 'unavailable') setNotice('choose-size')
   }
 
   const buttonClass =
@@ -88,40 +98,39 @@ export function BuyButton({
         ? 'Order via our store'
         : label
 
-  const noticeText: Record<Exclude<Notice, 'none' | 'added'>, string> = {
-    'choose-size': 'Select a size to continue.',
-    'no-store-id':
-      'This piece has no WooCommerce ID yet. Add `wooId` in src/data/products.ts to enable the cart.',
-    'no-variation':
-      'This size has no WooCommerce variation ID yet. Add `wooVariationId` in src/data/products.ts.',
-  }
+  const variantsField = showVariants && hasVariants && (
+    <fieldset className="buy__variants">
+      <legend className="buy__legend">Size</legend>
+      <div className="chip-row">
+        {variants.map((v) => (
+          <button
+            key={v.id}
+            type="button"
+            className={`chip ${selected === v.id ? 'is-active' : ''}`}
+            aria-pressed={selected === v.id}
+            onClick={() => {
+              setSelected(v.id)
+              setNotice('none')
+            }}
+          >
+            {v.label}
+          </button>
+        ))}
+      </div>
+    </fieldset>
+  )
 
-  /* Archive pieces and enquiries are not sold through the cart. */
-  if (archived || enquiry) {
+  /* -------------------- Archive, commission and studio pieces -------------------- */
+  if (archived || enquiry || studioOnly) {
+    const viaStudio = !archived
+
     return (
       <div className="buy">
-        {showVariants && hasVariants && (
-          <fieldset className="buy__variants">
-            <legend className="buy__legend">Size</legend>
-            <div className="chip-row">
-              {variants.map((v) => (
-                <button
-                  key={v.id}
-                  type="button"
-                  className={`chip ${selected === v.id ? 'is-active' : ''}`}
-                  aria-pressed={selected === v.id}
-                  onClick={() => setSelected(v.id)}
-                >
-                  {v.label}
-                </button>
-              ))}
-            </div>
-          </fieldset>
-        )}
+        {variantsField}
 
-        {enquiry ? (
-          <a className={`${buttonClass} ${block ? 'btn--block' : ''}`} href="#enquiry">
-            <span>Enquire about this piece</span>
+        {viaStudio ? (
+          <a className={`${buttonClass} ${block ? 'btn--block' : ''}`} href={enquiryHref}>
+            <span>{enquiry ? 'Enquire about this piece' : 'Request this piece'}</span>
             <ArrowUpRight width={14} height={14} />
           </a>
         ) : (
@@ -131,37 +140,28 @@ export function BuyButton({
         )}
 
         <p className="buy__note">
-          {enquiry
-            ? 'Back-order and archive pieces are arranged directly with the studio.'
-            : 'This piece has been archived and is no longer available.'}
+          {archived
+            ? 'This piece has left the studio and is held in the archive. Comparable works are released each firing.'
+            : backOrder
+              ? 'Fired to order in the studio. Write to us and we will confirm the current lead time and hold a place in the next firing.'
+              : 'One of a kind, held by the studio. Write to us and we will confirm availability, dimensions and shipping.'}
         </p>
+
+        {storeUrl && viaStudio && (
+          <p className="buy__note buy__note--secondary">
+            <a className="buy__direct" href={storeUrl} target="_blank" rel="noopener noreferrer">
+              See this piece in our store
+            </a>
+          </p>
+        )}
       </div>
     )
   }
 
+  /* -------------------- Standard purchase -------------------- */
   return (
     <div className="buy">
-      {showVariants && hasVariants && (
-        <fieldset className="buy__variants">
-          <legend className="buy__legend">Size</legend>
-          <div className="chip-row">
-            {variants.map((v) => (
-              <button
-                key={v.id}
-                type="button"
-                className={`chip ${selected === v.id ? 'is-active' : ''}`}
-                aria-pressed={selected === v.id}
-                onClick={() => {
-                  setSelected(v.id)
-                  setNotice('none')
-                }}
-              >
-                {v.label}
-              </button>
-            ))}
-          </div>
-        </fieldset>
-      )}
+      {variantsField}
 
       <div className={`buy__actions ${showQty ? '' : 'buy__actions--compact'}`}>
         {showQty && (
@@ -194,7 +194,7 @@ export function BuyButton({
           type="button"
           onClick={handleAdd}
           className={`${buttonClass} ${block ? 'btn--block' : ''} buy__add`}
-          aria-describedby={notice !== 'none' && notice !== 'added' ? `buy-notice-${product.id}` : undefined}
+          aria-describedby={notice === 'choose-size' ? `buy-notice-${product.id}` : undefined}
         >
           <span>{notice === 'added' ? 'Added to cart' : buttonLabel}</span>
           {notice === 'added' ? <Check width={14} height={14} /> : <ArrowUpRight width={14} height={14} />}
@@ -202,17 +202,12 @@ export function BuyButton({
       </div>
 
       <p className="buy__note">
-        Checkout, payment and shipping are completed on our WordPress store. Demo prices are
-        illustrative, not live.
+        Insured worldwide express shipping in custom wooden crating. Returns accepted within 30
+        days, free of charge.
         {storeUrl && (
           <>
             {' '}
-            <a
-              className="buy__direct"
-              href={storeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a className="buy__direct" href={storeUrl} target="_blank" rel="noopener noreferrer">
               Or buy this piece directly
             </a>
             .
@@ -220,10 +215,10 @@ export function BuyButton({
         )}
       </p>
 
-      {notice !== 'none' && notice !== 'added' && (
+      {notice === 'choose-size' && (
         <p className="buy__notice" id={`buy-notice-${product.id}`} role="status">
           <Info width={14} height={14} aria-hidden="true" />
-          <span>{noticeText[notice]}</span>
+          <span>Select a size to continue.</span>
         </p>
       )}
     </div>

@@ -389,15 +389,6 @@
   color: var(--ivory);
 }
 
-.collection-hero__demo {
-  margin-top: 18px;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  opacity: 0.7;
-}
-
 .collection-body {
   padding-block: clamp(32px, 5vw, 56px) clamp(64px, 10vw, 120px);
 }
@@ -515,6 +506,11 @@
   display: grid;
   gap: 12px;
   align-content: center;
+}
+
+.collection-note__link {
+  margin-top: 6px;
+  font-size: 10px;
 }
 
 /* ---------------- Product page ---------------- */
@@ -660,6 +656,7 @@
   margin-bottom: 14px;
 }
 
+/* Packaging note — the box and certificate that accompany every piece */
 .product-info__disclaimer {
   margin-top: 28px;
   padding-top: 18px;

@@ -11,7 +11,9 @@ import { ProductPage } from './pages/ProductPage'
 import { Craft } from './pages/Craft'
 import { About } from './pages/About'
 import { Journal, JournalPost } from './pages/Journal'
+import { PolicyPage } from './pages/PolicyPage'
 import { NotFound } from './pages/NotFound'
+import { policies } from './data/policies'
 import type { Product } from './data/types'
 
 function ScrollToTop() {
@@ -37,6 +39,13 @@ function Routes({ onQuickView }: { onQuickView: (p: Product) => void }) {
   if (path === '/about') return <About />
   if (path === '/journal') return <Journal />
   if (segments[0] === 'journal' && segments[1]) return <JournalPost slug={segments[1]} />
+
+  /* Footer policies — one route per slug, resolved from the data module */
+  if (segments.length === 1) {
+    const policy = policies.find((p) => p.slug === segments[0])
+    if (policy) return <PolicyPage slug={policy.slug} />
+  }
+
   return <NotFound />
 }
 
