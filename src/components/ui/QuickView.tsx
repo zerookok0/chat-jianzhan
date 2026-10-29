@@ -76,7 +76,7 @@ export function QuickView({ product, onClose }: QuickViewProps) {
             ))}
           </dl>
 
-          <BuyButton product={product} label="Buy on our store" onNavigate={onClose} />
+          <BuyButton product={product} showQty={false} onNavigate={onClose} />
 
           <div className="qv__foot">
             <FavButton productId={product.id} productName={product.name} variant="labelled" />

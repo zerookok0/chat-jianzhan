@@ -1,6 +1,6 @@
 import { useState, type MouseEvent, type ReactNode } from 'react'
 import { img, srcSet, type ImageKey } from '../../data/images'
-import { navigate } from '../../lib/hooks'
+import { navigate, toHref } from '../../lib/hooks'
 
 interface MediaProps {
   image: ImageKey
@@ -107,7 +107,7 @@ export function AppLink({
 
   return (
     <a
-      href={href}
+      href={isExternal ? href : toHref(href)}
       className={className}
       onClick={handle}
       aria-label={ariaLabel}

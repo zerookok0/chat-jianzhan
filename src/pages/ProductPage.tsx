@@ -42,7 +42,6 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
 
   const related = getRelated(product, 3)
   const glaze = getGlaze(product.glaze)
-  const soldOut = product.availability === 'sold-out'
 
   return (
     <div className="product-page" key={product.id}>
@@ -116,7 +115,7 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
 
           <p className="body product-info__desc">{product.description}</p>
 
-          <BuyButton product={product} label={soldOut ? 'Archived' : 'Buy on our store'} />
+          <BuyButton product={product} />
 
           <div className="product-info__meta">
             <AppLink href={`/collection?glaze=${product.glaze}`} className="tag">

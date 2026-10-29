@@ -74,6 +74,14 @@ export const Search = (p: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
+export const Cart = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...p}>
+    <path d="M3 4h2.4l2.3 10.6h10.1M6.4 8.4h13.2l-1.5 6.2" />
+    <circle cx="9" cy="19" r="1.4" />
+    <circle cx="17.4" cy="19" r="1.4" />
+  </svg>
+)
+
 export const Check = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...p}>
     <path d="m4.5 12.5 5 5L20 6.5" />

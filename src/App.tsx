@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { FavouritesProvider, useRoute, useReveal } from './lib/hooks'
+import { CartProvider } from './lib/cart'
 import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
+import { CartDrawer } from './components/cart/CartDrawer'
 import { QuickView } from './components/ui/QuickView'
 import { Home } from './pages/Home'
 import { Collection } from './pages/Collection'
@@ -43,13 +45,16 @@ export default function App() {
 
   return (
     <FavouritesProvider>
-      <ScrollToTop />
-      <Header />
-      <main id="main">
-        <Routes onQuickView={setQuickView} />
-      </main>
-      <Footer />
-      <QuickView product={quickView} onClose={() => setQuickView(null)} />
+      <CartProvider>
+        <ScrollToTop />
+        <Header />
+        <main id="main">
+          <Routes onQuickView={setQuickView} />
+        </main>
+        <Footer />
+        <QuickView product={quickView} onClose={() => setQuickView(null)} />
+        <CartDrawer />
+      </CartProvider>
     </FavouritesProvider>
   )
 }

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { navigation, site, announcement } from '../../data/site'
 import { useRoute, useScrollLock } from '../../lib/hooks'
+import { useCart } from '../../lib/cart'
 import { AppLink } from '../ui/Media'
-import { Close, Search } from '../ui/Icons'
+import { Cart, Close, Search } from '../ui/Icons'
 import { SearchOverlay } from './SearchOverlay'
 
 /**
@@ -11,6 +12,7 @@ import { SearchOverlay } from './SearchOverlay'
  */
 export function Header() {
   const route = useRoute()
+  const { count, openCart } = useCart()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -81,6 +83,20 @@ export function Header() {
               aria-label="Search the collection"
             >
               <Search width={16} height={16} />
+            </button>
+
+            <button
+              type="button"
+              className="icon-btn cart-btn"
+              onClick={openCart}
+              aria-label={count > 0 ? `Open cart, ${count} items` : 'Open cart, empty'}
+            >
+              <Cart width={16} height={16} />
+              {count > 0 && (
+                <span className="cart-btn__count" aria-hidden="true">
+                  {count > 99 ? '99+' : count}
+                </span>
+              )}
             </button>
 
             <button

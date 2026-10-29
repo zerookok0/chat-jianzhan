@@ -6,6 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:subdir": "vite build && node scripts/verify-dist.mjs && node scripts/zip-dist.mjs",
+    "verify": "node scripts/verify-dist.mjs",
+    "zip": "node scripts/zip-dist.mjs",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit",
     "lint": "eslint .",
     "preview": "vite preview"
   },
