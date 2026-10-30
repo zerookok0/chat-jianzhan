@@ -41,7 +41,7 @@
         }
       ],
       "purchaseUrl": null,
-      "wooId": 2472,
+      "wooId": 9383,
       "featured": true,
       "availability": "available",
       "year": "2024"
@@ -86,7 +86,7 @@
         }
       ],
       "purchaseUrl": null,
-      "wooId": 2465,
+      "wooId": 9395,
       "featured": true,
       "availability": "available",
       "year": "2024"
@@ -146,7 +146,8 @@
       ],
       "featured": true,
       "availability": "made-to-order",
-      "year": "2025"
+      "year": "2025",
+      "wooId": 9406
     },
     {
       "id": "jz-04",
@@ -189,7 +190,6 @@
         }
       ],
       "purchaseUrl": null,
-      "wooId": 2461,
       "featured": true,
       "availability": "available",
       "year": "2024"
@@ -238,7 +238,8 @@
       "purchaseUrl": null,
       "featured": false,
       "availability": "available",
-      "year": "2023"
+      "year": "2023",
+      "wooId": 9451
     },
     {
       "id": "jz-06",
@@ -325,7 +326,8 @@
       "purchaseUrl": null,
       "featured": false,
       "availability": "enquire",
-      "year": "2024"
+      "year": "2024",
+      "wooId": 9464
     },
     {
       "id": "jz-08",
@@ -368,7 +370,8 @@
       "purchaseUrl": null,
       "featured": false,
       "availability": "sold-out",
-      "year": "2023"
+      "year": "2023",
+      "wooId": 9475
     },
     {
       "id": "jz-09",
@@ -456,7 +459,8 @@
       "purchaseUrl": null,
       "featured": false,
       "availability": "available",
-      "year": "2026"
+      "year": "2026",
+      "wooId": 9485
     },
     {
       "id": "jz-11",
@@ -499,7 +503,8 @@
       "purchaseUrl": null,
       "featured": false,
       "availability": "available",
-      "year": "2026"
+      "year": "2026",
+      "wooId": 9496
     },
     {
       "id": "jz-12",
@@ -543,7 +548,8 @@
       "purchaseUrl": null,
       "featured": false,
       "availability": "available",
-      "year": "2026"
+      "year": "2026",
+      "wooId": 9506
     },
     {
       "id": "jz-13",
@@ -587,7 +593,8 @@
       "purchaseUrl": null,
       "featured": true,
       "availability": "available",
-      "year": "2026"
+      "year": "2026",
+      "wooId": 9371
     }
   ]
 }
