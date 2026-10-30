@@ -221,6 +221,18 @@
   background: transparent;
 }
 
+.admin__button--danger {
+  background: var(--a-danger);
+  border-color: var(--a-danger);
+  color: #fff;
+}
+
+.admin__button--danger:hover:not(:disabled) {
+  background: #7d2020;
+  border-color: #7d2020;
+  color: #fff;
+}
+
 .admin__button--small {
   padding: 0.38rem 0.6rem;
   font-size: 0.78rem;

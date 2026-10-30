@@ -45,6 +45,59 @@ const availabilityOptions: Product['availability'][] = [
   'enquire',
 ]
 
+function nextProductId(products: Product[]): string {
+  const used = new Set(products.map((product) => product.id))
+  const numbers = products
+    .map((product) => /^jz-(\d+)$/.exec(product.id)?.[1])
+    .filter((value): value is string => Boolean(value))
+    .map(Number)
+  let next = numbers.length ? Math.max(...numbers) + 1 : 1
+  let id = `jz-${String(next).padStart(2, '0')}`
+
+  while (used.has(id)) {
+    next += 1
+    id = `jz-${String(next).padStart(2, '0')}`
+  }
+
+  return id
+}
+
+function newProductSlug(products: Product[]): string {
+  const base = `new-piece-${Date.now().toString(36).slice(-5)}`
+  let slug = base
+  let suffix = 2
+
+  while (products.some((product) => product.slug === slug)) {
+    slug = `${base}-${suffix}`
+    suffix += 1
+  }
+
+  return slug
+}
+
+function validateProducts(products: Product[]): string | null {
+  const ids = new Set<string>()
+  const slugs = new Set<string>()
+
+  for (const product of products) {
+    if (!product.id.trim()) return '有产品缺少 id。'
+    if (!product.name.trim()) return `产品 ${product.id} 缺少名称。`
+    if (!product.slug.trim()) return `产品「${product.name}」缺少 slug。`
+
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(product.slug)) {
+      return `产品「${product.name}」的 slug 只能使用小写字母、数字和连字符。`
+    }
+
+    if (ids.has(product.id)) return `产品 id 重复：${product.id}`
+    if (slugs.has(product.slug)) return `产品 slug 重复：${product.slug}`
+
+    ids.add(product.id)
+    slugs.add(product.slug)
+  }
+
+  return null
+}
+
 function readStoredToken(): string {
   try {
     return sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) || ''
@@ -289,6 +342,7 @@ export default function Admin() {
   const [content, setContent] = useState<ContentBundle | null>(null)
   const [tab, setTab] = useState<'products' | 'site' | 'home'>('products')
   const [selectedId, setSelectedId] = useState('')
+  const [draftIds, setDraftIds] = useState<Set<string>>(new Set())
   const [pendingImages, setPendingImages] = useState<Record<string, PreparedImage>>({})
   const [dirty, setDirty] = useState(false)
   const [uploading, setUploading] = useState(false)
@@ -442,6 +496,55 @@ export default function Admin() {
     if (selected) updateProduct(selected.id, patch)
   }
 
+  const addProduct = () => {
+    if (!content) return
+
+    const id = nextProductId(content.products)
+    const product: Product = {
+      id,
+      slug: newProductSlug(content.products),
+      name: 'New piece',
+      subtitle: '',
+      description: '',
+      price: 0,
+      currency: content.site.currency || 'USD',
+      images: [],
+      category: 'tea-bowl',
+      glaze: 'oil-spot',
+      specifications: [],
+      purchaseUrl: null,
+      featured: false,
+      availability: 'available',
+      year: new Date().getFullYear().toString(),
+    }
+
+    setContent((prev) => (prev ? { ...prev, products: [...prev.products, product] } : prev))
+    setDraftIds((prev) => new Set(prev).add(id))
+    setSelectedId(id)
+    setNewImageValue('')
+    setTab('products')
+    markDirty()
+    setStatus({ kind: 'idle', message: '已新建空产品，填写名称、slug 和文案后保存。' })
+  }
+
+  const removeProduct = (product: Product) => {
+    if (!content) return
+    if (!window.confirm(`删除「${product.name}」？需要保存并部署后才会从线上消失。`)) return
+
+    const index = content.products.findIndex((entry) => entry.id === product.id)
+    const products = content.products.filter((entry) => entry.id !== product.id)
+
+    setContent((prev) => (prev ? { ...prev, products } : prev))
+    setDraftIds((prev) => {
+      const next = new Set(prev)
+      next.delete(product.id)
+      return next
+    })
+    setSelectedId(products[Math.min(index, products.length - 1)]?.id ?? '')
+    markDirty()
+    setStatus({ kind: 'idle', message: '产品已移除，保存并部署后生效。' })
+  }
+
   const updateSpec = (index: number, field: keyof SpecItem, value: string) => {
     if (!selected) return
     const specifications = selected.specifications.map((spec, specIndex) =>
@@ -516,6 +619,13 @@ export default function Admin() {
   const handleSave = async () => {
     if (!content) return
 
+    const problem = validateProducts(content.products)
+
+    if (problem) {
+      setStatus({ kind: 'error', message: problem })
+      return
+    }
+
     setStatus({ kind: 'saving', message: '正在提交到 GitHub…' })
 
     const files = [
@@ -546,6 +656,7 @@ export default function Admin() {
 
       setDirty(false)
       setPendingImages({})
+      setDraftIds(new Set())
       setStatus({
         kind: 'success',
         message: '已提交到 GitHub。Cloudflare Pages 会在 1-2 分钟内重新部署。',
@@ -697,22 +808,31 @@ export default function Admin() {
           </div>
 
           {tab === 'products' && (
-            <nav className="admin__product-list" aria-label="产品列表">
-              {content.products.map((product) => (
-                <button
-                  type="button"
-                  key={product.id}
-                  className={product.id === selectedId ? 'is-active' : ''}
-                  onClick={() => {
-                    setSelectedId(product.id)
-                    setNewImageValue('')
-                  }}
-                >
-                  <span>{product.name}</span>
-                  <small>{product.slug}</small>
-                </button>
-              ))}
-            </nav>
+            <>
+              <button
+                type="button"
+                className="admin__button admin__button--primary admin__button--wide"
+                onClick={addProduct}
+              >
+                + 新建产品
+              </button>
+              <nav className="admin__product-list" aria-label="产品列表">
+                {content.products.map((product) => (
+                  <button
+                    type="button"
+                    key={product.id}
+                    className={product.id === selectedId ? 'is-active' : ''}
+                    onClick={() => {
+                      setSelectedId(product.id)
+                      setNewImageValue('')
+                    }}
+                  >
+                    <span>{product.name}</span>
+                    <small>{product.slug}</small>
+                  </button>
+                ))}
+              </nav>
+            </>
           )}
         </aside>
 
@@ -726,7 +846,17 @@ export default function Admin() {
                     value={selected.name}
                     onChange={(value) => updateSelected({ name: value })}
                   />
-                  <Field label="Slug（不可改）" value={selected.slug} readOnly />
+                  <Field
+                    label={draftIds.has(selected.id) ? 'Slug（新建，可改）' : 'Slug（不可改）'}
+                    value={selected.slug}
+                    readOnly={!draftIds.has(selected.id)}
+                    onChange={(value) => updateSelected({ slug: value })}
+                    hint={
+                      draftIds.has(selected.id)
+                        ? '保存后不要再改，否则旧链接会 404。'
+                        : undefined
+                    }
+                  />
                   <Field
                     label="副标题"
                     value={selected.subtitle}
@@ -979,6 +1109,19 @@ export default function Admin() {
                     }
                   />
                 </div>
+              </Section>
+
+              <Section title="删除产品">
+                <p className="admin__hint">
+                  删除后需要点“保存并部署”才会从线上移除；已上传的图片不会自动删除。
+                </p>
+                <button
+                  type="button"
+                  className="admin__button admin__button--danger"
+                  onClick={() => removeProduct(selected)}
+                >
+                  删除「{selected.name}」
+                </button>
               </Section>
             </>
           )}

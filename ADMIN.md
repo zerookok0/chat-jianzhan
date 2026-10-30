@@ -25,9 +25,20 @@ The token is used only by your browser to call `api.github.com`. It is not sent 
 
 ## What can be edited
 
-- **产品** — name, subtitle, description, price, currency, category, glaze, availability, year, featured flag, specifications, purchase link, WooCommerce ID, and gallery images.
+- **产品** — name, subtitle, description, price, currency, category, glaze, availability, year, featured flag, specifications, purchase link, WooCommerce ID, and gallery images. Use **+ 新建产品** to add a piece; use **删除产品** at the bottom of the form to remove one.
 - **站点** — brand, tagline, contact details, social links, footer policies, navigation.
 - **首页文案** — hero, soul, collection, craft, gifting, journal and closing copy.
+
+## Adding a product
+
+1. Click **+ 新建产品** in the left sidebar.
+2. Fill in the name, then set a unique slug while the product is still new.
+3. Add specifications, pricing and images.
+4. Click **保存并部署**.
+
+The slug becomes read-only after the first save. Do not change it later without adding a redirect, or the old product URL will break.
+
+Deleting a product only removes it from the catalogue on the next deploy; images already uploaded stay in `public/images/uploads/`.
 
 Images uploaded through the admin are committed to:
 
