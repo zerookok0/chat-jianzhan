@@ -2,7 +2,9 @@ import { useDocumentMeta, useReveal } from '../lib/hooks'
 import { AppLink } from '../components/ui/Media'
 import { ArrowRight } from '../components/ui/Icons'
 import { site } from '../data/site'
-import { policies, getPolicy, type PolicyBlock } from '../data/policies'
+import type { PolicyBlock } from '../data/policies'
+import { useI18n } from '../i18n'
+import { localisedPolicy, localisedPolicies } from '../lib/content'
 
 interface PolicyPageProps {
   slug: string
@@ -39,53 +41,61 @@ function Block({ block }: { block: PolicyBlock }) {
 }
 
 export function PolicyPage({ slug }: PolicyPageProps) {
-  const policy = getPolicy(slug)
+  const { t, locale } = useI18n()
+  const policy = localisedPolicy(slug, locale)
 
-  useDocumentMeta(policy ? policy.metaTitle : 'Policy not found | JIANZHAN', policy?.description)
-  useReveal([slug])
+  useDocumentMeta(
+    policy ? policy.metaTitle : t('meta.policyNotFound'),
+    policy?.description,
+  )
+  useReveal([slug, locale])
 
   if (!policy) {
     return (
       <div className="shell not-found-page">
-        <p className="eyebrow">Not Found</p>
-        <h1 className="display display--lg">This policy could not be found</h1>
-        <p className="body">
-          The page may have moved. Every policy is linked from the footer of any page on the site.
-        </p>
+        <p className="eyebrow">{t('policy.notFoundEyebrow')}</p>
+        <h1 className="display display--lg">{t('policy.notFoundTitle')}</h1>
+        <p className="body">{t('policy.notFoundBody')}</p>
         <AppLink href="/" className="btn btn--outline">
-          Back to the home page
+          {t('policy.notFoundCta')}
         </AppLink>
       </div>
     )
   }
 
+  const others = localisedPolicies(locale).filter((p) => p.slug !== policy.slug)
+
   return (
     <div className="policy-page">
       <header className="policy-hero">
         <div className="shell">
-          <nav className="breadcrumb breadcrumb--light" aria-label="Breadcrumb">
-            <AppLink href="/">Home</AppLink>
+          <nav className="breadcrumb breadcrumb--light" aria-label={t('common.breadcrumb')}>
+            <AppLink href="/">{t('common.home')}</AppLink>
             <span aria-hidden="true">/</span>
             <span aria-current="page">{policy.title}</span>
           </nav>
 
           <p className="eyebrow reveal">{policy.eyebrow}</p>
-          <h1 id="policy-title" className="display display--lg policy-hero__title reveal" data-delay="1">
+          <h1
+            id="policy-title"
+            className="display display--lg policy-hero__title reveal"
+            data-delay="1"
+          >
             {policy.title}
           </h1>
           <p className="lede policy-hero__intro reveal" data-delay="2">
             {policy.intro}
           </p>
           <p className="meta policy-hero__updated reveal" data-delay="3">
-            Last updated {policy.updated}
+            {t('policy.updated', { date: policy.updated })}
           </p>
         </div>
       </header>
 
       <div className="shell policy-layout">
         {/* Section index — anchors, not a second navigation system */}
-        <nav className="policy-index" aria-label={`${policy.title} contents`}>
-          <p className="eyebrow">Contents</p>
+        <nav className="policy-index" aria-label={t('policy.contentsAria', { title: policy.title })}>
+          <p className="eyebrow">{t('policy.contents')}</p>
           <ol>
             {policy.sections.map((section) => (
               <li key={section.id}>
@@ -97,7 +107,12 @@ export function PolicyPage({ slug }: PolicyPageProps) {
 
         <div className="policy-body">
           {policy.sections.map((section, i) => (
-            <section key={section.id} id={section.id} className="policy-section" aria-labelledby={`${section.id}-h`}>
+            <section
+              key={section.id}
+              id={section.id}
+              className="policy-section"
+              aria-labelledby={`${section.id}-h`}
+            >
               <p className="policy-section__n" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}
               </p>
@@ -113,16 +128,13 @@ export function PolicyPage({ slug }: PolicyPageProps) {
           ))}
 
           <footer className="policy-foot">
-            <p className="body">
-              Questions about this policy, an order, or a piece already in your hands? The studio
-              answers every message within one business day.
-            </p>
+            <p className="body">{t('policy.footBody')}</p>
             <div className="policy-foot__actions">
               <AppLink href={`mailto:${site.email}`} className="btn btn--solid">
-                Contact the studio
+                {t('policy.footCta1')}
               </AppLink>
               <AppLink href="/collection" className="btn">
-                Explore the collection
+                {t('policy.footCta2')}
                 <ArrowRight width={16} height={16} className="btn__arrow" />
               </AppLink>
             </div>
@@ -131,19 +143,17 @@ export function PolicyPage({ slug }: PolicyPageProps) {
       </div>
 
       {/* Cross-links to the other policies, so none is a dead end */}
-      <nav className="shell policy-others" aria-label="Other policies">
-        <p className="eyebrow">Also in this section</p>
+      <nav className="shell policy-others" aria-label={t('policy.others')}>
+        <p className="eyebrow">{t('policy.others')}</p>
         <ul>
-          {policies
-            .filter((p) => p.slug !== policy.slug)
-            .map((p) => (
-              <li key={p.slug}>
-                <AppLink href={`/${p.slug}`} className="policy-others__link">
-                  <span>{p.title}</span>
-                  <ArrowRight width={14} height={14} className="btn__arrow" />
-                </AppLink>
-              </li>
-            ))}
+          {others.map((p) => (
+            <li key={p.slug}>
+              <AppLink href={`/${p.slug}`} className="policy-others__link">
+                <span>{p.title}</span>
+                <ArrowRight width={14} height={14} className="btn__arrow" />
+              </AppLink>
+            </li>
+          ))}
         </ul>
       </nav>
     </div>

@@ -38,6 +38,9 @@ export interface Product {
   /** Short editorial line used in grids */
   subtitle: string
   description: string
+  /** Optional SEO overrides for the product page */
+  seoTitle?: string
+  seoDescription?: string
   price: number
   currency: string
   images: string[]

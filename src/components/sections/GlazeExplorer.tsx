@@ -4,6 +4,7 @@ import { MediaImage } from '../ui/Media'
 import { ArrowRight } from '../ui/Icons'
 import { useReveal } from '../../lib/hooks'
 import { AppLink } from '../ui/Media'
+import { useI18n } from '../../i18n'
 
 interface GlazeExplorerProps {
   glazes: Glaze[]
@@ -14,6 +15,7 @@ interface GlazeExplorerProps {
  * so switching tabs always changes image, name and description together.
  */
 export function GlazeExplorer({ glazes }: GlazeExplorerProps) {
+  const { t } = useI18n()
   const [active, setActive] = useState(0)
   useReveal([active])
   const glaze = glazes[active]
@@ -22,13 +24,12 @@ export function GlazeExplorer({ glazes }: GlazeExplorerProps) {
     <section className="section glaze-explorer" aria-labelledby="glaze-title">
       <div className="shell">
         <header className="glaze-explorer__head">
-          <p className="eyebrow reveal">Glaze Explorer</p>
+          <p className="eyebrow reveal">{t('glaze.eyebrow')}</p>
           <h2 id="glaze-title" className="display display--md reveal" data-delay="1">
-            Five surfaces, one kiln
+            {t('glaze.title')}
           </h2>
           <p className="body reveal" data-delay="2">
-            The same clay and the same flame produce entirely different faces. Choose a glaze to see
-            the piece it belongs to.
+            {t('glaze.body')}
           </p>
         </header>
 
@@ -37,7 +38,7 @@ export function GlazeExplorer({ glazes }: GlazeExplorerProps) {
             <MediaImage
               key={glaze.id}
               image={glaze.image}
-              alt={`${glaze.name} glaze — ${glaze.tagline}`}
+              alt={t('glaze.alt', { name: glaze.name, tagline: glaze.tagline })}
               ratio={4 / 5}
               sizes="(min-width: 900px) 52vw, 92vw"
               className="glaze-explorer__media"
@@ -49,7 +50,7 @@ export function GlazeExplorer({ glazes }: GlazeExplorerProps) {
           </div>
 
           <div className="glaze-explorer__panel">
-            <div className="chip-row glaze-explorer__tabs" role="tablist" aria-label="Glaze types">
+            <div className="chip-row glaze-explorer__tabs" role="tablist" aria-label={t('glaze.tabsAria')}>
               {glazes.map((g, i) => (
                 <button
                   key={g.id}
@@ -81,7 +82,7 @@ export function GlazeExplorer({ glazes }: GlazeExplorerProps) {
               <p className="body">{glaze.description}</p>
 
               <AppLink href={`/collection?glaze=${glaze.id}`} className="btn glaze-explorer__link">
-                See pieces in this glaze
+                {t('glaze.see')}
                 <ArrowRight width={16} height={16} className="btn__arrow" />
               </AppLink>
             </div>

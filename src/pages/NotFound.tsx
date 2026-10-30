@@ -1,23 +1,23 @@
 import { AppLink } from '../components/ui/Media'
 import { useDocumentMeta } from '../lib/hooks'
+import { useI18n } from '../i18n'
 
 export function NotFound() {
-  useDocumentMeta('Page not found | JIANZHAN', 'The page you were looking for is not here.')
+  const { t } = useI18n()
+
+  useDocumentMeta(t('meta.nfTitle'), t('meta.nfDesc'))
 
   return (
     <div className="shell not-found-page">
       <p className="eyebrow">404</p>
-      <h1 className="display display--lg">This page has left the kiln</h1>
-      <p className="body">
-        The address does not match anything in the catalogue. Everything currently available lives
-        in the collection.
-      </p>
+      <h1 className="display display--lg">{t('nf.title')}</h1>
+      <p className="body">{t('nf.body')}</p>
       <div className="not-found-page__links">
         <AppLink href="/collection" className="btn btn--outline">
-          Collection
+          {t('nf.cta1')}
         </AppLink>
         <AppLink href="/" className="btn">
-          Home
+          {t('nf.cta2')}
         </AppLink>
       </div>
     </div>

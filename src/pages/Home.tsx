@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { products, formatPrice, glazes } from '../data/products'
-import { defaultHome as home } from '../data/content'
-import { posts } from '../data/posts'
+import { formatPrice } from '../data/products'
 import { visual } from '../styles/visual'
 import { img } from '../data/images'
 import { AppLink, MediaImage } from '../components/ui/Media'
@@ -10,6 +8,9 @@ import type { Product } from '../data/types'
 import { ArrowDown, ArrowRight, ScrollIndicator } from '../components/ui/Icons'
 import { usePrefersReducedMotion, useReveal } from '../lib/hooks'
 import { GlazeExplorer } from '../components/sections/GlazeExplorer'
+import { useI18n } from '../i18n'
+import { defaultHome } from '../data/content'
+import { localisedProducts, localisedGlazes, localisedPosts } from '../lib/content'
 
 interface HomeProps {
   onQuickView: (p: Product) => void
@@ -17,6 +18,8 @@ interface HomeProps {
 
 export function Home({ onQuickView }: HomeProps) {
   useReveal()
+  const { t, locale } = useI18n()
+  const copy = (value: string, key: string) => (locale === 'en' ? value : t(key))
   const [heroLoaded, setHeroLoaded] = useState(false)
   const heroRef = useRef<HTMLDivElement>(null)
   const reduce = usePrefersReducedMotion()
@@ -40,6 +43,10 @@ export function Home({ onQuickView }: HomeProps) {
       cancelAnimationFrame(frame)
     }
   }, [reduce])
+
+  const products = localisedProducts(locale)
+  const glazes = localisedGlazes(locale)
+  const posts = localisedPosts(locale)
 
   const featured = products.filter((p) => p.featured).slice(0, 3)
   const latest = posts.slice(0, 3)
@@ -73,7 +80,7 @@ export function Home({ onQuickView }: HomeProps) {
             <div className="hero__bowl-inner">
               <img
                 src={visual.heroBowl}
-                alt="A dark-glazed Jian ware tea bowl catching a single warm light against stone"
+                alt={t('home.heroAlt')}
                 onLoad={() => setHeroLoaded(true)}
                 fetchPriority="high"
                 decoding="sync"
@@ -93,21 +100,21 @@ export function Home({ onQuickView }: HomeProps) {
           </div>
 
           <div className="hero__text">
-            <p className="eyebrow hero__kicker reveal">{home.hero.kicker}</p>
+            <p className="eyebrow hero__kicker reveal">{copy(defaultHome.hero.kicker, 'home.kicker')}</p>
             <h1 id="hero-title" className="display display--xl hero__title reveal" data-delay="1">
-              {home.hero.titleLine1}
+              {copy(defaultHome.hero.titleLine1, 'home.title1')}
               <br />
-              {home.hero.titleLine2}
+              {copy(defaultHome.hero.titleLine2, 'home.title2')}
             </h1>
             <p className="hero__line serif-italic reveal" data-delay="2">
-              {home.hero.line}
+              {copy(defaultHome.hero.line, 'home.line')}
             </p>
             <p className="hero__sub reveal" data-delay="3">
-              {home.hero.sub}
+              {copy(defaultHome.hero.sub, 'home.sub')}
             </p>
             <div className="hero__cta reveal" data-delay="4">
               <AppLink href="/collection" className="btn">
-                {home.hero.cta}
+                {copy(defaultHome.hero.cta, 'home.cta')}
                 <ArrowRight width={18} height={18} className="btn__arrow" />
               </AppLink>
             </div>
@@ -115,7 +122,7 @@ export function Home({ onQuickView }: HomeProps) {
 
           <div className="hero__scroll" aria-hidden="true">
             <ScrollIndicator />
-            <span>Scroll</span>
+            <span>{t('home.scroll')}</span>
           </div>
         </div>
       </section>
@@ -125,18 +132,18 @@ export function Home({ onQuickView }: HomeProps) {
         <div className="shell">
           <div className="soul__grid">
             <div className="soul__text">
-              <p className="eyebrow reveal">{home.soul.eyebrow}</p>
+              <p className="eyebrow reveal">{copy(defaultHome.soul.eyebrow, 'home.soulEyebrow')}</p>
               <h2 id="soul-title" className="display display--lg soul__title reveal" data-delay="1">
-                {home.soul.titleLine1}
+                {copy(defaultHome.soul.titleLine1, 'home.soulTitle1')}
                 <br />
-                {home.soul.titleLine2}
+                {copy(defaultHome.soul.titleLine2, 'home.soulTitle2')}
               </h2>
               <p className="lede reveal" data-delay="2">
-                {home.soul.body}
+                {copy(defaultHome.soul.body, 'home.soulLede')}
               </p>
               <div className="reveal" data-delay="3">
                 <AppLink href="/craft" className="btn">
-                  {home.soul.cta}
+                  {copy(defaultHome.soul.cta, 'home.soulCta')}
                   <ArrowRight width={18} height={18} className="btn__arrow" />
                 </AppLink>
               </div>
@@ -145,13 +152,13 @@ export function Home({ onQuickView }: HomeProps) {
             <figure className="soul__figure reveal" data-delay="2">
               <MediaImage
                 image="glaze-detail"
-                alt="Close detail of a dark glazed surface catching warm light"
+                alt={t('home.soulAlt')}
                 ratio={4 / 5}
                 sizes="(min-width: 900px) 44vw, 92vw"
               />
               <figcaption className="soul__caption">
-                <span className="meta">Fig. 01</span>
-                <span>{home.soul.caption}</span>
+                <span className="meta">{t('home.soulFigNum')}</span>
+                <span>{copy(defaultHome.soul.caption, 'home.soulFigCaption')}</span>
               </figcaption>
             </figure>
           </div>
@@ -167,16 +174,16 @@ export function Home({ onQuickView }: HomeProps) {
         <div className="shell">
           <header className="section-head">
             <div>
-              <p className="eyebrow reveal">{home.collection.eyebrow}</p>
+              <p className="eyebrow reveal">{copy(defaultHome.collection.eyebrow, 'home.collEyebrow')}</p>
               <h2 id="featured-title" className="display display--md reveal" data-delay="1">
-                {home.collection.title}
+                {copy(defaultHome.collection.title, 'home.collTitle')}
               </h2>
             </div>
             <p className="body section-head__note reveal" data-delay="2">
-              {home.collection.note}
+              {copy(defaultHome.collection.note, 'home.collNote')}
             </p>
             <AppLink href="/collection" className="btn section-head__link reveal" data-delay="2">
-              {home.collection.cta}
+              {copy(defaultHome.collection.cta, 'common.allPieces')}
               <ArrowRight width={16} height={16} className="btn__arrow" />
             </AppLink>
           </header>
@@ -192,26 +199,21 @@ export function Home({ onQuickView }: HomeProps) {
       {/* ================= CRAFT ================= */}
       <section className="craft-band" aria-labelledby="craft-title">
         <div className="craft-band__media">
-          <img
-            src={visual.craft}
-            alt="Hands shaping a vessel on a potter's wheel in a dim studio"
-            loading="lazy"
-            decoding="async"
-          />
+          <img src={visual.craft} alt={t('home.craftAlt')} loading="lazy" decoding="async" />
           <div className="craft-band__scrim" aria-hidden="true" />
         </div>
 
         <div className="shell craft-band__inner">
           <div className="craft-band__text">
-            <p className="eyebrow reveal">{home.craft.eyebrow}</p>
+            <p className="eyebrow reveal">{copy(defaultHome.craft.eyebrow, 'home.craftEyebrow')}</p>
             <h2 id="craft-title" className="display display--md reveal" data-delay="1">
-              {home.craft.title}
+              {copy(defaultHome.craft.title, 'home.craftTitle')}
             </h2>
             <p className="body reveal" data-delay="2">
-              {home.craft.body}
+              {copy(defaultHome.craft.body, 'home.craftBody')}
             </p>
             <AppLink href="/craft" className="btn reveal" data-delay="3">
-              {home.craft.cta}
+              {copy(defaultHome.craft.cta, 'home.craftCta')}
               <ArrowRight width={16} height={16} className="btn__arrow" />
             </AppLink>
           </div>
@@ -225,27 +227,30 @@ export function Home({ onQuickView }: HomeProps) {
       <section className="section gifting" aria-labelledby="gift-title">
         <div className="shell gifting__inner">
           <div className="gifting__text">
-            <p className="eyebrow reveal">{home.gifting.eyebrow}</p>
+            <p className="eyebrow reveal">{copy(defaultHome.gifting.eyebrow, 'home.giftEyebrow')}</p>
             <h2 id="gift-title" className="display display--md reveal" data-delay="1">
-              {home.gifting.title}
+              {copy(defaultHome.gifting.title, 'home.giftTitle')}
             </h2>
             <p className="body reveal" data-delay="2">
-              {home.gifting.body}
+              {copy(defaultHome.gifting.body, 'home.giftBody')}
             </p>
             <ul className="gifting__list reveal" data-delay="3">
-              {home.gifting.list.map((item) => (
+              {(locale === 'en'
+                ? defaultHome.gifting.list
+                : [t('home.giftLi1'), t('home.giftLi2'), t('home.giftLi3')]
+              ).map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
             <AppLink href="/collection" className="btn reveal" data-delay="3">
-              {home.gifting.cta}
+              {copy(defaultHome.gifting.cta, 'home.giftCta')}
               <ArrowRight width={16} height={16} className="btn__arrow" />
             </AppLink>
           </div>
           <figure className="gifting__figure reveal" data-delay="2">
             <MediaImage
               image="bowl-set"
-              alt="A group of handcrafted bowls arranged together on a dark surface"
+              alt={t('home.giftAlt')}
               ratio={1}
               sizes="(min-width: 900px) 42vw, 92vw"
             />
@@ -258,20 +263,25 @@ export function Home({ onQuickView }: HomeProps) {
         <div className="shell">
           <header className="section-head">
             <div>
-              <p className="eyebrow reveal">{home.journal.eyebrow}</p>
+              <p className="eyebrow reveal">{copy(defaultHome.journal.eyebrow, 'home.journalEyebrow')}</p>
               <h2 id="journal-title" className="display display--md reveal" data-delay="1">
-                {home.journal.title}
+                {copy(defaultHome.journal.title, 'home.journalTitle')}
               </h2>
             </div>
             <AppLink href="/journal" className="btn section-head__link reveal" data-delay="2">
-              {home.journal.cta}
+              {copy(defaultHome.journal.cta, 'common.allEntries')}
               <ArrowRight width={16} height={16} className="btn__arrow" />
             </AppLink>
           </header>
 
           <div className="journal-grid">
             {latest.map((post, i) => (
-              <AppLink key={post.slug} href={`/journal/${post.slug}`} className="jcard reveal" data-delay={i + 1}>
+              <AppLink
+                key={post.slug}
+                href={`/journal/${post.slug}`}
+                className="jcard reveal"
+                data-delay={i + 1}
+              >
                 <MediaImage
                   image={post.image as never}
                   alt=""
@@ -280,7 +290,7 @@ export function Home({ onQuickView }: HomeProps) {
                 />
                 <div className="jcard__body">
                   <p className="meta">
-                    {post.kicker} · {post.readMinutes} min
+                    {post.kicker} · {t('journal.min', { count: post.readMinutes })}
                   </p>
                   <h3 className="jcard__title">{post.title}</h3>
                   <p className="jcard__excerpt">{post.excerpt}</p>
@@ -297,21 +307,21 @@ export function Home({ onQuickView }: HomeProps) {
           <img src={visual.parting} alt="" loading="lazy" decoding="async" />
         </div>
         <div className="shell closing__inner">
-          <p className="eyebrow reveal">{home.closing.eyebrow}</p>
+          <p className="eyebrow reveal">{copy(defaultHome.closing.eyebrow, 'home.closingEyebrow')}</p>
           <h2 id="closing-title" className="display display--lg closing__title reveal" data-delay="1">
-            {home.closing.titleLine1}
+            {copy(defaultHome.closing.titleLine1, 'home.closingTitle1')}
             <br />
-            {home.closing.titleLine2}
+            {copy(defaultHome.closing.titleLine2, 'home.closingTitle2')}
           </h2>
           <p className="lede closing__lede reveal" data-delay="2">
-            {home.closing.body}
+            {copy(defaultHome.closing.body, 'home.closingLede')}
           </p>
           <div className="closing__cta reveal" data-delay="3">
             <AppLink href="/collection" className="btn btn--solid">
-              {home.closing.ctaPrimary}
+              {copy(defaultHome.closing.ctaPrimary, 'home.closingCta1')}
             </AppLink>
             <AppLink href="/about" className="btn">
-              {home.closing.ctaSecondary}
+              {copy(defaultHome.closing.ctaSecondary, 'home.closingCta2')}
               <ArrowDown width={16} height={16} className="btn__arrow" />
             </AppLink>
           </div>
@@ -324,8 +334,10 @@ export function Home({ onQuickView }: HomeProps) {
 
       {/* Price reference for screen readers and search snippets */}
       <p className="sr-only">
-        Catalogue contains {products.length} pieces. Featured pieces from{' '}
-        {formatPrice(Math.min(...featured.map((p) => p.price)))}.
+        {t('home.srCatalogue', {
+          count: products.length,
+          price: formatPrice(Math.min(...featured.map((p) => p.price))),
+        })}
       </p>
       {/* Preload hint for the next section image */}
       <link rel="prefetch" href={img('kiln-glow', 800)} as="image" />

@@ -305,20 +305,39 @@ export function useEscape(active: boolean, onEscape: () => void) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Document title / meta description                                   */
+/* Document title / meta description / OG                              */
 /* ------------------------------------------------------------------ */
+
+function setMeta(selector: string, attr: 'name' | 'property', key: string, value: string) {
+  let el = document.head.querySelector<HTMLMetaElement>(selector)
+  if (!el) {
+    el = document.createElement('meta')
+    el.setAttribute(attr, key)
+    document.head.appendChild(el)
+  }
+  el.setAttribute('content', value)
+}
 
 export function useDocumentMeta(title: string, description?: string) {
   useEffect(() => {
     document.title = title
+
+    /*
+     * The <html lang> attribute is owned by the i18n provider, so it is not
+     * touched here — one writer, no race between the two effects.
+     */
     if (description) {
-      let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]')
-      if (!meta) {
-        meta = document.createElement('meta')
-        meta.name = 'description'
-        document.head.appendChild(meta)
-      }
-      meta.content = description
+      setMeta('meta[name="description"]', 'name', 'description', description)
+    }
+
+    /* Keep the social preview in step with the page, not just the document. */
+    setMeta('meta[property="og:title"]', 'property', 'og:title', title)
+    if (description) {
+      setMeta('meta[property="og:description"]', 'property', 'og:description', description)
+    }
+    setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', title)
+    if (description) {
+      setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', description)
     }
   }, [title, description])
 }

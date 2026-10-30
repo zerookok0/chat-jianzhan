@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { products, glazes, categories, formatPrice } from '../data/products'
+import { formatPrice } from '../data/products'
 import { useDocumentMeta, useReveal, useRoute } from '../lib/hooks'
 import { ProductCard } from '../components/ui/ProductCard'
 import { MediaImage, AppLink } from '../components/ui/Media'
@@ -7,6 +7,8 @@ import { visual } from '../styles/visual'
 import { Close, ArrowRight } from '../components/ui/Icons'
 import { site } from '../data/site'
 import type { Product, CategoryId, GlazeId } from '../data/types'
+import { useI18n } from '../i18n'
+import { localisedProducts, localisedGlazes, localisedCategories } from '../lib/content'
 
 type SortKey = 'curated' | 'price-asc' | 'price-desc' | 'newest'
 
@@ -17,10 +19,9 @@ interface CollectionProps {
 const PAGE = 9
 
 export function Collection({ onQuickView }: CollectionProps) {
-  useDocumentMeta(
-    'Collection — Jian Ware Tea Bowls & Vessels | JIANZHAN',
-    'Browse the JIANZHAN collection of Jian ware tea bowls and vessels: oil spot, hare’s fur, iridescent and jade glazes. Filter by glaze and category, preview quickly, and enquire about bespoke acquisitions.',
-  )
+  const { t, locale } = useI18n()
+
+  useDocumentMeta(t('meta.collectionTitle'), t('meta.collectionDesc'))
   useReveal()
 
   const route = useRoute()
@@ -30,10 +31,14 @@ export function Collection({ onQuickView }: CollectionProps) {
   const [visible, setVisible] = useState(PAGE)
   const [filtersOpen, setFiltersOpen] = useState(false)
 
+  const products = useMemo(() => localisedProducts(locale), [locale])
+  const glazes = useMemo(() => localisedGlazes(locale), [locale])
+  const categories = useMemo(() => localisedCategories(locale), [locale])
+
   /* Honour ?glaze= from the home page explorer */
   useEffect(() => {
     const g = route.query.get('glaze')
-    if (g && glazes.some((gl) => gl.id === g)) setGlazeFilter(g as GlazeId)
+    if (g) setGlazeFilter(g as GlazeId)
   }, [route.query])
 
   const filtered = useMemo(() => {
@@ -52,7 +57,7 @@ export function Collection({ onQuickView }: CollectionProps) {
       default:
         return [...list].sort((a, b) => Number(b.featured) - Number(a.featured))
     }
-  }, [glazeFilter, categoryFilter, sort])
+  }, [products, glazeFilter, categoryFilter, sort])
 
   const shown = filtered.slice(0, visible)
   const activeCount = (glazeFilter === 'all' ? 0 : 1) + (categoryFilter === 'all' ? 0 : 1)
@@ -71,27 +76,30 @@ export function Collection({ onQuickView }: CollectionProps) {
           <img src={visual.collectionHero} alt="" fetchPriority="high" decoding="async" />
         </div>
         <div className="shell collection-hero__inner">
-          <p className="eyebrow reveal">The Collection</p>
-          <h1 id="collection-title" className="display display--lg collection-hero__title reveal" data-delay="1">
-            Works in clay,
+          <p className="eyebrow reveal">{t('coll.eyebrow')}</p>
+          <h1
+            id="collection-title"
+            className="display display--lg collection-hero__title reveal"
+            data-delay="1"
+          >
+            {t('coll.title1')}
             <br />
-            fire and glaze
+            {t('coll.title2')}
           </h1>
           <p className="lede reveal" data-delay="2">
-            A working catalogue of Jian ware pieces. Each bowl is fired individually; surfaces differ
-            from piece to piece and cannot be reordered to specification.
+            {t('coll.lede')}
           </p>
           <dl className="collection-hero__facts reveal" data-delay="3">
             <div>
-              <dt>Pieces</dt>
+              <dt>{t('coll.factPieces')}</dt>
               <dd>{products.length}</dd>
             </div>
             <div>
-              <dt>Glaze families</dt>
+              <dt>{t('coll.factGlazes')}</dt>
               <dd>{glazes.length}</dd>
             </div>
             <div>
-              <dt>From</dt>
+              <dt>{t('coll.factFrom')}</dt>
               <dd>{formatPrice(Math.min(...products.map((p) => p.price)))}</dd>
             </div>
           </dl>
@@ -107,16 +115,20 @@ export function Collection({ onQuickView }: CollectionProps) {
             aria-controls="collection-filters"
             onClick={() => setFiltersOpen((v) => !v)}
           >
-            Filters{activeCount > 0 ? ` (${activeCount})` : ''}
+            {activeCount > 0
+              ? t('coll.filtersCount', { count: activeCount })
+              : t('coll.filters')}
           </button>
 
           <p className="collection-toolbar__count" role="status" aria-live="polite">
-            {filtered.length} piece{filtered.length === 1 ? '' : 's'}
+            {filtered.length === 1
+              ? t('coll.count', { count: filtered.length })
+              : t('coll.countPlural', { count: filtered.length })}
           </p>
 
           <div className="collection-toolbar__sort">
             <label htmlFor="sort" className="meta">
-              Sort
+              {t('coll.sort')}
             </label>
             <select
               id="sort"
@@ -127,17 +139,17 @@ export function Collection({ onQuickView }: CollectionProps) {
               }}
               className="select"
             >
-              <option value="curated">Curated</option>
-              <option value="newest">Newest</option>
-              <option value="price-asc">Price — low to high</option>
-              <option value="price-desc">Price — high to low</option>
+              <option value="curated">{t('coll.sortCurated')}</option>
+              <option value="newest">{t('coll.sortNewest')}</option>
+              <option value="price-asc">{t('coll.sortPriceAsc')}</option>
+              <option value="price-desc">{t('coll.sortPriceDesc')}</option>
             </select>
           </div>
         </div>
 
         <div id="collection-filters" className={`collection-filters ${filtersOpen ? 'is-open' : ''}`}>
           <div className="filter-group">
-            <p className="eyebrow">Glaze</p>
+            <p className="eyebrow">{t('coll.glaze')}</p>
             <div className="chip-row">
               <button
                 type="button"
@@ -148,7 +160,7 @@ export function Collection({ onQuickView }: CollectionProps) {
                   setVisible(PAGE)
                 }}
               >
-                All
+                {t('coll.all')}
               </button>
               {glazes.map((g) => (
                 <button
@@ -168,7 +180,7 @@ export function Collection({ onQuickView }: CollectionProps) {
           </div>
 
           <div className="filter-group">
-            <p className="eyebrow">Category</p>
+            <p className="eyebrow">{t('coll.category')}</p>
             <div className="chip-row">
               <button
                 type="button"
@@ -179,7 +191,7 @@ export function Collection({ onQuickView }: CollectionProps) {
                   setVisible(PAGE)
                 }}
               >
-                All
+                {t('coll.all')}
               </button>
               {categories.map((c) => (
                 <button
@@ -200,7 +212,7 @@ export function Collection({ onQuickView }: CollectionProps) {
 
           {activeCount > 0 && (
             <button type="button" className="btn btn--link collection-filters__reset" onClick={reset}>
-              Clear filters
+              {t('coll.clear')}
               <Close width={12} height={12} />
             </button>
           )}
@@ -209,13 +221,21 @@ export function Collection({ onQuickView }: CollectionProps) {
         {activeCount > 0 && (
           <div className="active-filters" aria-live="polite">
             {glazeFilter !== 'all' && (
-              <button type="button" className="tag tag--removable" onClick={() => setGlazeFilter('all')}>
+              <button
+                type="button"
+                className="tag tag--removable"
+                onClick={() => setGlazeFilter('all')}
+              >
                 {glazes.find((g) => g.id === glazeFilter)?.name}
                 <Close width={10} height={10} />
               </button>
             )}
             {categoryFilter !== 'all' && (
-              <button type="button" className="tag tag--removable" onClick={() => setCategoryFilter('all')}>
+              <button
+                type="button"
+                className="tag tag--removable"
+                onClick={() => setCategoryFilter('all')}
+              >
                 {categories.find((c) => c.id === categoryFilter)?.label}
                 <Close width={10} height={10} />
               </button>
@@ -231,34 +251,38 @@ export function Collection({ onQuickView }: CollectionProps) {
           </div>
         ) : (
           <div className="empty-state">
-            <p className="display display--sm">No pieces match these filters</p>
-            <p className="body">
-              Try a different glaze or category — the full catalogue holds {products.length} works.
-            </p>
+            <p className="display display--sm">{t('coll.emptyTitle')}</p>
+            <p className="body">{t('coll.emptyBody', { count: products.length })}</p>
             <button type="button" className="btn btn--outline" onClick={reset}>
-              Show all pieces
+              {t('coll.emptyCta')}
             </button>
           </div>
         )}
 
         {visible < filtered.length && (
           <div className="collection-more">
-            <button type="button" className="btn btn--outline" onClick={() => setVisible((v) => v + PAGE)}>
-              Load more — {filtered.length - visible} remaining
+            <button
+              type="button"
+              className="btn btn--outline"
+              onClick={() => setVisible((v) => v + PAGE)}
+            >
+              {t('coll.loadMore', { count: filtered.length - visible })}
             </button>
           </div>
         )}
 
         <aside className="collection-note">
-          <MediaImage image="kiln-studio" alt="Pottery tools on a workshop table" ratio={16 / 9} sizes="92vw" />
+          <MediaImage
+            image="kiln-studio"
+            alt={t('coll.noteAlt')}
+            ratio={16 / 9}
+            sizes="92vw"
+          />
           <div className="collection-note__body">
-            <p className="eyebrow">From the Studio</p>
-            <p className="body">
-              Each piece in our collection is wood-fired in Jianyang. For bespoke acquisitions or
-              private curation, contact our studio concierge.
-            </p>
+            <p className="eyebrow">{t('coll.noteEyebrow')}</p>
+            <p className="body">{t('coll.noteBody')}</p>
             <AppLink href={`mailto:${site.email}`} className="btn collection-note__link">
-              Write to the studio
+              {t('coll.noteCta')}
               <ArrowRight width={16} height={16} className="btn__arrow" />
             </AppLink>
           </div>

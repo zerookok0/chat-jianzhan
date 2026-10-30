@@ -15,6 +15,12 @@
 
     <link rel="canonical" href="https://jianzhan.studio/" />
 
+    <!-- Locale alternates: the language lives in the visitor's preference,
+         not in the path, so all locales share the same canonical URL. -->
+    <link rel="alternate" hreflang="en" href="https://jianzhan.studio/" />
+    <link rel="alternate" hreflang="vi-VN" href="https://jianzhan.studio/" />
+    <link rel="alternate" hreflang="x-default" href="https://jianzhan.studio/" />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JIANZHAN" />
     <meta property="og:title" content="JIANZHAN — An Ancient Craft for Eternal Beauty" />
@@ -54,6 +60,24 @@
         fbq('track', 'PageView');
       </script>
     -->
+
+    <!-- First-paint locale: set <html lang> from an existing manual choice
+         before React mounts. It never redirects and does nothing on a first visit. -->
+    <script>
+      ;(function () {
+        try {
+          var stored = window.localStorage.getItem('preferred-locale')
+          var match = document.cookie.match(/(?:^|;\s*)NEXT_LOCALE=([^;]*)/)
+          var value = stored || (match ? decodeURIComponent(match[1]) : '')
+          var tags = { en: 'en', vi: 'vi-VN' }
+          if (value && tags[value]) {
+            document.documentElement.lang = tags[value]
+          }
+        } catch (e) {
+          /* storage or cookies blocked — the default language stands */
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

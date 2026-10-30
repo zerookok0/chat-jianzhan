@@ -1,9 +1,11 @@
 import type { Product } from '../../data/types'
-import { formatPrice, availabilityLabels } from '../../data/products'
+import { formatPrice } from '../../data/products'
 import { AppLink } from './Media'
 import { MediaImage } from './Media'
 import { FavButton } from './FavButton'
 import { Expand } from './Icons'
+import { useI18n } from '../../i18n'
+import { localisedGlaze } from '../../lib/content'
 
 interface ProductCardProps {
   product: Product
@@ -16,13 +18,21 @@ interface ProductCardProps {
  * Hovering reveals a low-key quick view affordance (not a loud overlay).
  */
 export function ProductCard({ product, onQuickView, index = 0 }: ProductCardProps) {
+  const { t, locale } = useI18n()
   const href = `/collection/${product.slug}`
   const soldOut = product.availability === 'sold-out'
+
+  /*
+   * The glaze line reads as a name, not as a slug: "Du Tích (giọt dầu)" in
+   * Vietnamese, "Oil Spot" in English. The identifier itself is never shown.
+   */
+  const glaze = localisedGlaze(product.glaze, locale)
+  const glazeName = glaze?.name ?? product.glaze.replace('-', ' ')
 
   return (
     <article className="card reveal" data-delay={(index % 3) + 1}>
       <div className="card__media">
-        <AppLink href={href} ariaLabel={`View ${product.name}`}>
+        <AppLink href={href} ariaLabel={t('cart.viewName', { name: product.name })}>
           <MediaImage
             image={product.images[0]}
             alt={`${product.name} — ${product.subtitle}`}
@@ -38,24 +48,26 @@ export function ProductCard({ product, onQuickView, index = 0 }: ProductCardProp
             type="button"
             className="icon-btn"
             onClick={() => onQuickView(product)}
-            aria-label={`Quick view: ${product.name}`}
+            aria-label={`${t('qv.fullDetails')}: ${product.name}`}
           >
             <Expand width={14} height={14} />
           </button>
         </div>
 
-        {soldOut && <span className="card__badge">Archive</span>}
+        {soldOut && <span className="card__badge">{t('prod.badgeArchive')}</span>}
       </div>
 
       <div className="card__body">
         <AppLink href={href} className="card__link">
-          <p className="card__glaze">{product.year} · {product.glaze.replace('-', ' ')}</p>
+          <p className="card__glaze">
+            {product.year} · {glazeName}
+          </p>
           <h3 className="card__name">{product.name}</h3>
         </AppLink>
         <p className="card__sub">{product.subtitle}</p>
         <div className="card__foot">
           <span className="card__price">{formatPrice(product.price, product.currency)}</span>
-          <span className="card__status">{availabilityLabels[product.availability]}</span>
+          <span className="card__status">{t(`avail.${product.availability}`)}</span>
         </div>
       </div>
     </article>

@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import { navigation, site } from '../../data/site'
 import { useRoute, useScrollLock } from '../../lib/hooks'
 import { useCart } from '../../lib/cart'
+import { useI18n } from '../../i18n'
 import { AppLink } from '../ui/Media'
 import { Cart, Close, Search } from '../ui/Icons'
 import { SearchOverlay } from './SearchOverlay'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
 /**
  * Header: transparent over the hero, then settles into a dark bar.
@@ -13,6 +15,7 @@ import { SearchOverlay } from './SearchOverlay'
 export function Header() {
   const route = useRoute()
   const { count, openCart } = useCart()
+  const { t, locale } = useI18n()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -40,24 +43,41 @@ export function Header() {
   const isActive = (href: string) =>
     href === '/' ? route.path === '/' : route.path === href || route.path.startsWith(`${href}/`)
 
+  /* Nav labels come from the dictionary; the hrefs stay in site.ts. */
+  const navKey = (href: string) =>
+    href === '/'
+      ? 'nav.home'
+      : href === '/collection'
+        ? 'nav.collection'
+        : href === '/craft'
+          ? 'nav.craft'
+          : href === '/journal'
+            ? 'nav.journal'
+            : 'nav.about'
+
+  const items = navigation.map((item) => ({
+    ...item,
+    label: locale === 'en' ? item.label : t(navKey(item.href)),
+  }))
+
   return (
     <>
       <a href="#main" className="skip-link">
-        Skip to content
+        {t('common.skip')}
       </a>
 
       <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="site-header__inner">
-          <AppLink href="/" className="brand" ariaLabel={`${site.brand} — home`}>
+          <AppLink href="/" className="brand" ariaLabel={`${site.brand} — ${t('header.brandHome')}`}>
             <span className="brand__word">{site.brand}</span>
             <span className="brand__seal" aria-hidden="true">
               {site.brandCn.charAt(0)}
             </span>
           </AppLink>
 
-          <nav className="nav-desktop" aria-label="Primary">
+          <nav className="nav-desktop" aria-label={t('nav.primaryAria')}>
             <ul>
-              {navigation.map((item) => (
+              {items.map((item) => (
                 <li key={item.href}>
                   <AppLink
                     href={item.href}
@@ -72,11 +92,13 @@ export function Header() {
           </nav>
 
           <div className="site-header__tools">
+            <LanguageSwitcher />
+
             <button
               type="button"
               className="icon-btn"
               onClick={() => setSearchOpen(true)}
-              aria-label="Search the collection"
+              aria-label={t('header.searchAria')}
             >
               <Search width={16} height={16} />
             </button>
@@ -85,7 +107,7 @@ export function Header() {
               type="button"
               className="icon-btn cart-btn"
               onClick={openCart}
-              aria-label={count > 0 ? `Open cart, ${count} items` : 'Open cart, empty'}
+              aria-label={count > 0 ? t('header.cartAria', { count }) : t('header.cartAriaEmpty')}
             >
               <Cart width={16} height={16} />
               {count > 0 && (
@@ -100,7 +122,7 @@ export function Header() {
               className="menu-btn"
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={menuOpen ? t('header.closeMenu') : t('header.openMenu')}
               onClick={() => setMenuOpen((v) => !v)}
             >
               <span className="menu-btn__bars" aria-hidden="true">
@@ -124,15 +146,15 @@ export function Header() {
             type="button"
             className="icon-btn"
             onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
+            aria-label={t('header.closeMenu')}
           >
             <Close width={18} height={18} />
           </button>
         </div>
 
-        <nav aria-label="Mobile">
+        <nav aria-label={t('nav.mobileAria')}>
           <ul className="mobile-menu__list">
-            {navigation.map((item, i) => (
+            {items.map((item, i) => (
               <li key={item.href} style={{ transitionDelay: `${0.06 + i * 0.05}s` }}>
                 <AppLink
                   href={item.href}
@@ -148,9 +170,10 @@ export function Header() {
         </nav>
 
         <div className="mobile-menu__foot">
-          <p className="mobile-menu__tag">{site.tagline}</p>
+          <LanguageSwitcher variant="menu" />
+          <p className="mobile-menu__tag">{locale === 'en' ? site.tagline : t('site.tagline')}</p>
           <p className="meta">{site.email}</p>
-          <p className="meta">{site.hours}</p>
+          <p className="meta">{locale === 'en' ? site.hours : t('site.hours')}</p>
         </div>
       </div>
 

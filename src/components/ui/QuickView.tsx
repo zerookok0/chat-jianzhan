@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import type { Product } from '../../data/types'
-import { formatPrice, availabilityLabels } from '../../data/products'
-import { sortImages } from '../../data/images'
+import { formatPrice } from '../../data/products'
 import { Modal } from './Modal'
 import { MediaImage, AppLink } from './Media'
 import { FavButton } from './FavButton'
 import { BuyButton } from './BuyButton'
 import { Close } from './Icons'
+import { useI18n } from '../../i18n'
 
 interface QuickViewProps {
   product: Product | null
@@ -14,6 +14,7 @@ interface QuickViewProps {
 }
 
 export function QuickView({ product, onClose }: QuickViewProps) {
+  const { t } = useI18n()
   const [active, setActive] = useState(0)
 
   // Reset the previewed image whenever a different piece is opened.
@@ -22,32 +23,32 @@ export function QuickView({ product, onClose }: QuickViewProps) {
   }, [product?.id])
 
   if (!product) return null
-  const images = sortImages(product.images)
+  const images = product.images
 
   return (
     <Modal open={Boolean(product)} onClose={onClose} labelledBy="qv-title" variant="center">
       <div className="qv">
-        <button type="button" className="qv__close" onClick={onClose} aria-label="Close quick view">
+        <button type="button" className="qv__close" onClick={onClose} aria-label={t('qv.close')}>
           <Close width={16} height={16} />
         </button>
 
         <div className="qv__media">
           <MediaImage
             image={images[Math.min(active, images.length - 1)]}
-            alt={`${product.name} — detail ${active + 1}`}
+            alt={t('qv.detailAlt', { name: product.name, index: active + 1 })}
             ratio={1}
             sizes="(min-width: 900px) 40vw, 92vw"
             showFallbackNote
           />
           {images.length > 1 && (
-            <div className="qv__thumbs" role="tablist" aria-label="Product images">
+            <div className="qv__thumbs" role="tablist" aria-label={t('prod.thumbsAria')}>
               {images.map((im, i) => (
                 <button
                   key={im + i}
                   type="button"
                   role="tab"
                   aria-selected={i === active}
-                  aria-label={`Image ${i + 1}`}
+                  aria-label={t('qv.image', { index: i + 1 })}
                   className={`qv__thumb ${i === active ? 'is-active' : ''}`}
                   onClick={() => setActive(i)}
                 >
@@ -59,7 +60,9 @@ export function QuickView({ product, onClose }: QuickViewProps) {
         </div>
 
         <div className="qv__body">
-          <p className="eyebrow">{availabilityLabels[product.availability]} · {product.year}</p>
+          <p className="eyebrow">
+            {t(`avail.${product.availability}`)} · {product.year}
+          </p>
           <h2 id="qv-title" className="display display--md qv__title">
             {product.name}
           </h2>
@@ -80,14 +83,16 @@ export function QuickView({ product, onClose }: QuickViewProps) {
 
           <div className="qv__foot">
             <FavButton productId={product.id} productName={product.name} variant="labelled" />
-            <AppLink href={`/collection/${product.slug}`} className="btn btn--link qv__detail" onClick={onClose}>
-              Full details
+            <AppLink
+              href={`/collection/${product.slug}`}
+              className="btn btn--link qv__detail"
+              onClick={onClose}
+            >
+              {t('qv.fullDetails')}
             </AppLink>
           </div>
 
-          <p className="qv__data-note">
-            Fired in Jianyang · studio-signed presentation box and firing certificate included.
-          </p>
+          <p className="qv__data-note">{t('qv.note')}</p>
         </div>
       </div>
     </Modal>

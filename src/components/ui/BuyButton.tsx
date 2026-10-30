@@ -4,6 +4,7 @@ import { resolvePurchaseUrl } from '../../lib/purchase'
 import { useCart } from '../../lib/cart'
 import { site } from '../../data/site'
 import { ArrowUpRight, Check, Info } from './Icons'
+import { useI18n } from '../../i18n'
 
 interface BuyButtonProps {
   product: Product
@@ -33,18 +34,21 @@ export function BuyButton({
   product,
   variant = 'solid',
   block = true,
-  label = 'Add to cart',
+  label,
   showVariants = true,
   showQty = true,
   onNavigate,
 }: BuyButtonProps) {
-  const variants = product.variants ?? []
+  const { t } = useI18n()
   const { addItem, openCart } = useCart()
   const [selected, setSelected] = useState<string | undefined>(
-    variants.length === 1 ? variants[0].id : undefined,
+    product.variants?.length === 1 ? product.variants[0].id : undefined,
   )
   const [qty, setQty] = useState(1)
   const [notice, setNotice] = useState<Notice>('none')
+
+  /* A stable array reference, so the memo below does not re-run needlessly. */
+  const variants = useMemo(() => product.variants ?? [], [product.variants])
 
   const selectedVariant = useMemo(
     () => variants.find((v) => v.id === selected),
@@ -62,8 +66,11 @@ export function BuyButton({
   const studioOnly = directOnly || Boolean(selectedVariant && !selectedVariant.wooVariationId)
 
   const storeUrl = resolvePurchaseUrl(product, selected)
+  const addLabel = label ?? t('buy.addToCart')
 
-  const subject = `Enquiry — ${product.name}${selectedVariant ? ` (${selectedVariant.label})` : ''}`
+  const subject = t('buy.enquirySubject', {
+    name: `${product.name}${selectedVariant ? ` (${selectedVariant.label})` : ''}`,
+  })
   const enquiryHref = `mailto:${site.email}?subject=${encodeURIComponent(subject)}`
 
   const handleAdd = () => {
@@ -91,16 +98,16 @@ export function BuyButton({
     variant === 'solid' ? 'btn btn--solid' : variant === 'outline' ? 'btn btn--outline' : 'btn btn--link'
 
   const buttonLabel = archived
-    ? 'Archived — not for sale'
+    ? t('buy.archived')
     : hasVariants && !selected
-      ? 'Choose a size'
+      ? t('buy.chooseSize')
       : backOrder
-        ? 'Order via our store'
-        : label
+        ? t('buy.orderViaStore')
+        : addLabel
 
   const variantsField = showVariants && hasVariants && (
     <fieldset className="buy__variants">
-      <legend className="buy__legend">Size</legend>
+      <legend className="buy__legend">{t('buy.size')}</legend>
       <div className="chip-row">
         {variants.map((v) => (
           <button
@@ -130,27 +137,27 @@ export function BuyButton({
 
         {viaStudio ? (
           <a className={`${buttonClass} ${block ? 'btn--block' : ''}`} href={enquiryHref}>
-            <span>{enquiry ? 'Enquire about this piece' : 'Request this piece'}</span>
+            <span>{enquiry ? t('buy.enquirePiece') : t('buy.requestPiece')}</span>
             <ArrowUpRight width={14} height={14} />
           </a>
         ) : (
           <button type="button" className={`${buttonClass} ${block ? 'btn--block' : ''}`} disabled>
-            <span>Archived — not for sale</span>
+            <span>{t('buy.archived')}</span>
           </button>
         )}
 
         <p className="buy__note">
           {archived
-            ? 'This piece has left the studio and is held in the archive. Comparable works are released each firing.'
+            ? t('buy.noteArchived')
             : backOrder
-              ? 'Fired to order in the studio. Write to us and we will confirm the current lead time and hold a place in the next firing.'
-              : 'One of a kind, held by the studio. Write to us and we will confirm availability, dimensions and shipping.'}
+              ? t('buy.noteBackOrder')
+              : t('buy.noteStudio')}
         </p>
 
         {storeUrl && viaStudio && (
           <p className="buy__note buy__note--secondary">
             <a className="buy__direct" href={storeUrl} target="_blank" rel="noopener noreferrer">
-              See this piece in our store
+              {t('buy.seeInStore')}
             </a>
           </p>
         )}
@@ -170,19 +177,19 @@ export function BuyButton({
               type="button"
               className="qty__btn"
               onClick={() => setQty((n) => Math.max(1, n - 1))}
-              aria-label="Decrease quantity"
+              aria-label={t('buy.decreaseQty')}
               disabled={qty <= 1}
             >
               <span aria-hidden="true">−</span>
             </button>
-            <span className="qty__value" aria-live="polite" aria-label={`Quantity ${qty}`}>
+            <span className="qty__value" aria-live="polite" aria-label={t('buy.quantityN', { count: qty })}>
               {qty}
             </span>
             <button
               type="button"
               className="qty__btn"
               onClick={() => setQty((n) => Math.min(99, n + 1))}
-              aria-label="Increase quantity"
+              aria-label={t('buy.increaseQty')}
               disabled={qty >= 99}
             >
               <span aria-hidden="true">+</span>
@@ -196,19 +203,18 @@ export function BuyButton({
           className={`${buttonClass} ${block ? 'btn--block' : ''} buy__add`}
           aria-describedby={notice === 'choose-size' ? `buy-notice-${product.id}` : undefined}
         >
-          <span>{notice === 'added' ? 'Added to cart' : buttonLabel}</span>
+          <span>{notice === 'added' ? t('buy.added') : buttonLabel}</span>
           {notice === 'added' ? <Check width={14} height={14} /> : <ArrowUpRight width={14} height={14} />}
         </button>
       </div>
 
       <p className="buy__note">
-        Insured worldwide express shipping in custom wooden crating. Returns accepted within 30
-        days, free of charge.
+        {t('buy.noteShipping')}
         {storeUrl && (
           <>
             {' '}
             <a className="buy__direct" href={storeUrl} target="_blank" rel="noopener noreferrer">
-              Or buy this piece directly
+              {t('buy.buyDirect')}
             </a>
             .
           </>
@@ -218,7 +224,7 @@ export function BuyButton({
       {notice === 'choose-size' && (
         <p className="buy__notice" id={`buy-notice-${product.id}`} role="status">
           <Info width={14} height={14} aria-hidden="true" />
-          <span>Select a size to continue.</span>
+          <span>{t('buy.selectSize')}</span>
         </p>
       )}
     </div>

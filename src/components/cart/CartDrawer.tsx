@@ -7,6 +7,7 @@ import { site } from '../../data/site'
 import { checkout } from '../../lib/wordpress'
 import { AppLink } from '../ui/Media'
 import { ArrowUpRight, Close, Minus, Plus } from '../ui/Icons'
+import { useI18n } from '../../i18n'
 
 /**
  * CART DRAWER
@@ -16,6 +17,7 @@ import { ArrowUpRight, Close, Minus, Plus } from '../ui/Icons'
  * WordPress store, which owns the rest of the purchase.
  */
 export function CartDrawer() {
+  const { t } = useI18n()
   const { lines, isOpen, closeCart, count, subtotal, currency, setQty, removeItem } = useCart()
   const panelRef = useRef<HTMLDivElement>(null)
   /*
@@ -89,16 +91,17 @@ export function CartDrawer() {
       >
         <header className="cart-drawer__head">
           <div>
-            <p className="eyebrow">Your selection</p>
+            <p className="eyebrow">{t('cart.eyebrow')}</p>
             <h2 id="cart-title" className="display display--sm">
-              Cart{count > 0 && <span className="cart-drawer__count"> ({count})</span>}
+              {t('cart.title')}
+              {count > 0 && <span className="cart-drawer__count"> ({count})</span>}
             </h2>
           </div>
           <button
             type="button"
             className="icon-btn"
             onClick={handleClose}
-            aria-label="Close cart"
+            aria-label={t('cart.close')}
           >
             <Close width={18} height={18} />
           </button>
@@ -106,13 +109,10 @@ export function CartDrawer() {
 
         {lines.length === 0 ? (
           <div className="cart-drawer__empty">
-            <p className="serif-italic cart-drawer__empty-line">Nothing chosen yet.</p>
-            <p className="body">
-              Pieces you select will gather here. Checkout, payment and shipping all happen on our
-              store.
-            </p>
+            <p className="serif-italic cart-drawer__empty-line">{t('cart.emptyLine')}</p>
+            <p className="body">{t('cart.emptyBody')}</p>
             <AppLink href="/collection" className="btn btn--outline" onClick={closeCart}>
-              Browse the collection
+              {t('cart.browse')}
             </AppLink>
           </div>
         ) : (
@@ -124,7 +124,7 @@ export function CartDrawer() {
                     href={`/collection/${line.slug}`}
                     className="cart-line__media"
                     onClick={closeCart}
-                    ariaLabel={`View ${line.name}`}
+                    ariaLabel={t('cart.viewName', { name: line.name })}
                   >
                     <img src={line.image} alt="" loading="lazy" width={80} height={96} />
                   </AppLink>
@@ -143,7 +143,7 @@ export function CartDrawer() {
                     )}
 
                     <p className="cart-line__unit">
-                      {formatPrice(line.price, line.currency)} <span>each</span>
+                      {formatPrice(line.price, line.currency)} <span>{t('cart.each')}</span>
                     </p>
 
                     <div className="cart-line__foot">
@@ -152,7 +152,7 @@ export function CartDrawer() {
                           type="button"
                           className="qty__btn"
                           onClick={() => setQty(line.key, line.qty - 1)}
-                          aria-label={`Decrease quantity of ${line.name}`}
+                          aria-label={t('cart.decrease', { name: line.name })}
                           disabled={line.qty <= 1}
                         >
                           <Minus width={12} height={12} />
@@ -164,7 +164,7 @@ export function CartDrawer() {
                           type="button"
                           className="qty__btn"
                           onClick={() => setQty(line.key, line.qty + 1)}
-                          aria-label={`Increase quantity of ${line.name}`}
+                          aria-label={t('cart.increase', { name: line.name })}
                           disabled={line.qty >= 99}
                         >
                           <Plus width={12} height={12} />
@@ -175,9 +175,9 @@ export function CartDrawer() {
                         type="button"
                         className="cart-line__remove"
                         onClick={() => removeItem(line.key)}
-                        aria-label={`Remove ${line.name} from cart`}
+                        aria-label={t('cart.removeAria', { name: line.name })}
                       >
-                        Remove
+                        {t('cart.remove')}
                       </button>
                     </div>
                   </div>
@@ -191,7 +191,7 @@ export function CartDrawer() {
 
             <footer className="cart-drawer__foot">
               <div className="cart-drawer__subtotal">
-                <span>Subtotal</span>
+                <span>{t('cart.subtotal')}</span>
                 <strong>{formatPrice(subtotal, currency)}</strong>
               </div>
 
@@ -202,7 +202,7 @@ export function CartDrawer() {
                 disabled={isRedirecting}
                 aria-busy={isRedirecting}
               >
-                <span>{isRedirecting ? 'Connecting…' : 'Checkout on our store'}</span>
+                <span>{isRedirecting ? t('cart.connecting') : t('cart.checkout')}</span>
                 {isRedirecting ? (
                   <span className="btn__spinner" aria-hidden="true" />
                 ) : (
@@ -210,17 +210,14 @@ export function CartDrawer() {
                 )}
               </button>
 
-              <p className="cart-drawer__note">
-                Taxes and insured crated shipping calculated at checkout.
-              </p>
+              <p className="cart-drawer__note">{t('cart.taxNote')}</p>
 
               {handoffFailed && (
                 <p className="cart-drawer__error" role="status">
-                  We could not reach the store just now. Please try again, or write to{' '}
+                  {t('cart.handoffError', { email: site.email })}
                   <AppLink href={`mailto:${site.email}`} className="cart-drawer__error-link">
                     {site.email}
-                  </AppLink>{' '}
-                  and we will complete the order with you directly.
+                  </AppLink>
                 </p>
               )}
             </footer>
@@ -237,8 +234,8 @@ export function CartDrawer() {
         <div className="checkout-overlay" role="status" aria-live="assertive">
           <div className="checkout-overlay__inner">
             <span className="checkout-overlay__spinner" aria-hidden="true" />
-            <p className="checkout-overlay__title">Taking you to secure checkout…</p>
-            <p className="checkout-overlay__note">Your selection is being transferred</p>
+            <p className="checkout-overlay__title">{t('cart.overlayTitle')}</p>
+            <p className="checkout-overlay__note">{t('cart.overlayNote')}</p>
           </div>
         </div>
       )}

@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { getProduct, getRelated, getGlaze, formatPrice, availabilityLabels } from '../data/products'
-import { sortImages } from '../data/images'
+import { formatPrice } from '../data/products'
 import { useDocumentMeta, useReveal } from '../lib/hooks'
 import { MediaImage, AppLink } from '../components/ui/Media'
 import { BuyButton } from '../components/ui/BuyButton'
@@ -9,6 +8,8 @@ import { Lightbox } from '../components/ui/Lightbox'
 import { ProductCard } from '../components/ui/ProductCard'
 import { ArrowRight, Expand } from '../components/ui/Icons'
 import type { Product } from '../data/types'
+import { useI18n } from '../i18n'
+import { localisedProductBySlug, localisedRelated, localisedGlaze } from '../lib/content'
 
 interface ProductPageProps {
   slug: string
@@ -16,42 +17,46 @@ interface ProductPageProps {
 }
 
 export function ProductPage({ slug, onQuickView }: ProductPageProps) {
-  const product = getProduct(slug)
+  const { t, locale } = useI18n()
+  const product = localisedProductBySlug(slug, locale)
   const [lightbox, setLightbox] = useState<number | null>(null)
   const [activeImage, setActiveImage] = useState(0)
 
   useDocumentMeta(
-    product ? `${product.name} — ${formatPrice(product.price, product.currency)} | JIANZHAN` : 'Piece not found | JIANZHAN',
-    product?.description.slice(0, 155),
+    product
+      ? (product.seoTitle ??
+        t('meta.productTitle', {
+          name: product.name,
+          price: formatPrice(product.price, product.currency),
+        }))
+      : t('meta.productNotFound'),
+    product ? (product.seoDescription ?? product.description.slice(0, 155)) : undefined,
   )
-  useReveal([slug])
+  useReveal([slug, locale])
 
   if (!product) {
     return (
       <div className="shell not-found-page">
-        <p className="eyebrow">Not Found</p>
-        <h1 className="display display--lg">This piece is no longer listed</h1>
-        <p className="body">
-          It may have been archived or moved. The current catalogue is the best place to look next.
-        </p>
+        <p className="eyebrow">{t('prod.notFoundEyebrow')}</p>
+        <h1 className="display display--lg">{t('prod.notFoundTitle')}</h1>
+        <p className="body">{t('prod.notFoundBody')}</p>
         <AppLink href="/collection" className="btn btn--outline">
-          Back to the collection
+          {t('prod.notFoundCta')}
         </AppLink>
       </div>
     )
   }
 
-  const related = getRelated(product, 3)
-  const glaze = getGlaze(product.glaze)
-  const images = sortImages(product.images)
+  const related = localisedRelated(product, locale, 3)
+  const glaze = localisedGlaze(product.glaze, locale)
 
   return (
-    <div className="product-page" key={product.id}>
+    <div className="product-page" key={`${product.id}-${locale}`}>
       {/* Breadcrumb */}
-      <nav className="breadcrumb shell" aria-label="Breadcrumb">
-        <AppLink href="/">Home</AppLink>
+      <nav className="breadcrumb shell" aria-label={t('common.breadcrumb')}>
+        <AppLink href="/">{t('common.home')}</AppLink>
         <span aria-hidden="true">/</span>
-        <AppLink href="/collection">Collection</AppLink>
+        <AppLink href="/collection">{t('common.collection')}</AppLink>
         <span aria-hidden="true">/</span>
         <span aria-current="page">{product.name}</span>
       </nav>
@@ -64,30 +69,37 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
               type="button"
               className="product-gallery__open"
               onClick={() => setLightbox(activeImage)}
-              aria-label={`Open ${product.name} image ${activeImage + 1} full screen`}
+              aria-label={t('prod.openImage', {
+                name: product.name,
+                index: activeImage + 1,
+              })}
             >
               <MediaImage
-                image={images[activeImage]}
-                alt={`${product.name} — ${product.subtitle}, view ${activeImage + 1}`}
+                image={product.images[activeImage]}
+                alt={t('prod.imageAlt', {
+                  name: product.name,
+                  subtitle: product.subtitle,
+                  index: activeImage + 1,
+                })}
                 ratio={1}
                 sizes="(min-width: 1024px) 52vw, 92vw"
                 priority
                 showFallbackNote
               />
               <span className="product-gallery__zoom" aria-hidden="true">
-                <Expand width={14} height={14} /> Zoom
+                <Expand width={14} height={14} /> {t('prod.zoom')}
               </span>
             </button>
           </div>
 
-          <div className="product-gallery__thumbs" role="tablist" aria-label="Product images">
-            {images.map((im, i) => (
+          <div className="product-gallery__thumbs" role="tablist" aria-label={t('prod.thumbsAria')}>
+            {product.images.map((im, i) => (
               <button
                 key={im + i}
                 type="button"
                 role="tab"
                 aria-selected={i === activeImage}
-                aria-label={`Show image ${i + 1}`}
+                aria-label={t('prod.showImage', { index: i + 1 })}
                 className={`product-gallery__thumb ${i === activeImage ? 'is-active' : ''}`}
                 onClick={() => setActiveImage(i)}
               >
@@ -102,7 +114,7 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
           <div className="product-info__head">
             <div>
               <p className="eyebrow">
-                {availabilityLabels[product.availability]} · {product.year}
+                {t(`avail.${product.availability}`)} · {product.year}
               </p>
               <h1 className="display display--lg product-info__title">{product.name}</h1>
               <p className="serif-italic product-info__sub">{product.subtitle}</p>
@@ -112,7 +124,7 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
 
           <div className="product-info__price-row">
             <p className="product-info__price">{formatPrice(product.price, product.currency)}</p>
-            <p className="meta">Duties included · 30-day returns</p>
+            <p className="meta">{t('prod.duties')}</p>
           </div>
 
           <p className="body product-info__desc">{product.description}</p>
@@ -123,14 +135,14 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
             <AppLink href={`/collection?glaze=${product.glaze}`} className="tag">
               {glaze?.name ?? product.glaze}
             </AppLink>
-            <span className="tag">{product.category.replace('-', ' ')}</span>
-            <span className="tag">Single firing</span>
+            <span className="tag">{t(`cat.${product.category}`)}</span>
+            <span className="tag">{t('prod.singleFiring')}</span>
           </div>
 
           {/* Specifications */}
           <section className="product-specs" aria-labelledby="specs-title">
             <h2 id="specs-title" className="eyebrow">
-              Specifications
+              {t('prod.specs')}
             </h2>
             <dl className="specs">
               {product.specifications.map((s) => (
@@ -145,66 +157,42 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
           {/* Accordions */}
           <div className="accordions">
             <details className="accordion" open>
-              <summary>The making</summary>
+              <summary>{t('prod.making')}</summary>
               <div className="accordion__body">
-                <p>
-                  Thrown by hand on the wheel, dried slowly, then glazed and fired in a wood kiln.
-                  The final surface depends on how heat and ash moved through the chamber and on the
-                  pace of cooling afterwards — factors the maker guides but does not control.
-                </p>
+                <p>{t('prod.makingBody')}</p>
               </div>
             </details>
 
             <details className="accordion">
-              <summary>Care</summary>
+              <summary>{t('prod.careTitle')}</summary>
               <div className="accordion__body">
-                <p>
-                  Hand wash only, with warm water and a soft cloth; never use abrasive scouring pads
-                  or harsh detergents. Avoid thermal shock — do not pour boiling water into a cold
-                  vessel. Not suitable for microwave, oven or dishwasher. The iron-rich glaze darkens
-                  and gains a soft lustre with use; this patina is the mark of a lived-in piece.
-                </p>
+                <p>{t('prod.careBody')}</p>
               </div>
             </details>
 
             <details className="accordion">
-              <summary>Delivery</summary>
+              <summary>{t('prod.shippingTitle')}</summary>
               <div className="accordion__body">
-                <p>
-                  Born in Nanping, Fujian, China. Every piece currently listed has already reached
-                  our local warehouse and will be delivered within 2–3 working days.
-                </p>
+                <p>{t('prod.shippingBody')}</p>
               </div>
             </details>
 
             <details className="accordion">
-              <summary>Packaging</summary>
+              <summary>{t('prod.packagingTitle')}</summary>
               <div className="accordion__body">
-                <p>
-                  Each piece travels by insured express courier, cushioned in a custom wooden crate
-                  and shock-resistant packing. Live tracking is issued the moment the parcel leaves
-                  the studio, and every cup arrives with its firing note. Returns are accepted within
-                  30 days of receipt, free of charge.
-                </p>
+                <p>{t('prod.packagingBody')}</p>
               </div>
             </details>
 
             <details className="accordion">
-              <summary>Characteristics</summary>
+              <summary>{t('prod.characteristicsTitle')}</summary>
               <div className="accordion__body">
-                <p>
-                  Jianzhan is shaped as much by chance as by hand. The flame, the ash and the cooling
-                  glaze decide the final pattern, so no two cups can ever be alike — each is a
-                  singular work, unrepeatable by design.
-                </p>
+                <p>{t('prod.characteristicsBody')}</p>
               </div>
             </details>
           </div>
 
-          <p className="product-info__disclaimer">
-            Includes a studio-signed paulownia wooden presentation box and recorded firing
-            certificate.
-          </p>
+          <p className="product-info__disclaimer">{t('prod.disclaimer')}</p>
         </div>
       </div>
 
@@ -214,13 +202,13 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
           <div className="shell">
             <header className="section-head">
               <div>
-                <p className="eyebrow">Continue</p>
+                <p className="eyebrow">{t('prod.relatedEyebrow')}</p>
                 <h2 id="related-title" className="display display--md">
-                  Related works
+                  {t('prod.relatedTitle')}
                 </h2>
               </div>
               <AppLink href="/collection" className="btn section-head__link">
-                All pieces
+                {t('common.allPieces')}
                 <ArrowRight width={16} height={16} className="btn__arrow" />
               </AppLink>
             </header>
@@ -234,9 +222,9 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
       )}
 
       <Lightbox
-        images={images}
-        alts={images.map(
-          (_, i) => `${product.name} — ${product.subtitle}, view ${i + 1}`,
+        images={product.images}
+        alts={product.images.map((_, i) =>
+          t('prod.imageAlt', { name: product.name, subtitle: product.subtitle, index: i + 1 }),
         )}
         index={lightbox}
         onClose={() => setLightbox(null)}

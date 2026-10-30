@@ -1,0 +1,668 @@
+/* ============================================================
+   JIANZHAN — Language switcher
+   Additive only: nothing here overrides an existing rule.
+   Palette and easing are the site's own tokens.
+   ============================================================ */
+
+.lang {
+  position: relative;
+  display: inline-flex;
+}
+
+/* ---------------- Trigger ---------------- */
+
+.lang__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  /* 44px tall: the touch target matches the other header controls. */
+  min-height: 44px;
+  padding: 0 10px;
+  color: var(--ivory);
+  border: 1px solid transparent;
+  transition:
+    color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+.lang__trigger:hover,
+.lang__trigger:focus-visible,
+.lang__trigger[aria-expanded='true'] {
+  color: var(--bronze);
+  border-color: var(--line);
+}
+
+.lang__trigger svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.lang__code {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Small caret, built from a rotated border — no icon needed. */
+.lang__chevron {
+  width: 5px;
+  height: 5px;
+  margin-left: 1px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.35s var(--ease-out);
+  opacity: 0.75;
+}
+
+.lang__chevron.is-open {
+  transform: translateY(1px) rotate(-135deg);
+}
+
+/* ---------------- Panel ---------------- */
+
+.lang__panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 80;
+  width: 216px;
+  padding: 12px 0 8px;
+  background: var(--charcoal);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.62);
+  /* Hidden but still mounted, so the opening transition can play. */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.28s var(--ease),
+    transform 0.34s var(--ease-out),
+    visibility 0.28s;
+}
+
+.lang__panel.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* On mobile the panel is pinned wide enough to stay inside the viewport. */
+@media (max-width: 480px) {
+  .lang__panel {
+    right: -46px;
+    width: 200px;
+  }
+}
+
+.lang__title {
+  padding: 0 16px 10px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 6px;
+}
+
+/* ---------------- Options ---------------- */
+
+.lang__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 16px;
+  text-align: left;
+  color: var(--muted);
+  transition:
+    color 0.28s var(--ease),
+    background-color 0.28s var(--ease);
+}
+
+.lang__option:hover,
+.lang__option:focus-visible {
+  color: var(--ivory);
+  background: var(--surface-2);
+}
+
+.lang__option.is-active {
+  color: var(--ivory);
+}
+
+.lang__option-name {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+
+/* Vietnamese diacritics need slightly more room than the Latin average. */
+.lang__option[lang='vi-VN'] .lang__option-name {
+  line-height: 1.45;
+}
+
+.lang__option-code {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.lang__check {
+  color: var(--bronze);
+  flex-shrink: 0;
+}
+
+/* ---------------- Variant: inside the mobile menu ---------------- */
+
+.lang--menu {
+  width: 100%;
+}
+
+.lang--menu .lang__trigger {
+  width: 100%;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 12px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.lang--menu .lang__code {
+  font-size: 11px;
+  letter-spacing: 0.26em;
+}
+
+.lang--menu .lang__chevron {
+  margin-left: auto;
+}
+
+.lang--menu .lang__panel {
+  position: static;
+  width: 100%;
+  right: auto;
+  margin-top: 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  box-shadow: none;
+  background: transparent;
+  /* Collapsed rather than absolutely placed, so it never overlaps the links. */
+  max-height: 0;
+  padding: 0;
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    max-height 0.42s var(--ease-out),
+    padding 0.3s var(--ease);
+}
+
+.lang--menu .lang__panel.is-open {
+  max-height: 240px;
+  padding: 10px 0 4px;
+}
+
+.lang--menu .lang__title {
+  display: none;
+}
+
+.lang--menu .lang__option {
+  padding-inline: 4px;
+}
+
+/* ---------------- Reduced motion ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .lang__panel,
+  .lang--menu .lang__panel,
+  .lang__chevron {
+    transition-duration: 0.001ms;
+  }
+}
+
+/* ============================================================
+   VIETNAMESE TYPOGRAPHY
+   ------------------------------------------------------------
+   Vietnamese runs roughly 25-40% longer than the English it
+   replaced, and its stacked diacritics (e, o, u with two marks)
+   need more vertical room than plain Latin at the same size.
+
+   Everything below is scoped to :lang(vi), so the English
+   composition — wide tracking, tight leading, one-line rows —
+   is left exactly as it was. Nothing here changes colour or
+   hierarchy; it only lets longer words fit.
+   ============================================================ */
+
+/* ---------------- Header: five longer labels on one line ---------------- */
+
+:lang(vi) .nav-link {
+  /* 0.2em tracking is what pushes "Bo suu tap" past the header edge. */
+  letter-spacing: 0.1em;
+}
+
+:lang(vi) .nav-link::after {
+  /* The rule should still hug the text once tracking tightens. */
+  bottom: 4px;
+}
+
+/* ---------------- Display type: diacritics need room ---------------- */
+
+:lang(vi) .display {
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+:lang(vi) .display--xl {
+  line-height: 1.08;
+}
+
+:lang(vi) .display--md,
+:lang(vi) .display--sm {
+  line-height: 1.18;
+}
+
+/*
+ * Vietnamese compounds ("tac pham", "Kien Tran") can be long single
+ * tokens, so a heading must break inside a word rather than widen
+ * its column and push the grid sideways.
+ */
+:lang(vi) .display,
+:lang(vi) .eyebrow,
+:lang(vi) .card__name,
+:lang(vi) .jcard__title,
+:lang(vi) .jrow__title,
+:lang(vi) .step__title,
+:lang(vi) .value__title,
+:lang(vi) .policy-section__h,
+:lang(vi) .policy__callout-title {
+  overflow-wrap: break-word;
+}
+
+/* ---------------- Header: the tool row must not squeeze the nav ---------------- */
+
+:lang(vi) .site-header__inner {
+  gap: var(--sp-2);
+}
+
+:lang(vi) .nav-desktop ul {
+  /* Tighter gaps buy the extra width the longer labels need. */
+  gap: clamp(14px, 2vw, 30px);
+}
+
+:lang(vi) .brand__word {
+  letter-spacing: 0.24em;
+}
+
+/* ---------------- Language switcher ---------------- */
+
+:lang(vi) .lang__code {
+  /* "VI" is narrow, but the label beside it is not. */
+  letter-spacing: 0.14em;
+}
+
+:lang(vi) .lang__title {
+  letter-spacing: 0.16em;
+}
+
+:lang(vi) .lang__option-name {
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+/* ---------------- Mobile menu: longer links, same rhythm ---------------- */
+
+:lang(vi) .mobile-menu__link {
+  font-size: 24px;
+  line-height: 1.35;
+  gap: 12px;
+  padding: 18px 0;
+}
+
+:lang(vi) .mobile-menu__tag {
+  line-height: 1.6;
+}
+
+/* ---------------- Body copy: leading for stacked marks ---------------- */
+
+:lang(vi) .body,
+:lang(vi) .lede {
+  line-height: 1.95;
+}
+
+:lang(vi) .serif-italic {
+  line-height: 1.6;
+}
+
+/* ============================================================
+   UPPERCASE LABELS
+   ------------------------------------------------------------
+   Vietnamese set in caps is the worst case in the whole design:
+   every stacked mark grows taller, and the site's 0.2-0.34em
+   tracking then stretches each label well past its English
+   width. Tracking is therefore halved, never removed — the
+   labels still read as labels, they simply stop overflowing.
+   ============================================================ */
+
+:lang(vi) .eyebrow {
+  /* 0.34em → 0.16em. "BỘ SƯU TẬP" still looks tracked, not cramped. */
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+}
+
+:lang(vi) .meta {
+  letter-spacing: 0.12em;
+  line-height: 1.6;
+}
+
+:lang(vi) .btn {
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+}
+
+/* Long labels must be allowed to wrap instead of widening the row. */
+:lang(vi) .btn,
+:lang(vi) .btn--solid,
+:lang(vi) .btn--outline {
+  text-align: center;
+  white-space: normal;
+}
+
+:lang(vi) .chip {
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  padding-inline: 16px;
+}
+
+/* "Đặt làm theo yêu cầu" is far longer than "Made to order". */
+:lang(vi) .tag,
+:lang(vi) .card__status {
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+}
+
+/* The solid button's arrow would otherwise be pushed off the row. */
+:lang(vi) .btn svg {
+  flex-shrink: 0;
+}
+
+/* ---------------- Cards ---------------- */
+
+:lang(vi) .card__body {
+  gap: 8px;
+}
+
+:lang(vi) .card__glaze {
+  letter-spacing: 0.12em;
+  line-height: 1.6;
+}
+
+:lang(vi) .card__name {
+  line-height: 1.28;
+}
+
+:lang(vi) .card__sub {
+  line-height: 1.75;
+}
+
+/* Name and price share a row: let the price hold its ground. */
+:lang(vi) .card__price {
+  flex-shrink: 0;
+}
+
+:lang(vi) .qty__value {
+  letter-spacing: 0.04em;
+}
+
+/* ---------------- Collection toolbar ---------------- */
+
+:lang(vi) .collection-toolbar {
+  flex-wrap: wrap;
+  row-gap: 12px;
+}
+
+:lang(vi) .collection-toolbar__count {
+  letter-spacing: 0.12em;
+}
+
+:lang(vi) .collection-toolbar__sort {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+/* The native select sizes to its longest option; a Vietnamese sort
+   label is long, so it must be allowed to shrink rather than force
+   the toolbar wider than the screen. */
+:lang(vi) .select {
+  max-width: 100%;
+}
+
+:lang(vi) .filter-group {
+  min-width: 0;
+}
+
+/* ---------------- Product page ---------------- */
+
+:lang(vi) .breadcrumb {
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+
+:lang(vi) .product-info__sub {
+  line-height: 1.6;
+}
+
+:lang(vi) .product-info__price-row {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+:lang(vi) .product-info__meta .tag {
+  /* "Nung một lần" is fine; "Diệu Biến" plus tracking is not. */
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+:lang(vi) .specs__row {
+  gap: 16px;
+  line-height: 1.65;
+}
+
+/* Long value strings ("Nung củi, 1300 °C") may need to fold. */
+:lang(vi) .specs__row dd {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+:lang(vi) .accordion summary {
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  font-size: 11.5px;
+}
+
+:lang(vi) .accordion__body {
+  line-height: 1.95;
+}
+
+/* ============================================================
+   POLICY PAGES
+   ------------------------------------------------------------
+   The policy headings are the longest strings in the project:
+   "Chúng tôi là ai, và chính sách này bao gồm những gì" is 51
+   characters next to a 48px number column. At the desktop
+   breakpoint that column is too tight, so the number gutter is
+   widened and the heading line-height opened up. Below 1000px
+   the layout stays single-column, as it already does.
+   ============================================================ */
+
+:lang(vi) .policy-layout {
+  /* The index links are whole sentences in Vietnamese. */
+  gap: clamp(28px, 4vw, 56px);
+}
+
+@media (min-width: 1000px) {
+  :lang(vi) .policy-layout {
+    grid-template-columns: minmax(220px, 0.32fr) minmax(0, 1fr);
+  }
+}
+
+:lang(vi) .policy-section {
+  row-gap: 10px;
+}
+
+@media (min-width: 720px) {
+  :lang(vi) .policy-section {
+    /* 48px → 56px, and the heading gets the rest. */
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+}
+
+:lang(vi) .policy-section__h {
+  line-height: 1.3;
+  font-size: clamp(21px, 2.8vw, 28px);
+}
+
+:lang(vi) .policy-section__content {
+  gap: 18px;
+}
+
+:lang(vi) .policy__p,
+:lang(vi) .policy__list,
+:lang(vi) .policy__callout-text,
+:lang(vi) .policy__callout .policy__list {
+  line-height: 1.95;
+}
+
+:lang(vi) .policy__callout-title {
+  line-height: 1.4;
+}
+
+:lang(vi) .policy-hero__title {
+  /* Vietnamese policy titles wrap to two lines; 18ch is too narrow. */
+  max-width: 22ch;
+  line-height: 1.14;
+}
+
+/* ---------------- Section index ---------------- */
+
+:lang(vi) .policy-index a {
+  /* Two-line index entries are normal here, not a bug. */
+  padding-block: 8px;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+
+@media (min-width: 1000px) {
+  :lang(vi) .policy-index {
+    /* Long anchors wrap rather than push the body column narrow. */
+    max-width: 30ch;
+  }
+}
+
+/* ---------------- Cross-links ---------------- */
+
+:lang(vi) .policy-others__link {
+  align-items: flex-start;
+  line-height: 1.4;
+  text-align: left;
+}
+
+:lang(vi) .policy-others__link svg {
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+@media (min-width: 720px) {
+  :lang(vi) .policy-others ul {
+    /* Vietnamese titles are longer, so 2 columns hold them better. */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------------- Footer & journal ---------------- */
+
+:lang(vi) .footer-link {
+  line-height: 1.6;
+}
+
+:lang(vi) .site-footer__tag {
+  line-height: 1.55;
+}
+
+:lang(vi) .site-footer__legal,
+:lang(vi) .site-footer__note,
+:lang(vi) .footer-address {
+  line-height: 1.75;
+}
+
+:lang(vi) .post-hero__title,
+:lang(vi) .journal-hero__title {
+  line-height: 1.14;
+}
+
+:lang(vi) .post-block p {
+  line-height: 2;
+}
+
+/* ---------------- Search ---------------- */
+
+:lang(vi) .search__item-sub {
+  /* Ellipsis is correct here; three long subtitles must not stack. */
+  line-height: 1.5;
+}
+
+:lang(vi) .search__empty {
+  line-height: 1.8;
+}
+
+/* ---------------- Quick view ---------------- */
+
+:lang(vi) .qv__desc,
+:lang(vi) .buy__note {
+  line-height: 1.9;
+}
+
+:lang(vi) .qv__sub {
+  line-height: 1.55;
+}
+
+/* ---------------- Cart drawer ---------------- */
+
+/* The empty state's body copy is the longest string in the drawer. */
+:lang(vi) .cart-drawer__empty .body,
+:lang(vi) .cart-drawer__note,
+:lang(vi) .cart-drawer__error {
+  line-height: 1.85;
+}
+
+:lang(vi) .cart-line__unit {
+  line-height: 1.7;
+}
+
+/* ---------------- Mobile, narrow screens ---------------- */
+
+@media (max-width: 480px) {
+  :lang(vi) .chip {
+    /* Long glaze names ("Du Tích (giọt dầu)") in one chip row. */
+    padding-inline: 14px;
+    letter-spacing: 0.08em;
+  }
+
+  :lang(vi) .policy__callout {
+    padding-inline: 18px;
+  }
+
+  :lang(vi) .mobile-menu__link {
+    font-size: 22px;
+  }
+}

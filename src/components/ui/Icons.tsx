@@ -101,3 +101,12 @@ export const ScrollIndicator = (p: SVGProps<SVGSVGElement>) => (
     <path d="M12 8v8" strokeLinecap="round" />
   </svg>
 )
+
+/** Globe drawn as a meridian ellipse inside a circle — no emoji, no third-party icon set. */
+export const Globe = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...p}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M3 12h18" />
+    <ellipse cx="12" cy="12" rx="4" ry="9" />
+  </svg>
+)
