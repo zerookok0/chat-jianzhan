@@ -31,7 +31,7 @@ export const terms: Policy = {
       blocks: [
         {
           kind: 'p',
-          text: 'All content on this website — photography, video, written copy, the JIANZHAN name and mark, layout, typography and code — is owned by JIANZHAN Studio or licensed to it, and is protected by copyright, trade mark and design law.',
+          text: 'All content on this website — photography, video, written copy, the JIANZHAN name and mark, layout, typography and code — is owned by JIANZHAN Studio or licensed to it, and is protected by copyright, trademark and design law.',
         },
         {
           kind: 'list',

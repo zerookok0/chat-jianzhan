@@ -666,3 +666,19 @@
     font-size: 22px;
   }
 }
+
+@media (max-width: 480px) {
+  .site-header__inner {
+    padding-inline: 16px;
+    gap: 8px;
+  }
+
+  .site-header__tools {
+    gap: 2px;
+  }
+
+  .lang__trigger {
+    padding: 0 4px;
+    gap: 4px;
+  }
+}

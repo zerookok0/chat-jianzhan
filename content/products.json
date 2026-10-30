@@ -51,7 +51,7 @@
       "slug": "hares-fur-bowl",
       "name": "'Silver Oil Spot' Tenmoku Tea Cup",
       "subtitle": "",
-      "description": "A superior grade Tenmoku (Jian Zhan) tea cup with a silver coloured 'oil spot' pattern. Every cup has an unique pattern, which is naturally formed during oven-firing at 1300ºC.\n\nIt is handmade by Jian Zhan artist Ye Ting (叶婷). Her name is visible on the bottom of the cup and an artist certificate is included in the box.",
+      "description": "A superior-grade Tenmoku (Jian Zhan) tea cup with a silver coloured 'oil spot' pattern. Every cup has a unique pattern, which is naturally formed during oven-firing at 1300ºC.\n\nIt is handmade by Jian Zhan artist Ye Ting (叶婷). Her name is visible on the bottom of the cup and an artist certificate is included in the box.",
       "price": 255400,
       "currency": "VND",
       "images": [
@@ -145,7 +145,7 @@
         }
       ],
       "featured": true,
-      "availability": "made-to-order",
+      "availability": "available",
       "year": "2025",
       "wooId": 9406
     },
@@ -282,7 +282,7 @@
       ],
       "purchaseUrl": null,
       "featured": true,
-      "availability": "made-to-order",
+      "availability": "available",
       "year": "2025",
       "wooId": 9430
     },
@@ -327,7 +327,7 @@
       ],
       "purchaseUrl": null,
       "featured": false,
-      "availability": "enquire",
+      "availability": "available",
       "year": "2024",
       "wooId": 9464
     },
@@ -371,7 +371,7 @@
       ],
       "purchaseUrl": null,
       "featured": false,
-      "availability": "sold-out",
+      "availability": "available",
       "year": "2023",
       "wooId": 9475
     },
