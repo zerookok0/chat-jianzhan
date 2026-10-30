@@ -17,13 +17,13 @@ export const shipping: Policy = {
       blocks: [
         {
           kind: 'p',
-          text: 'Most pieces leave the studio within three to five business days of an order. Works marked made to order are fired to commission and typically require six to ten weeks; the product page states the current estimate before you buy. When a piece is ready to travel, we photograph it in its crate, issue a tracking number and email the link the same day.',
+          text: 'Every piece currently listed is held in our local warehouse and will be delivered within two to three business days of an order. A tracking number and link are issued as soon as the parcel leaves the warehouse.',
         },
         {
           kind: 'list',
           items: [
-            'In stock — dispatched within 3 to 5 business days.',
-            'Made to order — fired to commission, usually 6 to 10 weeks.',
+            'In stock — delivered within 2 to 3 business days.',
+            'If a piece is ever offered made to order, the product page states the lead time before you buy.',
             'Archive and back order — arranged directly with the studio.',
           ],
         },
@@ -54,10 +54,8 @@ export const shipping: Policy = {
         {
           kind: 'list',
           items: [
-            'Asia — typically 1 to 3 business days after dispatch.',
-            'Europe and North America — typically 3 to 5 business days.',
-            'Rest of world — typically 5 to 9 business days.',
-            'Customs clearance may extend these windows; we monitor every shipment until delivery is confirmed.',
+            'In-stock pieces — delivered within 2 to 3 business days.',
+            'Remote destinations and customs clearance may add time; we monitor every shipment until delivery is confirmed.',
           ],
         },
       ],

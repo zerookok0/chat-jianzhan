@@ -29,13 +29,13 @@ export const shippingVi: Policy = {
       blocks: [
         {
           kind: 'p',
-          text: 'Phần lớn tác phẩm rời xưởng trong vòng ba đến năm ngày làm việc kể từ khi đặt hàng. Những tác phẩm ghi "đặt làm theo yêu cầu" được nung theo đơn và thường cần sáu đến mười tuần; trang sản phẩm luôn ghi thời gian dự kiến hiện hành trước khi bạn mua. Khi tác phẩm sẵn sàng lên đường, chúng tôi chụp ảnh nó trong thùng gỗ, cấp mã theo dõi và gửi đường dẫn ngay trong ngày.',
+          text: 'Mọi tác phẩm đang niêm yết đều được giữ tại kho địa phương và sẽ được giao trong vòng hai đến ba ngày làm việc kể từ khi đặt hàng. Mã theo dõi và đường dẫn được cấp ngay khi kiện hàng rời kho.',
         },
         {
           kind: 'list',
           items: [
-            'Còn hàng — xuất trong 3 đến 5 ngày làm việc.',
-            'Đặt làm theo yêu cầu — nung theo đơn, thường 6 đến 10 tuần.',
+            'Còn hàng — giao trong 2 đến 3 ngày làm việc.',
+            'Nếu có tác phẩm nhận đặt làm, trang sản phẩm sẽ ghi rõ thời gian trước khi bạn mua.',
             'Lưu trữ và đặt lại — sắp xếp trực tiếp với xưởng.',
           ],
         },
@@ -66,10 +66,8 @@ export const shippingVi: Policy = {
         {
           kind: 'list',
           items: [
-            'Châu Á — thường 1 đến 3 ngày làm việc sau khi xuất hàng.',
-            'Châu Âu và Bắc Mỹ — thường 3 đến 5 ngày làm việc.',
-            'Các khu vực còn lại — thường 5 đến 9 ngày làm việc.',
-            'Thủ tục hải quan có thể kéo dài các mốc trên; chúng tôi theo dõi từng lô hàng cho tới khi xác nhận đã giao.',
+            'Tác phẩm còn hàng — giao trong 2 đến 3 ngày làm việc.',
+            'Điểm đến xa và thủ tục hải quan có thể kéo dài thời gian; chúng tôi theo dõi từng lô hàng cho tới khi xác nhận đã giao.',
           ],
         },
       ],
