@@ -173,6 +173,58 @@ export const productsVi: Record<string, ProductCopy> = {
       { label: 'Nung', value: 'Nung củi, 1300 °C' },
     ],
   },
+
+  'new-piece-mgl7l': {
+    name: "Chén Kiến 'Khởi Nguyên Sự Sống' — Men Xanh, Dáng Đấu Lạp",
+    subtitle: 'Vân men như những tế bào đầu tiên',
+    description:
+      'Chén Kiến dáng đấu lạp — chiếc nón lá úp ngược — một dáng chén cổ điển của thời Tống. Qua lò nung 1300°C, lớp men tự kết thành những vân xanh bạc, gợi hình ảnh những cấu trúc tế bào đầu tiên của sự sống. Vì thế, chúng tôi gọi tác phẩm này là “Khởi Nguyên Sự Sống”.',
+    specifications: [
+      { label: 'Đường kính', value: '9,8 cm' },
+      { label: 'Chiều cao', value: '5,9 cm' },
+      { label: 'Dung tích', value: '170 ml' },
+      { label: 'Lò vi sóng', value: 'Không dùng lò vi sóng' },
+    ],
+  },
+
+  'new-piece-mkxe8': {
+    name: "Chén Kiến 'Bách Hoa' — Dáng Bát",
+    subtitle: 'Trăm hoa cùng nở trong lửa',
+    description:
+      "Chén Kiến 'Bách Hoa' theo tinh thần thời Tống. Lớp men xanh bạc lấp lánh như trăm đóa hoa cùng nở, được tạo nên trong lò nung 1300°C. Dáng Bát — phỏng theo chiếc bình bát của nhà sư khất thực — mang lại cảm giác tròn đầy, khiêm nhường và tĩnh tại.",
+    specifications: [
+      { label: 'Đường kính', value: '5,2 cm' },
+      { label: 'Chiều cao', value: '9,7 cm' },
+      { label: 'Dung tích', value: '105 ml' },
+      { label: 'Lò vi sóng', value: 'Không dùng lò vi sóng' },
+    ],
+  },
+
+  'new-piece-mmpkh': {
+    name: "Chén Kiến 'Lông Thỏ' — Men Nâu",
+    subtitle: 'Những sợi nâu chảy dọc như lông thú',
+    description:
+      "Chén Kiến men nâu, với những vệt dọc mảnh như lông thú — dân gian gọi là “lông thỏ”. Vân men không được vẽ lên, mà do nhiệt độ lò 1300°C và dòng chảy của men tạo nên tự nhiên. Mỗi chiếc chén giữ một nhịp chảy riêng, không chiếc nào lặp lại.",
+    specifications: [
+      { label: 'Đường kính', value: '9,5 cm' },
+      { label: 'Chiều cao', value: '5,5 cm' },
+      { label: 'Dung tích', value: '175 ml' },
+      { label: 'Lò vi sóng', value: 'Không dùng lò vi sóng' },
+    ],
+  },
+
+  'new-piece-p6gye': {
+    name: "Mingche 'Cõi Sen Đôn Hoàng' — Mạ Vàng, Thiền Trà",
+    subtitle: 'Một đóa sen nở giữa ốc đảo ngàn năm',
+    description:
+      "Giữa ốc đảo Đôn Hoàng xa xôi, những đóa sen thiêng lặng lẽ nở dưới những bức bích họa rực rỡ của thời xưa. Chén Kiến 'Cõi Sen Đôn Hoàng' mang trên mình những cánh sen mềm mại, như giữ lại một nhịp thiền thanh tịnh và tinh khôi. Một đóa sen chạm nổi nơi đáy chén, như bóng hoa lay động trên mặt nước trong; mỗi lần rót trà, quá khứ và hiện tại, tĩnh và động, cùng lắng lại trong một khoảnh khắc. Hơi trà mỏng manh bay lên, hương sen thoảng trong ánh sáng đổi thay — một khoảng lặng sáng trong cho tâm hồn. Từng cánh sen ôm lấy nhau, kể câu chuyện ngàn năm của sự thanh nhã. Chén được làm từ gốm cao cấp, mài tỉ mỉ và nung ở nhiệt độ cao, cho cảm giác mịn như ngọc. Hoa văn sen cổ hòa cùng lớp men biến ảo của lò nung; đường nét mềm mại và bề mặt lốm đốm bắt sáng. Mỗi ngụm trà để lại một vị ngọt dịu. Đây không chỉ là chén trà thường ngày, mà còn là món quà mang theo sự trân trọng và tấm lòng — dành cho đối tác, bạn bè, hay người mình quý. Đóng gói chỉn chu, chân thành trong từng chi tiết.",
+    specifications: [
+      { label: 'Đường kính', value: '9,2 cm' },
+      { label: 'Chiều cao', value: '5,5 cm' },
+      { label: 'Dung tích', value: '170 ml' },
+      { label: 'Lò vi sóng', value: 'Không dùng lò vi sóng' },
+    ],
+  },
 }
 
 /* ------------------------------------------------------------------ */
