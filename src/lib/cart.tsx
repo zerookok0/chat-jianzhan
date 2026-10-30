@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { img } from '../data/images'
+import { resolveImage } from '../data/images'
 import type { Product, Variant } from '../data/types'
 
 /**
@@ -147,7 +147,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           slug: product.slug,
           price: product.price,
           currency: product.currency,
-          image: img(product.images[0], 480),
+          image: resolveImage(product.images[0], 480),
           qty: amount,
         },
       ]

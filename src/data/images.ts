@@ -102,9 +102,28 @@ export const PHOTOS = {
 export const LOCAL_OVERRIDES: Partial<Record<ImageKey, string>> = {}
 
 /** Keep the opening images first, packaging second, the certificate last. */
-export function sortImages(images: ImageKey[]): ImageKey[] {
-  const rank = (key: ImageKey) => ROLE_RANK[(PHOTOS[key] as Photo).role ?? 'general']
+export function sortImages(images: string[]): string[] {
+  const hasCustom = images.some((image) => !(image in PHOTOS))
+
+  if (hasCustom) {
+    return [...images]
+  }
+
+  const rank = (key: string) => ROLE_RANK[(PHOTOS[key as ImageKey] as Photo).role ?? 'general']
   return [...images].sort((a, b) => rank(a) - rank(b))
+}
+
+export function isRemoteImage(image: string): boolean {
+  return image.startsWith('/') || /^https?:\/\//i.test(image) || image.startsWith('//')
+}
+
+/** Resolve a stock key or a custom path/URL to a concrete image source. */
+export function resolveImage(image: string, width = 1200): string {
+  return isRemoteImage(image) ? image : img(image as ImageKey, width)
+}
+
+export function srcSetFor(image: string): string {
+  return isRemoteImage(image) ? '' : srcSet(image as ImageKey)
 }
 
 /** Widths requested from the Pexels CDN (they are free to resize). */

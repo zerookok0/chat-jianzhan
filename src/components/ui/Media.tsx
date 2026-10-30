@@ -1,9 +1,9 @@
 import { useState, type MouseEvent, type ReactNode } from 'react'
-import { img, srcSet, type ImageKey } from '../../data/images'
+import { resolveImage, srcSetFor } from '../../data/images'
 import { navigate, toHref } from '../../lib/hooks'
 
 interface MediaProps {
-  image: ImageKey
+  image: string
   alt: string
   /** Aspect ratio as width / height, e.g. 3/4 */
   ratio?: number
@@ -41,8 +41,8 @@ export function MediaImage({
     >
       {!errored && (
         <img
-          src={img(image, priority ? 1600 : 1200)}
-          srcSet={srcSet(image) || undefined}
+          src={resolveImage(image, priority ? 1600 : 1200)}
+          srcSet={srcSetFor(image) || undefined}
           sizes={sizes}
           alt={alt}
           loading={priority ? 'eager' : 'lazy'}

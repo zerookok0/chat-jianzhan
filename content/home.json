@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "kicker": "Jian Ware · Song Dynasty Lineage",
+    "titleLine1": "The Cosmos Held",
+    "titleLine2": "in a Cup",
+    "line": "Where fire is the only author.",
+    "sub": "Iron-rich earth, pine wood fire, and stilled time. A Song Dynasty lineage capturing fleeting constellations in dark glaze.",
+    "cta": "Explore Collection"
+  },
+  "soul": {
+    "eyebrow": "The Soul of Jianzhan",
+    "titleLine1": "Born from Fire,",
+    "titleLine2": "Shaped by Time",
+    "body": "Jianzhan is more than a tea bowl; it is an encounter between earth and cosmic chance. Thrown by hand and fired in ancient dragon kilns, one clay enters the kiln, yet ten thousand colours emerge. What the flame decides, the artisan accepts.",
+    "cta": "Discover More",
+    "caption": "Glaze detail — iron crystals on a black ground"
+  },
+  "collection": {
+    "eyebrow": "Our Collection",
+    "title": "Selected Works",
+    "note": "Each vessel is a singular occurrence — glazes born from momentary alignments of heat, draft, and mineral ash that human hands cannot replicate.",
+    "cta": "All pieces"
+  },
+  "craft": {
+    "eyebrow": "Traditional Craftsmanship",
+    "title": "Passed down through generations",
+    "body": "Our artisans preserve Song-era methods, firing unrefined minerals in wood-fuelled kilns. Nothing is hurried: forming, drying, glazing, and days inside the fire are entirely surrendered to the patient rhythm of the kiln.",
+    "cta": "Learn More"
+  },
+  "gifting": {
+    "eyebrow": "Collecting & Gifting",
+    "title": "A quiet object, kept for a lifetime",
+    "body": "Each piece arrives linen-wrapped with a recorded firing note — the year, the kiln and the conditions of its making. Suitable for a collector’s shelf, a tea table, or a gift that outlives the occasion.",
+    "list": [
+      "Linen-wrapped presentation box",
+      "Firing note signed by the studio",
+      "Care card with use and washing guidance"
+    ],
+    "cta": "Browse collectible works"
+  },
+  "journal": {
+    "eyebrow": "Journal",
+    "title": "Notes on glaze & making",
+    "cta": "All entries"
+  },
+  "closing": {
+    "eyebrow": "The Earth in Your Hands",
+    "titleLine1": "Fire and time,",
+    "titleLine2": "held still",
+    "body": "The kiln does not bend to human will. We merely shape the clay; nature finishes the glaze.",
+    "ctaPrimary": "View the Collection",
+    "ctaSecondary": "Our Story"
+  }
+}

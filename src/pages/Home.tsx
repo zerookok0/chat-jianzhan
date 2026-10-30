@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { products, formatPrice, glazes } from '../data/products'
+import { defaultHome as home } from '../data/content'
 import { posts } from '../data/posts'
 import { visual } from '../styles/visual'
 import { img } from '../data/images'
@@ -92,22 +93,21 @@ export function Home({ onQuickView }: HomeProps) {
           </div>
 
           <div className="hero__text">
-            <p className="eyebrow hero__kicker reveal">Jian Ware · Song Dynasty Lineage</p>
+            <p className="eyebrow hero__kicker reveal">{home.hero.kicker}</p>
             <h1 id="hero-title" className="display display--xl hero__title reveal" data-delay="1">
-              The Cosmos Held
+              {home.hero.titleLine1}
               <br />
-              in a Cup
+              {home.hero.titleLine2}
             </h1>
             <p className="hero__line serif-italic reveal" data-delay="2">
-              Where fire is the only author.
+              {home.hero.line}
             </p>
             <p className="hero__sub reveal" data-delay="3">
-              Iron-rich earth, pine wood fire, and stilled time. A Song Dynasty lineage capturing
-              fleeting constellations in dark glaze.
+              {home.hero.sub}
             </p>
             <div className="hero__cta reveal" data-delay="4">
               <AppLink href="/collection" className="btn">
-                Explore Collection
+                {home.hero.cta}
                 <ArrowRight width={18} height={18} className="btn__arrow" />
               </AppLink>
             </div>
@@ -125,20 +125,18 @@ export function Home({ onQuickView }: HomeProps) {
         <div className="shell">
           <div className="soul__grid">
             <div className="soul__text">
-              <p className="eyebrow reveal">The Soul of Jianzhan</p>
+              <p className="eyebrow reveal">{home.soul.eyebrow}</p>
               <h2 id="soul-title" className="display display--lg soul__title reveal" data-delay="1">
-                Born from Fire,
+                {home.soul.titleLine1}
                 <br />
-                Shaped by Time
+                {home.soul.titleLine2}
               </h2>
               <p className="lede reveal" data-delay="2">
-                Jianzhan is more than a tea bowl; it is an encounter between earth and cosmic chance.
-                Thrown by hand and fired in ancient dragon kilns, one clay enters the kiln, yet ten
-                thousand colours emerge. What the flame decides, the artisan accepts.
+                {home.soul.body}
               </p>
               <div className="reveal" data-delay="3">
                 <AppLink href="/craft" className="btn">
-                  Discover More
+                  {home.soul.cta}
                   <ArrowRight width={18} height={18} className="btn__arrow" />
                 </AppLink>
               </div>
@@ -153,7 +151,7 @@ export function Home({ onQuickView }: HomeProps) {
               />
               <figcaption className="soul__caption">
                 <span className="meta">Fig. 01</span>
-                <span>Glaze detail — iron crystals on a black ground</span>
+                <span>{home.soul.caption}</span>
               </figcaption>
             </figure>
           </div>
@@ -169,17 +167,16 @@ export function Home({ onQuickView }: HomeProps) {
         <div className="shell">
           <header className="section-head">
             <div>
-              <p className="eyebrow reveal">Our Collection</p>
+              <p className="eyebrow reveal">{home.collection.eyebrow}</p>
               <h2 id="featured-title" className="display display--md reveal" data-delay="1">
-                Selected Works
+                {home.collection.title}
               </h2>
             </div>
             <p className="body section-head__note reveal" data-delay="2">
-              Each vessel is a singular occurrence — glazes born from momentary alignments of heat,
-              draft, and mineral ash that human hands cannot replicate.
+              {home.collection.note}
             </p>
             <AppLink href="/collection" className="btn section-head__link reveal" data-delay="2">
-              All pieces
+              {home.collection.cta}
               <ArrowRight width={16} height={16} className="btn__arrow" />
             </AppLink>
           </header>
@@ -206,17 +203,15 @@ export function Home({ onQuickView }: HomeProps) {
 
         <div className="shell craft-band__inner">
           <div className="craft-band__text">
-            <p className="eyebrow reveal">Traditional Craftsmanship</p>
+            <p className="eyebrow reveal">{home.craft.eyebrow}</p>
             <h2 id="craft-title" className="display display--md reveal" data-delay="1">
-              Passed down through generations
+              {home.craft.title}
             </h2>
             <p className="body reveal" data-delay="2">
-              Our artisans preserve Song-era methods, firing unrefined minerals in wood-fuelled
-              kilns. Nothing is hurried: forming, drying, glazing, and days inside the fire are
-              entirely surrendered to the patient rhythm of the kiln.
+              {home.craft.body}
             </p>
             <AppLink href="/craft" className="btn reveal" data-delay="3">
-              Learn More
+              {home.craft.cta}
               <ArrowRight width={16} height={16} className="btn__arrow" />
             </AppLink>
           </div>
@@ -230,22 +225,20 @@ export function Home({ onQuickView }: HomeProps) {
       <section className="section gifting" aria-labelledby="gift-title">
         <div className="shell gifting__inner">
           <div className="gifting__text">
-            <p className="eyebrow reveal">Collecting & Gifting</p>
+            <p className="eyebrow reveal">{home.gifting.eyebrow}</p>
             <h2 id="gift-title" className="display display--md reveal" data-delay="1">
-              A quiet object, kept for a lifetime
+              {home.gifting.title}
             </h2>
             <p className="body reveal" data-delay="2">
-              Each piece arrives linen-wrapped with a recorded firing note — the year, the kiln and
-              the conditions of its making. Suitable for a collector’s shelf, a tea table, or a gift
-              that outlives the occasion.
+              {home.gifting.body}
             </p>
             <ul className="gifting__list reveal" data-delay="3">
-              <li>Linen-wrapped presentation box</li>
-              <li>Firing note signed by the studio</li>
-              <li>Care card with use and washing guidance</li>
+              {home.gifting.list.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
             <AppLink href="/collection" className="btn reveal" data-delay="3">
-              Browse collectible works
+              {home.gifting.cta}
               <ArrowRight width={16} height={16} className="btn__arrow" />
             </AppLink>
           </div>
@@ -265,13 +258,13 @@ export function Home({ onQuickView }: HomeProps) {
         <div className="shell">
           <header className="section-head">
             <div>
-              <p className="eyebrow reveal">Journal</p>
+              <p className="eyebrow reveal">{home.journal.eyebrow}</p>
               <h2 id="journal-title" className="display display--md reveal" data-delay="1">
-                Notes on glaze & making
+                {home.journal.title}
               </h2>
             </div>
             <AppLink href="/journal" className="btn section-head__link reveal" data-delay="2">
-              All entries
+              {home.journal.cta}
               <ArrowRight width={16} height={16} className="btn__arrow" />
             </AppLink>
           </header>
@@ -304,22 +297,21 @@ export function Home({ onQuickView }: HomeProps) {
           <img src={visual.parting} alt="" loading="lazy" decoding="async" />
         </div>
         <div className="shell closing__inner">
-          <p className="eyebrow reveal">The Earth in Your Hands</p>
+          <p className="eyebrow reveal">{home.closing.eyebrow}</p>
           <h2 id="closing-title" className="display display--lg closing__title reveal" data-delay="1">
-            Fire and time,
+            {home.closing.titleLine1}
             <br />
-            held still
+            {home.closing.titleLine2}
           </h2>
           <p className="lede closing__lede reveal" data-delay="2">
-            The kiln does not bend to human will. We merely shape the clay; nature finishes the
-            glaze.
+            {home.closing.body}
           </p>
           <div className="closing__cta reveal" data-delay="3">
             <AppLink href="/collection" className="btn btn--solid">
-              View the Collection
+              {home.closing.ctaPrimary}
             </AppLink>
             <AppLink href="/about" className="btn">
-              Our Story
+              {home.closing.ctaSecondary}
               <ArrowDown width={16} height={16} className="btn__arrow" />
             </AppLink>
           </div>

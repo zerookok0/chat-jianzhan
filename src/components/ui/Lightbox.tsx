@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { img, srcSet, type ImageKey } from '../../data/images'
+import { resolveImage, srcSetFor } from '../../data/images'
 import { useEscape, useScrollLock } from '../../lib/hooks'
 import { ArrowRight, Close, Minus, Plus } from './Icons'
 
 interface LightboxProps {
-  images: ImageKey[]
+  images: string[]
   alts?: string[]
   index: number | null
   onClose: () => void
@@ -141,8 +141,8 @@ export function Lightbox({ images, alts = [], index, onClose, onIndexChange }: L
       >
         <img
           key={current + index}
-          src={img(current, 2000)}
-          srcSet={srcSet(current) || undefined}
+          src={resolveImage(current, 2000)}
+          srcSet={srcSetFor(current) || undefined}
           sizes="100vw"
           alt={alts[index] ?? `Photograph ${index + 1}`}
           style={{

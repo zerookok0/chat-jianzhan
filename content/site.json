@@ -1,0 +1,30 @@
+{
+  "brand": "JIANZHAN",
+  "brandCn": "建盏",
+  "tagline": "The Earth in Your Hands, the Cosmos in the Glaze.",
+  "legalName": "JIANZHAN Studio",
+  "email": "studio@jianzhan.studio",
+  "studio": "Jianyang, Nanping, Fujian, China",
+  "hours": "Mon – Fri, 09:00 – 18:00 (GMT+8)",
+  "url": "https://jianzhan.studio",
+  "currency": "USD",
+  "social": [
+    { "label": "Instagram", "href": "#" },
+    { "label": "Pinterest", "href": "#" },
+    { "label": "Facebook", "href": "#" },
+    { "label": "YouTube", "href": "#" }
+  ],
+  "policies": [
+    { "label": "Shipping & Returns", "href": "/shipping" },
+    { "label": "Care & Use", "href": "/care" },
+    { "label": "Privacy Policy", "href": "/privacy" },
+    { "label": "Terms of Service", "href": "/terms" }
+  ],
+  "navigation": [
+    { "label": "Home", "href": "/" },
+    { "label": "Collection", "href": "/collection" },
+    { "label": "Our Craft", "href": "/craft" },
+    { "label": "Journal", "href": "/journal" },
+    { "label": "About", "href": "/about" }
+  ]
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { FavouritesProvider, useRoute, useReveal } from './lib/hooks'
 import { CartProvider } from './lib/cart'
 import { Header } from './components/layout/Header'
@@ -15,6 +15,8 @@ import { PolicyPage } from './pages/PolicyPage'
 import { NotFound } from './pages/NotFound'
 import { policies } from './data/policies'
 import type { Product } from './data/types'
+
+const Admin = lazy(() => import('./pages/Admin'))
 
 function ScrollToTop() {
   const route = useRoute()
@@ -50,7 +52,29 @@ function Routes({ onQuickView }: { onQuickView: (p: Product) => void }) {
 }
 
 export default function App() {
+  const route = useRoute()
   const [quickView, setQuickView] = useState<Product | null>(null)
+
+  if (route.path === '/admin') {
+    return (
+      <Suspense
+        fallback={
+          <div
+            style={{
+              minHeight: '100vh',
+              display: 'grid',
+              placeItems: 'center',
+              fontFamily: 'Inter, system-ui, sans-serif',
+            }}
+          >
+            Loading content studio…
+          </div>
+        }
+      >
+        <Admin />
+      </Suspense>
+    )
+  }
 
   return (
     <FavouritesProvider>

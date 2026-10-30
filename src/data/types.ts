@@ -1,5 +1,3 @@
-import type { ImageKey } from './images'
-
 /**
  * PRODUCT DATA — single source of truth
  * ------------------------------------------------------------------
@@ -42,7 +40,7 @@ export interface Product {
   description: string
   price: number
   currency: string
-  images: ImageKey[]
+  images: string[]
   category: CategoryId
   glaze: GlazeId
   specifications: SpecItem[]

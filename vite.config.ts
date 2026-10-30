@@ -21,10 +21,25 @@ import react from '@vitejs/plugin-react'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const base = env.VITE_BASE?.trim() || './'
+  const wpSiteUrl =
+    env.VITE_WP_SITE_URL?.trim() ||
+    process.env.VITE_WP_SITE_URL?.trim() ||
+    'https://jianzhan.studio'
 
   return {
     base,
-    plugins: [react()],
+    plugins: [
+      react(),
+      {
+        name: 'wp-site-preconnect-fallback',
+        transformIndexHtml: {
+          order: 'pre',
+          handler(html) {
+            return html.replace(/%VITE_WP_SITE_URL%/g, wpSiteUrl)
+          },
+        },
+      },
+    ],
     build: {
       target: 'es2019',
       outDir: 'dist',
