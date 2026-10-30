@@ -188,7 +188,7 @@ function LinkListEditor({
         </button>
       </div>
       {items.map((item, index) => (
-        <div className="admin__row" key={`${item.label}-${index}`}>
+        <div className="admin__row" key={index}>
           <input
             className="admin__input"
             value={item.label}
@@ -823,7 +823,7 @@ export default function Admin() {
 
                 <div className="admin__image-grid">
                   {selected.images.map((image, index) => (
-                    <div className="admin__image" key={`${image}-${index}`}>
+                    <div className="admin__image" key={index}>
                       <img
                         src={
                           pendingImages[image]
@@ -920,7 +920,7 @@ export default function Admin() {
               <Section title="规格">
                 <div className="admin__stack">
                   {selected.specifications.map((spec, index) => (
-                    <div className="admin__row" key={`${spec.label}-${index}`}>
+                    <div className="admin__row" key={index}>
                       <input
                         className="admin__input"
                         value={spec.label}
