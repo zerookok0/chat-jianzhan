@@ -585,7 +585,7 @@
         }
       ],
       "purchaseUrl": null,
-      "featured": false,
+      "featured": true,
       "availability": "available",
       "year": "2026"
     }
