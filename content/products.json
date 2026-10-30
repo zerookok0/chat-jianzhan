@@ -5,7 +5,7 @@
       "slug": "midnight-oil-spot-bowl",
       "name": "'Resembling Peacock Feathers' Tenmoku Tea Cup",
       "subtitle": "",
-      "description": "These are luxury-grade Tenmoku tea cups handmade by the renowned artist Ding Changsheng (丁长生). Available in two different shapes, they are glazed with a multicolor oil specks pattern resembling peacock feathers on display. The metallic blue glaze color changes depending on how the light illuminates it, with purple, green, and golden nuances enriching the beautiful appearance of these cups. Every piece has a unique pattern, naturally formed during oven firing at 1300ºC.\n\nThese high-quality Tenmoku tea cups come with an elegant gift box and a certificate of authenticity, hand-signed by the artist Ding. \n\n Shu Kou shape\n\n    Size: 9,8x5cm\n    Content: 75ml\n    Microwave-safe: no",
+      "description": "These are luxury-grade Tenmoku tea cups handmade by the renowned artist Ding Changsheng (丁长生). Available in two different shapes, they are glazed with a multicolor oil specks pattern resembling peacock feathers on display. The metallic blue glaze color changes depending on how the light illuminates it, with purple, green, and golden nuances enriching the beautiful appearance of these cups. Every piece has a unique pattern, naturally formed during oven firing at 1300ºC.\n\nThese high-quality Tenmoku tea cups come with an elegant gift box and a certificate of authenticity, hand-signed by the artist Ding. ",
       "price": 420,
       "currency": "USD",
       "images": [
@@ -36,8 +36,8 @@
           "value": "75 ml"
         },
         {
-          "label": "Weight",
-          "value": "310 g"
+          "label": "Microwave-safe",
+          "value": "no"
         }
       ],
       "purchaseUrl": null,
@@ -51,7 +51,7 @@
       "slug": "hares-fur-bowl",
       "name": "'Silver Oil Spot' Tenmoku Tea Cup",
       "subtitle": "",
-      "description": "A superior grade Tenmoku (Jian Zhan) tea cup with a silver coloured 'oil spot' pattern. Every cup has an unique pattern, which is naturally formed during oven-firing at 1300ºC.\n\nIt is handmade by Jian Zhan artist Ye Ting (叶婷). Her name is visible on the bottom of the cup and an artist certificate is included in the box.\n\n    Size: 6.1x9.6cm\n    Content: 160ml\n    Microwave-safe: no",
+      "description": "A superior grade Tenmoku (Jian Zhan) tea cup with a silver coloured 'oil spot' pattern. Every cup has an unique pattern, which is naturally formed during oven-firing at 1300ºC.\n\nIt is handmade by Jian Zhan artist Ye Ting (叶婷). Her name is visible on the bottom of the cup and an artist certificate is included in the box.",
       "price": 380,
       "currency": "USD",
       "images": [
@@ -79,6 +79,10 @@
         {
           "label": "Capacity",
           "value": "160 ml"
+        },
+        {
+          "label": "Microwave-safe",
+          "value": "no"
         }
       ],
       "purchaseUrl": null,
@@ -90,29 +94,33 @@
     {
       "id": "jz-03",
       "slug": "iridescent-blue-bowl",
-      "name": "Iridescent Blue",
-      "subtitle": "A phantom blue awakened by light",
-      "description": "A phantom blue awakened by light — shifting like starlight held inside dark stone. The colour has no pigment to thank; it is a thin film of glaze interfering with the light itself, so it answers to the angle of your gaze and the hour of the day.",
+      "name": "'Queen' Premium Pink Purple, Shu Kou Tenmoku Tea Cup",
+      "subtitle": "",
+      "description": "A superior grade Tenmoku tea cup, which showcases its pink purple 'oil spot' pattern, enveloping both the interior and exterior of the cup. The tea cup features the classic Shu Kou shape with a curved rim, ensuring a spill-proof pour.\n\nThe tea cup is handmade by ceramic artist Ni Ting (倪挺) and oven-fired at 1300ºC. The name of the artist is stamped on the bottom of the cup and the signed certificate of the artist is included. It's packed in a beautiful box, which makes it an ideal gift for any occasion.",
       "price": 640,
       "currency": "USD",
       "images": [
-        "bowl-iris",
-        "bowl-iris-2",
-        "glaze-tools",
-        "smoke-soft",
-        "pack-box",
-        "cert-card"
+        "/images/uploads/iridescent-blue-bowl-mvul16ap.png",
+        "/images/uploads/iridescent-blue-bowl-mvul16g3.png",
+        "/images/uploads/iridescent-blue-bowl-mvul16kv.jpg",
+        "/images/uploads/iridescent-blue-bowl-mvul16p7.jpg",
+        "/images/uploads/iridescent-blue-bowl-mvul16st.jpg",
+        "/images/uploads/iridescent-blue-bowl-mvul16vv.jpg",
+        "/images/uploads/iridescent-blue-bowl-mvul16xc.jpg",
+        "/images/uploads/iridescent-blue-bowl-mvul16yc.jpg",
+        "/images/uploads/iridescent-blue-bowl-mvul16zd.jpg",
+        "/images/uploads/iridescent-blue-bowl-mvul1709.jpg"
       ],
       "category": "tea-bowl",
       "glaze": "iridescent",
       "specifications": [
         {
           "label": "Diameter",
-          "value": "12.6 cm"
+          "value": "9.5 cm"
         },
         {
           "label": "Height",
-          "value": "7.0 cm"
+          "value": "6.0 cm"
         },
         {
           "label": "Capacity",
@@ -120,15 +128,7 @@
         },
         {
           "label": "Weight",
-          "value": "330 g"
-        },
-        {
-          "label": "Body",
-          "value": "Iron-rich stoneware"
-        },
-        {
-          "label": "Firing",
-          "value": "Wood-fired, 1310 °C"
+          "value": "approx. 332g"
         }
       ],
       "purchaseUrl": null,
