@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { Product } from '../../data/types'
 import { formatPrice, availabilityLabels } from '../../data/products'
-import { site } from '../../data/site'
+import { sortImages } from '../../data/images'
 import { Modal } from './Modal'
 import { MediaImage, AppLink } from './Media'
 import { FavButton } from './FavButton'
@@ -22,7 +22,7 @@ export function QuickView({ product, onClose }: QuickViewProps) {
   }, [product?.id])
 
   if (!product) return null
-  const images = product.images
+  const images = sortImages(product.images)
 
   return (
     <Modal open={Boolean(product)} onClose={onClose} labelledBy="qv-title" variant="center">

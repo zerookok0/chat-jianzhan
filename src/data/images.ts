@@ -11,11 +11,21 @@
 
 export type ImageKey = keyof typeof PHOTOS
 
+export type ImageRole = 'general' | 'packaging' | 'certificate'
+
 export interface Photo {
   /** Pexels photo ID */
   id: number
   /** Short contextual description used for alt text / credits */
   note: string
+  /** Optional role used to order product gallery images */
+  role?: ImageRole
+}
+
+export const ROLE_RANK: Record<ImageRole, number> = {
+  general: 0,
+  packaging: 1,
+  certificate: 2,
 }
 
 export const PHOTOS = {
@@ -80,6 +90,8 @@ export const PHOTOS = {
   'glaze-surface': { id: 35463145, note: 'Glazed ceramic surface detail' },
   'glaze-tools': { id: 9736320, note: 'Glaze materials on the studio bench' },
   'craft-detail': { id: 6493200, note: 'Studio craft detail' },
+  'pack-box': { id: 7262898, note: 'Gift box tied with ribbon', role: 'packaging' },
+  'cert-card': { id: 6863237, note: 'Signed certificate, dark paper', role: 'certificate' },
 } as const satisfies Record<string, Photo>
 
 /**
@@ -88,6 +100,12 @@ export const PHOTOS = {
  *   'bowl-hero': '/images/jianzhan-hero.jpg'
  */
 export const LOCAL_OVERRIDES: Partial<Record<ImageKey, string>> = {}
+
+/** Keep the opening images first, packaging second, the certificate last. */
+export function sortImages(images: ImageKey[]): ImageKey[] {
+  const rank = (key: ImageKey) => ROLE_RANK[(PHOTOS[key] as Photo).role ?? 'general']
+  return [...images].sort((a, b) => rank(a) - rank(b))
+}
 
 /** Widths requested from the Pexels CDN (they are free to resize). */
 export const IMAGE_WIDTHS = [480, 800, 1200, 1600, 2000]

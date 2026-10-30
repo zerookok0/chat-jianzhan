@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getProduct, getRelated, getGlaze, formatPrice, availabilityLabels } from '../data/products'
+import { sortImages } from '../data/images'
 import { useDocumentMeta, useReveal } from '../lib/hooks'
 import { MediaImage, AppLink } from '../components/ui/Media'
 import { BuyButton } from '../components/ui/BuyButton'
@@ -42,6 +43,7 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
 
   const related = getRelated(product, 3)
   const glaze = getGlaze(product.glaze)
+  const images = sortImages(product.images)
 
   return (
     <div className="product-page" key={product.id}>
@@ -65,7 +67,7 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
               aria-label={`Open ${product.name} image ${activeImage + 1} full screen`}
             >
               <MediaImage
-                image={product.images[activeImage]}
+                image={images[activeImage]}
                 alt={`${product.name} — ${product.subtitle}, view ${activeImage + 1}`}
                 ratio={1}
                 sizes="(min-width: 1024px) 52vw, 92vw"
@@ -79,7 +81,7 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
           </div>
 
           <div className="product-gallery__thumbs" role="tablist" aria-label="Product images">
-            {product.images.map((im, i) => (
+            {images.map((im, i) => (
               <button
                 key={im + i}
                 type="button"
@@ -224,8 +226,8 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
       )}
 
       <Lightbox
-        images={product.images}
-        alts={product.images.map(
+        images={images}
+        alts={images.map(
           (_, i) => `${product.name} — ${product.subtitle}, view ${i + 1}`,
         )}
         index={lightbox}

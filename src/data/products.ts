@@ -22,7 +22,7 @@ export const products: Product[] = [
       'Concentric rings of metallic crystals sit on a near-black ground, catching light as the bowl turns. Each spot forms during cooling, when iron in the glaze crystallises — a result that can be encouraged but never fully controlled. The foot is left unglazed, revealing the iron-rich clay body and the marks of the wheel.',
     price: 420,
     currency: 'USD',
-    images: ['bowl-oil-spot', 'bowl-oil-spot-2', 'bowl-hero', 'rock-detail'],
+    images: ['bowl-oil-spot', 'bowl-oil-spot-2', 'bowl-hero', 'rock-detail', 'pack-box', 'cert-card'],
     category: 'tea-bowl',
     glaze: 'oil-spot',
     specifications: [
@@ -48,7 +48,7 @@ export const products: Product[] = [
       'Fine bronze streaks run from rim to base, following the path the flame took through the kiln. The pattern is a record of air and heat rather than a design, which is why no two bowls share the same fall of light.',
     price: 380,
     currency: 'USD',
-    images: ['bowl-hare', 'bowl-hare-2', 'bowl-table', 'kiln-glow'],
+    images: ['bowl-hare', 'bowl-hare-2', 'bowl-table', 'kiln-glow', 'pack-box', 'cert-card'],
     category: 'tea-bowl',
     glaze: 'hare-fur',
     specifications: [
@@ -74,7 +74,7 @@ export const products: Product[] = [
       'A phantom blue awakened by light — shifting like starlight held inside dark stone. The colour has no pigment to thank; it is a thin film of glaze interfering with the light itself, so it answers to the angle of your gaze and the hour of the day.',
     price: 640,
     currency: 'USD',
-    images: ['bowl-iris', 'bowl-iris-2', 'glaze-tools', 'smoke-soft'],
+    images: ['bowl-iris', 'bowl-iris-2', 'glaze-tools', 'smoke-soft', 'pack-box', 'cert-card'],
     category: 'tea-bowl',
     glaze: 'iridescent',
     specifications: [
@@ -103,7 +103,7 @@ export const products: Product[] = [
       'A quiet bowl. The glaze pools toward a soft celadon-green at the interior, while the exterior stays in shadow. Best appreciated empty, or with a pale tea that lets the glaze do the speaking.',
     price: 360,
     currency: 'USD',
-    images: ['bowl-jade', 'bowl-jade-2', 'rock-pile', 'tea-pour'],
+    images: ['bowl-jade', 'bowl-jade-2', 'rock-pile', 'tea-pour', 'pack-box', 'cert-card'],
     category: 'tea-bowl',
     glaze: 'jade',
     specifications: [
@@ -129,7 +129,7 @@ export const products: Product[] = [
       'Made to hold dry tea leaves rather than liquid. The unpolished surface softens with use, taking on a faint sheen from the hand — the only patina this glaze will ever show.',
     price: 290,
     currency: 'USD',
-    images: ['bowl-minimal', 'bowl-darkware-2', 'kiln-studio', 'stone-texture'],
+    images: ['bowl-minimal', 'bowl-darkware-2', 'kiln-studio', 'stone-texture', 'pack-box', 'cert-card'],
     category: 'vessel',
     glaze: 'tea-dust',
     specifications: [
@@ -154,7 +154,7 @@ export const products: Product[] = [
       'A pair chosen from a single kiln load so the contrast stays visible: one leaning to oil spot, one to hare\'s fur. Sold as a set, boxed in linen with a recorded firing note.',
     price: 880,
     currency: 'USD',
-    images: ['bowl-set', 'bowl-darkware', 'kiln-wood', 'tea-ritual'],
+    images: ['bowl-set', 'bowl-darkware', 'kiln-wood', 'tea-ritual', 'pack-box', 'cert-card'],
     category: 'set',
     glaze: 'oil-spot',
     specifications: [
@@ -179,7 +179,7 @@ export const products: Product[] = [
       'Ash from the firing settles unevenly across the shoulder of this bowl, leaving a grey-green drift over the darker body. Part of a small run where the kiln was allowed to cool slowly.',
     price: 460,
     currency: 'USD',
-    images: ['bowl-jade-2', 'bowl-studio', 'kiln-studio', 'rock-field'],
+    images: ['bowl-jade-2', 'bowl-studio', 'kiln-studio', 'rock-field', 'pack-box', 'cert-card'],
     category: 'tea-bowl',
     glaze: 'jade',
     specifications: [
@@ -204,7 +204,7 @@ export const products: Product[] = [
       'Where the Iridescent Blue opens toward violet, this bowl holds its colour deeper, closer to the black ground. The surface only answers to a strong, single light source.',
     price: 720,
     currency: 'USD',
-    images: ['bowl-hero', 'bowl-iris', 'glaze-detail', 'smoke-dark'],
+    images: ['bowl-hero', 'bowl-iris', 'glaze-detail', 'smoke-dark', 'pack-box', 'cert-card'],
     category: 'tea-bowl',
     glaze: 'iridescent',
     specifications: [
@@ -229,7 +229,7 @@ export const products: Product[] = [
       'A companion cup to the Hare\'s Fur bowl, thrown thinner so the streaks read at close range. Intended for everyday use, and to be washed by hand.',
     price: 180,
     currency: 'USD',
-    images: ['bowl-tea', 'bowl-matcha', 'tea-pot', 'kiln-hands-2'],
+    images: ['bowl-tea', 'bowl-matcha', 'tea-pot', 'kiln-hands-2', 'pack-box', 'cert-card'],
     category: 'tea-bowl',
     glaze: 'hare-fur',
     specifications: [
