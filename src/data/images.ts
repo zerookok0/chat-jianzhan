@@ -114,12 +114,28 @@ export function sortImages(images: string[]): string[] {
 }
 
 export function isRemoteImage(image: string): boolean {
-  return image.startsWith('/') || /^https?:\/\//i.test(image) || image.startsWith('//')
+  return (
+    image.startsWith('/') ||
+    image.startsWith('./') ||
+    image.startsWith('../') ||
+    /^https?:\/\//i.test(image) ||
+    image.startsWith('//')
+  )
+}
+
+const BASE_URL = import.meta.env.BASE_URL || '/'
+
+function withBase(path: string): string {
+  const clean = path.replace(/^\/+/, '')
+  return BASE_URL.endsWith('/') ? `${BASE_URL}${clean}` : `${BASE_URL}/${clean}`
 }
 
 /** Resolve a stock key or a custom path/URL to a concrete image source. */
 export function resolveImage(image: string, width = 1200): string {
-  return isRemoteImage(image) ? image : img(image as ImageKey, width)
+  if (/^https?:\/\//i.test(image) || image.startsWith('//')) return image
+  if (image.startsWith('/')) return withBase(image)
+  if (image.startsWith('./') || image.startsWith('../')) return image
+  return img(image as ImageKey, width)
 }
 
 export function srcSetFor(image: string): string {
