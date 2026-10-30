@@ -29,7 +29,7 @@
         },
         {
           "label": "Height",
-          "value": "5 cm"
+          "value": "5.0 cm"
         },
         {
           "label": "Capacity",
@@ -127,8 +127,8 @@
           "value": "190 ml"
         },
         {
-          "label": "Weight",
-          "value": "approx. 332g"
+          "label": "Microwave-safe",
+          "value": "no"
         }
       ],
       "purchaseUrl": null,
@@ -151,45 +151,41 @@
     {
       "id": "jz-04",
       "slug": "jade-glaze-bowl",
-      "name": "Jade Glaze",
-      "subtitle": "Cool green beneath a dark skin",
-      "description": "A quiet bowl. The glaze pools toward a soft celadon-green at the interior, while the exterior stays in shadow. Best appreciated empty, or with a pale tea that lets the glaze do the speaking.",
+      "name": "'Silver Fur' Tenmoku Tea Cup",
+      "subtitle": "",
+      "description": "A blue Tenmoku tea cup (also known as 'Jian Zhan') with a naturally formed pattern due to oven-firing at high temperature (1300ºC). This kind of pattern is also known as 'hare's fur' with vertical stripes resembling animal fur.\n\nHistory\nDuring the Song Dynasty, skilled artisans at the Jian kilns crafted exquisite tea bowls. Due to their humble appearance they were first loved by monks in Buddhist temples. As the wisps of steam twirled above the tea's surface, the divine contrast between the luminous glaze of these bowls and the white foam of whipped tea cast a spell on those who sipped from them.\n\nNews of these enchanted bowls quickly spread beyond the monastery walls. When word reached the finest tea connoisseur of them all, Song Emperor Huizong, he declared that the black-glazed bowls decorated with intricate 'hare's fur' patterns were the most desirable of all. Holding the secrets to the powerful art of ritual tea preparation, these remarkable tea bowls soon found their way to Japan during the Kamakura period, with Japanese monks unlocking the mysteries of southern China's Buddhist temples. The Jian Zhan cups, were called 'Tenmoku' in Japan.",
       "price": 360,
       "currency": "USD",
       "images": [
-        "bowl-jade",
-        "bowl-jade-2",
-        "rock-pile",
-        "tea-pour",
-        "pack-box",
-        "cert-card"
+        "/images/uploads/jade-glaze-bowl-mvulu9w1.png",
+        "/images/uploads/jade-glaze-bowl-mvulu9y8.png",
+        "/images/uploads/jade-glaze-bowl-mvulu9zv.jpg",
+        "/images/uploads/jade-glaze-bowl-mvulua15.jpg",
+        "/images/uploads/jade-glaze-bowl-mvulua2q.jpg",
+        "/images/uploads/jade-glaze-bowl-mvulua4c.jpg",
+        "/images/uploads/jade-glaze-bowl-mvulua5x.jpg",
+        "/images/uploads/jade-glaze-bowl-mvuluac1.jpg",
+        "/images/uploads/jade-glaze-bowl-mvuluahh.jpg",
+        "/images/uploads/jade-glaze-bowl-mvuluam4.jpg"
       ],
       "category": "tea-bowl",
       "glaze": "jade",
       "specifications": [
         {
           "label": "Diameter",
-          "value": "11.5 cm"
+          "value": "9.5 cm"
         },
         {
           "label": "Height",
-          "value": "6.0 cm"
+          "value": "5.0 cm"
         },
         {
           "label": "Capacity",
-          "value": "150 ml"
+          "value": "170 ml"
         },
         {
-          "label": "Weight",
-          "value": "270 g"
-        },
-        {
-          "label": "Body",
-          "value": "Stoneware with iron slip"
-        },
-        {
-          "label": "Firing",
-          "value": "Reduction, 1280 °C"
+          "label": "Microwave-safe",
+          "value": "no"
         }
       ],
       "purchaseUrl": null,
@@ -201,45 +197,42 @@
     {
       "id": "jz-05",
       "slug": "tea-dust-vessel",
-      "name": "Tea Dust Vessel",
-      "subtitle": "A matte surface the colour of dust and moss",
-      "description": "Made to hold dry tea leaves rather than liquid. The unpolished surface softens with use, taking on a faint sheen from the hand — the only patina this glaze will ever show.",
+      "name": "'Hundred Flowers' Dou Li Tenmoku Tea Cup",
+      "subtitle": "",
+      "description": "A beautifully crafted Tenmoku (Jian Zhan) tea cup in the shape of an inverted straw hat ('dou li'). It features a beautiful blue pattern in the style of a 'Hundred Flowers'. Oven fired at 1300º.",
       "price": 290,
       "currency": "USD",
       "images": [
-        "bowl-minimal",
-        "bowl-darkware-2",
-        "kiln-studio",
-        "stone-texture",
-        "pack-box",
-        "cert-card"
+        "/images/uploads/tea-dust-vessel-mvulvpxw.png",
+        "/images/uploads/tea-dust-vessel-mvulvpzz.png",
+        "/images/uploads/tea-dust-vessel-mvulvq17.jpg",
+        "/images/uploads/tea-dust-vessel-mvulvq2b.jpg",
+        "/images/uploads/tea-dust-vessel-mvulvq3j.jpg",
+        "/images/uploads/tea-dust-vessel-mvulvq4t.jpg",
+        "/images/uploads/tea-dust-vessel-mvulvq5q.jpg",
+        "/images/uploads/tea-dust-vessel-mvulvq6z.jpg",
+        "/images/uploads/tea-dust-vessel-mvulvqbu.jpg",
+        "/images/uploads/tea-dust-vessel-mvulvqhb.jpg",
+        "/images/uploads/tea-dust-vessel-mvulvqm2.jpg"
       ],
       "category": "vessel",
       "glaze": "tea-dust",
       "specifications": [
         {
           "label": "Diameter",
-          "value": "9.8 cm"
+          "value": "10.2 cm"
         },
         {
           "label": "Height",
-          "value": "10.5 cm"
+          "value": "4.7 cm"
         },
         {
           "label": "Capacity",
-          "value": "320 ml"
+          "value": "120 ml"
         },
         {
-          "label": "Weight",
-          "value": "365 g"
-        },
-        {
-          "label": "Body",
-          "value": "Stoneware"
-        },
-        {
-          "label": "Firing",
-          "value": "Reduction, 1260 °C"
+          "label": "Microwave-safe",
+          "value": "no"
         }
       ],
       "purchaseUrl": null,
@@ -250,45 +243,39 @@
     {
       "id": "jz-06",
       "slug": "connoisseur-pair",
-      "name": "Connoisseur Pair",
-      "subtitle": "Two bowls, one firing, deliberately unalike",
-      "description": "A pair chosen from a single kiln load so the contrast stays visible: one leaning to oil spot, one to hare's fur. Sold as a set, boxed in linen with a recorded firing note.",
+      "name": "'Silver Oil Spot' Lian Kou Tenmoku Tea Cup",
+      "subtitle": "",
+      "description": "This is a superior-grade Tenmoku tea cup in Lian Kou shape, glazed with a silver-coloured 'oil spot' pattern and bronze rim. Typically, with this shape, the rim is slightly curved towards the inside of the cup. Every piece has a unique pattern, naturally formed during oven firing at 1300ºC.",
       "price": 880,
       "currency": "USD",
       "images": [
-        "bowl-set",
-        "bowl-darkware",
-        "kiln-wood",
-        "tea-ritual",
-        "pack-box",
-        "cert-card"
+        "/images/uploads/connoisseur-pair-mvulxi5n.png",
+        "/images/uploads/connoisseur-pair-mvulxi7h.png",
+        "/images/uploads/connoisseur-pair-mvulxicy.jpg",
+        "/images/uploads/connoisseur-pair-mvulxiew.jpg",
+        "/images/uploads/connoisseur-pair-mvulxig6.jpg",
+        "/images/uploads/connoisseur-pair-mvulxiiw.jpg",
+        "/images/uploads/connoisseur-pair-mvulximd.jpg",
+        "/images/uploads/connoisseur-pair-mvulxipi.jpg"
       ],
       "category": "set",
       "glaze": "oil-spot",
       "specifications": [
         {
-          "label": "Bowls",
-          "value": "2"
-        },
-        {
           "label": "Diameter",
-          "value": "12.0 cm each"
+          "value": "8.0 cm"
         },
         {
           "label": "Height",
-          "value": "6.5 cm each"
+          "value": "5.0 cm"
         },
         {
           "label": "Capacity",
-          "value": "175 ml each"
+          "value": "95 ml"
         },
         {
-          "label": "Body",
-          "value": "Iron-rich stoneware"
-        },
-        {
-          "label": "Presentation",
-          "value": "Linen-wrapped box"
+          "label": "Microwave-safe",
+          "value": "no"
         }
       ],
       "purchaseUrl": null,
@@ -299,45 +286,40 @@
     {
       "id": "jz-07",
       "slug": "ash-shadow-bowl",
-      "name": "Ash Shadow",
-      "subtitle": "Wood ash settling where the flame slowed",
-      "description": "Ash from the firing settles unevenly across the shoulder of this bowl, leaving a grey-green drift over the darker body. Part of a small run where the kiln was allowed to cool slowly.",
+      "name": "'Origin of Life' Blue Shu Kou Tenmoku Tea Cup",
+      "subtitle": "",
+      "description": "A majestic Tenmoku (or 'Jian Zhan') tea cup with a naturally formed blue pattern due to oven-firing at high temperature (1300ºC). It's made in the most popular shape known as 'bound rim' or 'shu kou' which resembles an inverted cap of a mushroom.\nShu Kou (Bound Rim) Tea Cup Shape\n\nThe Shu Kou tea cup features a delicately curved rim, which was originally designed to prevents any spillage when pouring the tea during tea competitions. Due to its relatively deep shape, it's also known as a 'deep tea cup'.",
       "price": 460,
       "currency": "USD",
       "images": [
-        "bowl-jade-2",
-        "bowl-studio",
-        "kiln-studio",
-        "rock-field",
-        "pack-box",
-        "cert-card"
+        "/images/uploads/ash-shadow-bowl-mvulzfbk.png",
+        "/images/uploads/ash-shadow-bowl-mvulzff1.png",
+        "/images/uploads/ash-shadow-bowl-mvulzfhh.jpg",
+        "/images/uploads/ash-shadow-bowl-mvulzfjn.jpg",
+        "/images/uploads/ash-shadow-bowl-mvulzflm.jpg",
+        "/images/uploads/ash-shadow-bowl-mvulzfnp.jpg",
+        "/images/uploads/ash-shadow-bowl-mvulzfsc.jpg",
+        "/images/uploads/ash-shadow-bowl-mvulzfxl.jpg",
+        "/images/uploads/ash-shadow-bowl-mvulzg2l.jpg"
       ],
       "category": "tea-bowl",
       "glaze": "jade",
       "specifications": [
         {
           "label": "Diameter",
-          "value": "12.1 cm"
+          "value": "9.5 cm"
         },
         {
           "label": "Height",
-          "value": "6.4 cm"
+          "value": "5.5 cm"
         },
         {
           "label": "Capacity",
-          "value": "170 ml"
+          "value": "140 ml"
         },
         {
-          "label": "Weight",
-          "value": "300 g"
-        },
-        {
-          "label": "Body",
-          "value": "Stoneware"
-        },
-        {
-          "label": "Firing",
-          "value": "Wood-fired, 1290 °C"
+          "label": "Microwave-safe",
+          "value": "no"
         }
       ],
       "purchaseUrl": null,
@@ -348,45 +330,39 @@
     {
       "id": "jz-08",
       "slug": "deep-iridescence-bowl",
-      "name": "Deep Iridescence",
-      "subtitle": "A darker reading of the blue glaze",
-      "description": "Where the Iridescent Blue opens toward violet, this bowl holds its colour deeper, closer to the black ground. The surface only answers to a strong, single light source.",
+      "name": "'Blue Space' Tenmoku Tea Cup",
+      "subtitle": "",
+      "description": "A magnificant Tenmoku cup (also known as 'Jian Zhan' cup) with a naturally formed space blue pattern due to oven-firing at high temperature (1300ºC).",
       "price": 720,
       "currency": "USD",
       "images": [
-        "bowl-hero",
-        "bowl-iris",
-        "glaze-detail",
-        "smoke-dark",
-        "pack-box",
-        "cert-card"
+        "/images/uploads/deep-iridescence-bowl-mvum0whh.png",
+        "/images/uploads/deep-iridescence-bowl-mvum0wkx.png",
+        "/images/uploads/deep-iridescence-bowl-mvum0wn4.jpg",
+        "/images/uploads/deep-iridescence-bowl-mvum0wol.jpg",
+        "/images/uploads/deep-iridescence-bowl-mvum0wqb.jpg",
+        "/images/uploads/deep-iridescence-bowl-mvum0wuz.jpg",
+        "/images/uploads/deep-iridescence-bowl-mvum0x09.jpg",
+        "/images/uploads/deep-iridescence-bowl-mvum0x50.jpg"
       ],
       "category": "tea-bowl",
       "glaze": "iridescent",
       "specifications": [
         {
           "label": "Diameter",
-          "value": "13.0 cm"
+          "value": "8.5 cm"
         },
         {
           "label": "Height",
-          "value": "7.2 cm"
+          "value": "5.5 cm"
         },
         {
           "label": "Capacity",
-          "value": "200 ml"
+          "value": "115 ml"
         },
         {
-          "label": "Weight",
-          "value": "345 g"
-        },
-        {
-          "label": "Body",
-          "value": "Iron-rich stoneware"
-        },
-        {
-          "label": "Firing",
-          "value": "Wood-fired, 1310 °C"
+          "label": "Microwave-safe",
+          "value": "no"
         }
       ],
       "purchaseUrl": null,
@@ -397,51 +373,177 @@
     {
       "id": "jz-09",
       "slug": "hare-fur-teacup",
-      "name": "Hare's Fur Cup",
-      "subtitle": "The same glaze, at a smaller scale",
-      "description": "A companion cup to the Hare's Fur bowl, thrown thinner so the streaks read at close range. Intended for everyday use, and to be washed by hand.",
+      "name": "'Origin of Life' Blue Chanding Tenmoku Tea Cup",
+      "subtitle": "",
+      "description": "This is a Tenmoku (Jian Zhan) tea cup in the Chanding shape. The ceramic glaze, fired in a 1300ºC oven, forms a distinctive pattern reminiscent of the formation of cellular structures. Its metallic colour changes according to the light, with blue, silver, and purple hues. ",
       "price": 180,
       "currency": "USD",
       "images": [
-        "bowl-tea",
-        "bowl-matcha",
-        "tea-pot",
-        "kiln-hands-2",
-        "pack-box",
-        "cert-card"
+        "/images/uploads/hare-fur-teacup-mvumfx7h.png",
+        "/images/uploads/hare-fur-teacup-mvumfx9c.png",
+        "/images/uploads/hare-fur-teacup-mvumfxat.jpg",
+        "/images/uploads/hare-fur-teacup-mvumfxbw.jpg",
+        "/images/uploads/hare-fur-teacup-mvumfxd2.jpg",
+        "/images/uploads/hare-fur-teacup-mvumfxec.jpg",
+        "/images/uploads/hare-fur-teacup-mvumfxjd.jpg",
+        "/images/uploads/hare-fur-teacup-mvumfxoe.jpg",
+        "/images/uploads/hare-fur-teacup-mvumfxtl.jpg"
       ],
       "category": "tea-bowl",
       "glaze": "hare-fur",
       "specifications": [
         {
           "label": "Diameter",
-          "value": "8.6 cm"
+          "value": "9.8 cm"
         },
         {
           "label": "Height",
-          "value": "5.0 cm"
+          "value": "5.6 cm"
         },
         {
           "label": "Capacity",
-          "value": "90 ml"
+          "value": "170 ml"
         },
         {
-          "label": "Weight",
-          "value": "175 g"
+          "label": "Microwave-safe",
+          "value": "no"
+        }
+      ],
+      "purchaseUrl": null,
+      "featured": true,
+      "availability": "available",
+      "year": "2025"
+    },
+    {
+      "id": "jz-10",
+      "slug": "new-piece-mgl7l",
+      "name": "'Origin of Life' Blue Dou Li Tenmoku Tea Cup",
+      "subtitle": "",
+      "description": "A Tenmoku (Jian Zhan) tea cup in the classic 'dou li' (inverted straw hat) shape. Through a 1300ºC oven-firing process, the ceramic glaze forms a distinctive pattern reminiscent of the formation of cellular structures. Hence, we call this the 'Origin of Life' tea cup.",
+      "price": 304,
+      "currency": "USD",
+      "images": [
+        "/images/uploads/new-piece-mgl7l-mvumhojw.png",
+        "/images/uploads/new-piece-mgl7l-mvumhols.png",
+        "/images/uploads/new-piece-mgl7l-mvumhon2.jpg",
+        "/images/uploads/new-piece-mgl7l-mvumhoo6.jpg",
+        "/images/uploads/new-piece-mgl7l-mvumhopc.jpg",
+        "/images/uploads/new-piece-mgl7l-mvumhoqm.jpg",
+        "/images/uploads/new-piece-mgl7l-mvumhovc.jpg",
+        "/images/uploads/new-piece-mgl7l-mvumhp1b.jpg",
+        "/images/uploads/new-piece-mgl7l-mvumhp5z.jpg"
+      ],
+      "category": "tea-bowl",
+      "glaze": "oil-spot",
+      "specifications": [
+        {
+          "label": "Diameter",
+          "value": "9.8 cm"
         },
         {
-          "label": "Body",
-          "value": "Iron-rich stoneware"
+          "label": "Height",
+          "value": "5.9 cm"
         },
         {
-          "label": "Firing",
-          "value": "Wood-fired, 1300 °C"
+          "label": "Capacity",
+          "value": "170 ml"
+        },
+        {
+          "label": "Microwave-safe",
+          "value": "no"
         }
       ],
       "purchaseUrl": null,
       "featured": false,
       "availability": "available",
-      "year": "2025"
+      "year": "2026"
+    },
+    {
+      "id": "jz-11",
+      "slug": "new-piece-mkxe8",
+      "name": "'Hundred Flowers' Bo Xing Tenmoku Tea Cup",
+      "subtitle": "",
+      "description": "This Tenmoku tea cup, also called a 'Jian Zhan' cup, follows the traditional Song Dynasty style. Its 'Hundred Flowers' blue-silver glaze is achieved by firing the cup at 1300ºC.\n\nThe bowl has an elegant 'Bo shape' inspired by the alms bowls Buddhist monks use to collect food offerings each day.",
+      "price": 295,
+      "currency": "USD",
+      "images": [
+        "/images/uploads/new-piece-mkxe8-mvumlqax.png",
+        "/images/uploads/new-piece-mkxe8-mvumlqcp.png",
+        "/images/uploads/new-piece-mkxe8-mvumlqf2.png",
+        "/images/uploads/new-piece-mkxe8-mvumlqil.png",
+        "/images/uploads/new-piece-mkxe8-mvumlqm8.png",
+        "/images/uploads/new-piece-mkxe8-mvumlqqo.png",
+        "/images/uploads/new-piece-mkxe8-mvumlqv3.png",
+        "/images/uploads/new-piece-mkxe8-mvumlr0s.jpg"
+      ],
+      "category": "tea-bowl",
+      "glaze": "oil-spot",
+      "specifications": [
+        {
+          "label": "Diameter",
+          "value": "5.2 cm"
+        },
+        {
+          "label": "Height",
+          "value": "9.7 cm"
+        },
+        {
+          "label": "Capacity",
+          "value": "105 ml"
+        },
+        {
+          "label": "Microwave-safe",
+          "value": "no"
+        }
+      ],
+      "purchaseUrl": null,
+      "featured": false,
+      "availability": "available",
+      "year": "2026"
+    },
+    {
+      "id": "jz-12",
+      "slug": "new-piece-mmpkh",
+      "name": "'Hare's Fur' Tenmoku Tea Bowl / Tea Cup",
+      "subtitle": "",
+      "description": "A brown Tenmoku tea cup (also known as 'Jian Zhan') with a naturally formed pattern due to oven-firing at high temperature (1300ºC). This kind of pattern is also known as 'hare's fur' with vertical stripes resembling animal fur.",
+      "price": 295,
+      "currency": "USD",
+      "images": [
+        "/images/uploads/new-piece-mmpkh-mvumnjos.png",
+        "/images/uploads/new-piece-mmpkh-mvumnjtf.jpg",
+        "/images/uploads/new-piece-mmpkh-mvumnjwf.jpg",
+        "/images/uploads/new-piece-mmpkh-mvumnjzs.jpg",
+        "/images/uploads/new-piece-mmpkh-mvumnk2u.jpg",
+        "/images/uploads/new-piece-mmpkh-mvumnk5w.jpg",
+        "/images/uploads/new-piece-mmpkh-mvumnkav.jpg",
+        "/images/uploads/new-piece-mmpkh-mvumnkgb.jpg",
+        "/images/uploads/new-piece-mmpkh-mvumnkly.jpg"
+      ],
+      "category": "tea-bowl",
+      "glaze": "oil-spot",
+      "specifications": [
+        {
+          "label": "Diameter",
+          "value": "9.5 cm"
+        },
+        {
+          "label": "Height",
+          "value": "5.5 cm"
+        },
+        {
+          "label": "Capacity",
+          "value": "175 ml"
+        },
+        {
+          "label": "Microwave-safe",
+          "value": "no"
+        }
+      ],
+      "purchaseUrl": null,
+      "featured": false,
+      "availability": "available",
+      "year": "2026"
     }
   ]
 }
