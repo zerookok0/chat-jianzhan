@@ -156,20 +156,6 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
             </details>
 
             <details className="accordion">
-              <summary>Dimensions & materials</summary>
-              <div className="accordion__body">
-                <ul className="dot-list">
-                  {product.specifications.map((s) => (
-                    <li key={s.label}>
-                      <span>{s.label}</span>
-                      <span>{s.value}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </details>
-
-            <details className="accordion">
               <summary>Care</summary>
               <div className="accordion__body">
                 <p>
@@ -182,12 +168,34 @@ export function ProductPage({ slug, onQuickView }: ProductPageProps) {
             </details>
 
             <details className="accordion">
-              <summary>Shipping</summary>
+              <summary>Delivery</summary>
               <div className="accordion__body">
                 <p>
-                  Insured worldwide express shipping in custom wooden crating and impact-resistant
-                  packaging, with live tracking issued on dispatch. Every piece travels with its
-                  firing note. Returns are accepted within 30 days of delivery, free of charge.
+                  Born in Nanping, Fujian, China. Every piece currently listed has already reached
+                  our local warehouse and will be delivered within 2–3 working days.
+                </p>
+              </div>
+            </details>
+
+            <details className="accordion">
+              <summary>Packaging</summary>
+              <div className="accordion__body">
+                <p>
+                  Each piece travels by insured express courier, cushioned in a custom wooden crate
+                  and shock-resistant packing. Live tracking is issued the moment the parcel leaves
+                  the studio, and every cup arrives with its firing note. Returns are accepted within
+                  30 days of receipt, free of charge.
+                </p>
+              </div>
+            </details>
+
+            <details className="accordion">
+              <summary>Characteristics</summary>
+              <div className="accordion__body">
+                <p>
+                  Jianzhan is shaped as much by chance as by hand. The flame, the ash and the cooling
+                  glaze decide the final pattern, so no two cups can ever be alike — each is a
+                  singular work, unrepeatable by design.
                 </p>
               </div>
             </details>
