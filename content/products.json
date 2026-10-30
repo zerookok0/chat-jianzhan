@@ -544,6 +544,50 @@
       "featured": false,
       "availability": "available",
       "year": "2026"
+    },
+    {
+      "id": "jz-13",
+      "slug": "new-piece-p6gye",
+      "name": "Mingche 'Dunhuang Lotus Realm' Gilded Jian Ware Zen Meditation Tea Cup",
+      "subtitle": "",
+      "description": "In the distant oasis of Dunhuang, sacred lotuses bloom serenely amidst vibrant, storied caisson ceilings. Echoing this ancient beauty, graceful lotus motifs adorn the cup, carrying a timeless Zen resonance that speaks of purification and rebirth. An embossed lotus rests at the base, evoking shadows of blossoms swaying gently across clear waters; in an instant, past and present, stillness and motion, all find harmonious rest within a single pour of tea.\n\nAs delicate steam curls upward, the soul finds a peaceful sanctuary amid gentle tea fragrances and shifting floral reflections—quiet, contemplative, and luminous with inner clarity.\n\nEach petal of the Dunhuang Lotus Realm tenderly embraces the next, quietly narrating thousands of years of classic elegance. Crafted from premium ceramic, painstakingly polished, and fired at high temperatures, the cup offers a silky, jade-like touch. The essence of ancient lotus patterns weaves seamlessly with the unpredictable glaze shifts born of the kiln, while fluid silhouettes and dappled textures catch the light in captivating splendor.\n\nWith every sip, a mellow sweetness blooms softly on the palate. More than a refined vessel for daily tea rituals, it is an exquisite gift that carries profound affection and respect. Whether presented to esteemed partners or cherished friends, it conveys an authentic cultural discernment that never fades into the ordinary—thoughtfully packaged, with sincerity felt in every detail.",
+      "price": 269800,
+      "currency": "VND",
+      "images": [
+        "/images/uploads/new-piece-p6gye-mvup9h31.jpg",
+        "/images/uploads/new-piece-p6gye-mvup9h43.jpg",
+        "/images/uploads/new-piece-p6gye-mvup9h51.jpg",
+        "/images/uploads/new-piece-p6gye-mvup9h60.jpg",
+        "/images/uploads/new-piece-p6gye-mvup9h79.jpg",
+        "/images/uploads/new-piece-p6gye-mvup9h8b.jpg",
+        "/images/uploads/new-piece-p6gye-mvup9h94.jpg",
+        "/images/uploads/new-piece-p6gye-mvup9ha1.jpg",
+        "/images/uploads/new-piece-p6gye-mvup9hb4.jpg"
+      ],
+      "category": "tea-bowl",
+      "glaze": "oil-spot",
+      "specifications": [
+        {
+          "label": "Diameter",
+          "value": "9.2 cm"
+        },
+        {
+          "label": "Height",
+          "value": "5.5 cm"
+        },
+        {
+          "label": "Capacity",
+          "value": "170 ml"
+        },
+        {
+          "label": "Microwave-safe",
+          "value": "no"
+        }
+      ],
+      "purchaseUrl": null,
+      "featured": false,
+      "availability": "available",
+      "year": "2026"
     }
   ]
 }

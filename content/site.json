@@ -10,19 +10,7 @@
   "currency": "VND",
   "social": [
     {
-      "label": "Instagram",
-      "href": "#"
-    },
-    {
-      "label": "Pinterest",
-      "href": "#"
-    },
-    {
       "label": "Facebook",
-      "href": "#"
-    },
-    {
-      "label": "YouTube",
       "href": "#"
     }
   ],
