@@ -3,45 +3,41 @@
     {
       "id": "jz-01",
       "slug": "midnight-oil-spot-bowl",
-      "name": "Midnight Oil Spot",
-      "subtitle": "Iron crystals suspended in a black glaze",
-      "description": "Concentric rings of metallic crystals sit on a near-black ground, catching light as the bowl turns. Each spot forms during cooling, when iron in the glaze crystallises — a result that can be encouraged but never fully controlled. The foot is left unglazed, revealing the iron-rich clay body and the marks of the wheel.",
+      "name": "'Resembling Peacock Feathers' Tenmoku Tea Cup",
+      "subtitle": "",
+      "description": "These are luxury-grade Tenmoku tea cups handmade by the renowned artist Ding Changsheng (丁长生). Available in two different shapes, they are glazed with a multicolor oil specks pattern resembling peacock feathers on display. The metallic blue glaze color changes depending on how the light illuminates it, with purple, green, and golden nuances enriching the beautiful appearance of these cups. Every piece has a unique pattern, naturally formed during oven firing at 1300ºC.\n\nThese high-quality Tenmoku tea cups come with an elegant gift box and a certificate of authenticity, hand-signed by the artist Ding. \n\n Shu Kou shape\n\n    Size: 9,8x5cm\n    Content: 75ml\n    Microwave-safe: no",
       "price": 420,
       "currency": "USD",
       "images": [
-        "bowl-oil-spot",
-        "bowl-oil-spot-2",
-        "bowl-hero",
-        "rock-detail",
-        "pack-box",
-        "cert-card"
+        "/images/uploads/midnight-oil-spot-bowl-mvukorsz.png",
+        "/images/uploads/midnight-oil-spot-bowl-mvukorup.png",
+        "/images/uploads/midnight-oil-spot-bowl-mvukorw9.jpg",
+        "/images/uploads/midnight-oil-spot-bowl-mvukorzh.jpg",
+        "/images/uploads/midnight-oil-spot-bowl-mvukos0z.jpg",
+        "/images/uploads/midnight-oil-spot-bowl-mvukos2p.jpg",
+        "/images/uploads/midnight-oil-spot-bowl-mvukos3z.jpg",
+        "/images/uploads/midnight-oil-spot-bowl-mvukos5f.jpg",
+        "/images/uploads/midnight-oil-spot-bowl-mvukos6s.jpg",
+        "/images/uploads/midnight-oil-spot-bowl-mvukos7m.jpg"
       ],
       "category": "tea-bowl",
       "glaze": "oil-spot",
       "specifications": [
         {
           "label": "Diameter",
-          "value": "12.4 cm"
+          "value": "9.8 cm"
         },
         {
           "label": "Height",
-          "value": "6.8 cm"
+          "value": "5 cm"
         },
         {
           "label": "Capacity",
-          "value": "180 ml"
+          "value": "75 ml"
         },
         {
           "label": "Weight",
           "value": "310 g"
-        },
-        {
-          "label": "Body",
-          "value": "Iron-rich stoneware"
-        },
-        {
-          "label": "Firing",
-          "value": "Wood-fired, 1300 °C"
         }
       ],
       "purchaseUrl": null,

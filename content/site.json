@@ -9,22 +9,61 @@
   "url": "https://jianzhan.studio",
   "currency": "USD",
   "social": [
-    { "label": "Instagram", "href": "#" },
-    { "label": "Pinterest", "href": "#" },
-    { "label": "Facebook", "href": "#" },
-    { "label": "YouTube", "href": "#" }
+    {
+      "label": "Instagram",
+      "href": "#"
+    },
+    {
+      "label": "Pinterest",
+      "href": "#"
+    },
+    {
+      "label": "Facebook",
+      "href": "#"
+    },
+    {
+      "label": "YouTube",
+      "href": "#"
+    }
   ],
   "policies": [
-    { "label": "Shipping & Returns", "href": "/shipping" },
-    { "label": "Care & Use", "href": "/care" },
-    { "label": "Privacy Policy", "href": "/privacy" },
-    { "label": "Terms of Service", "href": "/terms" }
+    {
+      "label": "Shipping & Returns",
+      "href": "/shipping"
+    },
+    {
+      "label": "Care & Use",
+      "href": "/care"
+    },
+    {
+      "label": "Privacy Policy",
+      "href": "/privacy"
+    },
+    {
+      "label": "Terms of Service",
+      "href": "/terms"
+    }
   ],
   "navigation": [
-    { "label": "Home", "href": "/" },
-    { "label": "Collection", "href": "/collection" },
-    { "label": "Our Craft", "href": "/craft" },
-    { "label": "Journal", "href": "/journal" },
-    { "label": "About", "href": "/about" }
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "Collection",
+      "href": "/collection"
+    },
+    {
+      "label": "Our Craft",
+      "href": "/craft"
+    },
+    {
+      "label": "Journal",
+      "href": "/journal"
+    },
+    {
+      "label": "About",
+      "href": "/about"
+    }
   ]
 }
