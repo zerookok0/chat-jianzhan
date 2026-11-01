@@ -4,6 +4,7 @@ import { trackPixel } from './lib/pixel'
 import { CartProvider } from './lib/cart'
 import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
+import { ChatTab } from './components/layout/ChatTab'
 import { CartDrawer } from './components/cart/CartDrawer'
 import { QuickView } from './components/ui/QuickView'
 import { Home } from './pages/Home'
@@ -109,6 +110,7 @@ export default function App() {
           <Routes onQuickView={setQuickView} />
         </main>
         <Footer />
+        <ChatTab />
         <QuickView product={quickView} onClose={() => setQuickView(null)} />
         <CartDrawer />
       </CartProvider>
