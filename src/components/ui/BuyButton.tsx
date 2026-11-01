@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import type { Product } from '../../data/types'
 import { resolvePurchaseUrl } from '../../lib/purchase'
 import { useCart } from '../../lib/cart'
+import { trackPixel } from '../../lib/pixel'
 import { site } from '../../data/site'
 import { ArrowUpRight, Check, Info } from './Icons'
 import { useI18n } from '../../i18n'
@@ -84,6 +85,14 @@ export function BuyButton({
     const result = addItem(product, { variant: selectedVariant, qty })
 
     if (result === 'added') {
+      trackPixel('AddToCart', {
+        content_ids: [String(product.wooId ?? product.id)],
+        content_name: product.name,
+        content_type: 'product',
+        value: product.price,
+        currency: product.currency,
+        quantity: qty,
+      })
       setNotice('added')
       openCart()
       onNavigate?.()

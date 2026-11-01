@@ -1,5 +1,6 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { FavouritesProvider, useRoute, useReveal } from './lib/hooks'
+import { trackPixel } from './lib/pixel'
 import { CartProvider } from './lib/cart'
 import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
@@ -23,6 +24,28 @@ function ScrollToTop() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [route.path])
+  return null
+}
+
+/**
+ * The base pixel fires PageView on the first load. Hash routing does not
+ * reload the page, so every subsequent route change is reported here.
+ */
+function PixelRouteTracker() {
+  const route = useRoute()
+  const first = useRef(true)
+
+  useEffect(() => {
+    if (first.current) {
+      first.current = false
+      return
+    }
+
+    if (route.path.startsWith('/admin')) return
+
+    trackPixel('PageView')
+  }, [route.path, route.query])
+
   return null
 }
 
@@ -80,6 +103,7 @@ export default function App() {
     <FavouritesProvider>
       <CartProvider>
         <ScrollToTop />
+        <PixelRouteTracker />
         <Header />
         <main id="main">
           <Routes onQuickView={setQuickView} />

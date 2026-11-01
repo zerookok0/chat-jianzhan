@@ -5,6 +5,7 @@ import { useCart } from '../../lib/cart'
 import { formatPrice } from '../../data/products'
 import { site } from '../../data/site'
 import { checkout } from '../../lib/wordpress'
+import { trackPixel } from '../../lib/pixel'
 import { AppLink } from '../ui/Media'
 import { ArrowUpRight, Close, Minus, Plus } from '../ui/Icons'
 import { useI18n } from '../../i18n'
@@ -60,6 +61,14 @@ export function CartDrawer() {
      */
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
+        trackPixel('InitiateCheckout', {
+          content_ids: lines.map((line) => String(line.wooId ?? line.productId)),
+          content_type: 'product',
+          num_items: count,
+          value: subtotal,
+          currency,
+        })
+
         const ok = checkout(
           lines.map((line) => ({
             id: line.wooId,

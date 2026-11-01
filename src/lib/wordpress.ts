@@ -14,6 +14,7 @@
  */
 
 const WP_SITE = ((import.meta.env.VITE_WP_SITE_URL as string | undefined) ?? '').replace(/\/+$/, '')
+const SRC = 'kmarket'
 
 export const isWordPressConfigured = Boolean(WP_SITE)
 
@@ -58,6 +59,6 @@ export function checkout(items: WordPressCartItem[]): boolean {
    * value keeps it inside the query string and lets the store answer with
    * a single 302.
    */
-  window.location.href = `${WP_SITE}/?bolt_cart=${encodeURIComponent(pairs)}`
+  window.location.href = `${WP_SITE}/?bolt_cart=${encodeURIComponent(pairs)}&src=${encodeURIComponent(SRC)}`
   return true
 }
