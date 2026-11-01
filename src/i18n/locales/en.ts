@@ -50,8 +50,6 @@ const en: Dict = {
   'header.cartAria': 'Open cart, {count} items',
   'header.openMenu': 'Open menu',
   'header.closeMenu': 'Close menu',
-  'chat.label': 'Chat with us',
-  'chat.tab': 'CHAT',
 
   /* ---------------------------------------------------------------- */
   /* Footer                                                            */

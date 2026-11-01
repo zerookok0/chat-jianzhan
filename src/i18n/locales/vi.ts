@@ -53,8 +53,6 @@ const vi: Dict = {
   'header.cartAria': 'Mở giỏ hàng, {count} món',
   'header.openMenu': 'Mở menu',
   'header.closeMenu': 'Đóng menu',
-  'chat.label': 'Trò chuyện với chúng tôi',
-  'chat.tab': 'CHAT',
 
   /* ---------------------------------------------------------------- */
   /* Footer                                                            */
